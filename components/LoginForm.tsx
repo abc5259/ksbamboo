@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const LoginContainer = styled.div`
-  min-width: 200px;
+  min-width: 250px;
   max-width: 420px;
   display: flex;
   flex-direction: column;
@@ -51,7 +51,7 @@ const Register = styled.p`
 const LoginForm = () => {
   return (
     <LoginContainer>
-      <Title>KSU</Title>
+      <Title>KSB</Title>
       <Form>
         <Input type="email" placeholder="이메일" />
         <Input type="password" placeholder="비밀번호" />

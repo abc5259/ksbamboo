@@ -31,7 +31,7 @@ const NavBar = () => {
   return (
     <>
       <Header>
-        <Title>KsBamboo</Title>
+        <Title>KSB</Title>
         <Nav>
           <List>
             <Link href="/">게시판</Link>
