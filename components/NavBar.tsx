@@ -11,7 +11,7 @@ const NavBar = () => {
     <>
       <Header>
         <Nav>
-          <Li>awdwa</Li>
+          <Li>KsBamboo</Li>
           <Li>awdawd</Li>
           <Li>dfdwad</Li>
         </Nav>
