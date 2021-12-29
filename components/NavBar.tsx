@@ -6,7 +6,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 30px;
+  padding: 20px 0;
 `;
 
 const Title = styled.h1`

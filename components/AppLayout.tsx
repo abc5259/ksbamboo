@@ -5,11 +5,17 @@ type AppLayoutProps = {
   children: React.ReactNode;
 };
 
+const Container = styled.div`
+  margin: 0 30px;
+`;
+
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <>
-      <NavBar />
-      {children}
+      <Container>
+        <NavBar />
+        {children}
+      </Container>
     </>
   );
 };
