@@ -11,7 +11,7 @@ const LoginContainer = styled.div`
 `;
 const Title = styled.h1`
   font-size: 22px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 `;
 const Form = styled.form`
   width: 80%;
