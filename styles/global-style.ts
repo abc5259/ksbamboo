@@ -44,10 +44,24 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 body {
   background-color: ${props => props.theme.bgColor};
-  color: background-color: ${props => props.theme.textColor};
+  color:  ${props => props.theme.textColor};
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 `;

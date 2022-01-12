@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import AppLayout from "../components/AppLayout";
 
-const Home: NextPage = () => {
+const Join: NextPage = () => {
   return (
     <>
       <AppLayout>
-        <div>게시글</div>
+        <div>회원가입</div>
       </AppLayout>
     </>
   );
 };
 
-export default Home;
+export default Join;

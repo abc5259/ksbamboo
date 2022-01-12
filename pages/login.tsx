@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
 import AppLayout from "../components/AppLayout";
+import LoginForm from "../components/LoginForm";
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   return (
     <>
       <AppLayout>
-        <div>게시글</div>
+        <LoginForm />
       </AppLayout>
     </>
   );
 };
 
-export default Home;
+export default Login;
