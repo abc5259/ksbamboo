@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import AppLayout from "../components/AppLayout";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/LoginForm/LoginForm";
 
 const Login: NextPage = () => {
   return (
