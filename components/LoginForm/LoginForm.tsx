@@ -52,7 +52,7 @@ const LoginForm = () => {
           placeholder="비밀번호"
         />
         <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        <Button>로그인</Button>
+        <Button type="submit">로그인</Button>
         <Register>
           <span>KSB가 처음이신가요?</span>
           <Link href="/join">회원가입</Link>
