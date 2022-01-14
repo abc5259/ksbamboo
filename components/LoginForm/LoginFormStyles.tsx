@@ -26,6 +26,11 @@ export const Input = styled.input.attrs({ require: true })`
     outline: none;
   }
 `;
+
+export const ErrorMessage = styled.span`
+  color: red;
+`;
+
 export const Button = styled.button`
   border: none;
   width: 100%;
