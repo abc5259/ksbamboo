@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage, Register } from "../LoginForm/LoginFormStyles";
 import {
@@ -12,6 +12,7 @@ import {
   SelectWrapper,
   InputWrapper,
   Label,
+  EmailWrapper,
 } from "./JoinFormStyles";
 
 const enterYear: number[] = [
@@ -25,9 +26,12 @@ interface IJoinForm {
   nickname: string;
   password: string;
   passwordConfirm: string;
+  emailAuthNumber: number;
 }
 
 const JoinForm = () => {
+  const [emailAuth, setEmailAuth] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const {
     register,
     watch,
@@ -38,6 +42,19 @@ const JoinForm = () => {
       email: "@ks.ac.kr",
     },
   });
+
+  console.log(errors);
+
+  const onEmailButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (watch("email") === "") setEmailErrorMessage("학교 이메일을 입력하세요");
+    if (!watch("email").includes("@ks.ac.kr")) {
+      setEmailErrorMessage("학교 이메일이어야 합니다.");
+    } else {
+      // 인증번호 서버로 요청
+      setEmailAuth(true);
+    }
+  };
 
   const onVaild = (data: IJoinForm) => {
     console.log(data);
@@ -72,19 +89,36 @@ const JoinForm = () => {
         </SelectWrapper>
         <InputWrapper>
           <Label>경성대학교 이메일</Label>
-          <Input
-            {...register("email", {
-              required: "학교 이메일을 적어주세요",
-              validate: value =>
-                value.includes("@ks.ac.kr")
-                  ? true
-                  : "학교 이메일이어야 합니다.",
-            })}
-            name="email"
-            placeholder="이메일"
-          />
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          <EmailWrapper>
+            <Input
+              {...register("email", {
+                required: "학교 이메일을 적어주세요",
+                validate: value =>
+                  value.includes("@ks.ac.kr")
+                    ? true
+                    : "학교 이메일이어야 합니다.",
+              })}
+              name="email"
+              placeholder="이메일"
+            />
+            <button onClick={onEmailButtonClick}>인증번호받기</button>
+          </EmailWrapper>
+          <ErrorMessage>
+            {errors.email?.message || emailErrorMessage}
+          </ErrorMessage>
         </InputWrapper>
+        {emailAuth && (
+          <InputWrapper>
+            <Label>인증번호 입력</Label>
+            <Input
+              type="number"
+              {...register("emailAuthNumber", {
+                required: "인증번호를 입력하세요",
+              })}
+            />
+            <ErrorMessage>{errors.emailAuthNumber?.message}</ErrorMessage>
+          </InputWrapper>
+        )}
         <InputWrapper>
           <Label>비밀번호</Label>
           <Input

@@ -28,7 +28,18 @@ export const SelectWrapper = styled.div`
   }
 `;
 
-export const InputWrapper = styled.div``;
+export const InputWrapper = styled.div`
+  margin-bottom: 10px;
+`;
+
+export const EmailWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  button {
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+`;
 
 export const Select = styled.select`
   padding: 10px;
@@ -48,7 +59,6 @@ export const Input = styled.input.attrs({ require: true })`
   width: 100%;
   font-size: 18px;
   padding: 10px 5px;
-  margin-bottom: 10px;
   &:focus {
     outline: none;
   }
