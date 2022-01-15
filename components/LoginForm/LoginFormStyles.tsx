@@ -17,6 +17,16 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
+
+export const InputWrapper = styled.div``;
+
+export const Label = styled.label`
+  display: block;
+  padding: 5px;
+  font-size: 12px;
+  color: #8b949e;
+`;
+
 export const Input = styled.input.attrs({ require: true })`
   width: 100%;
   font-size: 18px;

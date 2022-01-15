@@ -7,8 +7,10 @@ import {
   Form,
   Input,
   LoginContainer,
+  InputWrapper,
   Register,
   Title,
+  Label,
 } from "./LoginFormStyles";
 
 interface ILoginForm {
@@ -34,24 +36,29 @@ const LoginForm = () => {
     <LoginContainer>
       <Title>KSB</Title>
       <Form onSubmit={handleSubmit(onValid)}>
-        <Input
-          {...register("email", {
-            required: "이메일을 적어주세요",
-            validate: value =>
-              value.includes("@") ? true : "이메일을 적어주세요",
-          })}
-          // type="email"
-          placeholder="이메일"
-        />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
-        <Input
-          {...register("password", {
-            required: "비밀번호를 적어주세요",
-          })}
-          type="password"
-          placeholder="비밀번호"
-        />
-        <ErrorMessage>{errors.password?.message}</ErrorMessage>
+        <InputWrapper>
+          <Label>학교 이메일</Label>
+          <Input
+            {...register("email", {
+              required: "이메일을 적어주세요",
+              validate: value =>
+                value.includes("@ks.ac.kr")
+                  ? true
+                  : "학교 이메일이어야 합니다.",
+            })}
+          />
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
+        </InputWrapper>
+        <InputWrapper>
+          <Label>비발번호</Label>
+          <Input
+            {...register("password", {
+              required: "비밀번호를 적어주세요",
+            })}
+            type="password"
+          />
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+        </InputWrapper>
         <Button type="submit">로그인</Button>
         <Register>
           <span>KSB가 처음이신가요?</span>

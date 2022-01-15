@@ -78,3 +78,14 @@ export const Join = styled.p`
     color: ${props => props.theme.accentColor};
   }
 `;
+
+export const Register = styled.p`
+  margin-top: 20px;
+  text-align: center;
+  span {
+    margin-right: 10px;
+  }
+  a {
+    color: ${props => props.theme.accentColor};
+  }
+`;

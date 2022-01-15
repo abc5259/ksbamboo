@@ -1,6 +1,7 @@
+import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "../LoginForm/LoginFormStyles";
+import { ErrorMessage, Register } from "../LoginForm/LoginFormStyles";
 import {
   Form,
   JoinContainer,
@@ -109,6 +110,10 @@ const JoinForm = () => {
         </InputWrapper>
         <Button type="submit">회원가입</Button>
       </Form>
+      <Register>
+        <span>이미 회원가입을 하셨나요?</span>
+        <Link href="/login">로그인</Link>
+      </Register>
     </JoinContainer>
   );
 };
