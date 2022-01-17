@@ -55,7 +55,7 @@ html {
 }
 
 body {
-  background-color: ${props => props.theme.bgColor};
+  background-color: ${props => props.theme.bgColor.default};
   color:  ${props => props.theme.textColor};
 }
 

@@ -1,5 +1,7 @@
+import { BoardStyle } from "./BoardStyles";
+
 const Board = () => {
-  return <div>Board</div>;
+  return <BoardStyle>BoardStyle</BoardStyle>;
 };
 
 export default Board;
