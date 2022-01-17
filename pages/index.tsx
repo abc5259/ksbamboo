@@ -1,11 +1,17 @@
 import type { NextPage } from "next";
+import { useRecoilValue } from "recoil";
+import { boardsAtom } from "../atom/atoms";
 import AppLayout from "../components/AppLayout";
+import Board from "../components/Board/Board";
 
 const Home: NextPage = () => {
+  const boards = useRecoilValue(boardsAtom);
   return (
     <>
       <AppLayout>
-        <div>게시글</div>
+        {boards.map(board => (
+          <Board />
+        ))}
       </AppLayout>
     </>
   );

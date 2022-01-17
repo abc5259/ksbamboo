@@ -3,7 +3,8 @@ import styled from "styled-components";
 import NavBar from "./NavBar";
 
 const Container = styled.div`
-  margin: 0 30px;
+  margin: 0 auto;
+  width: 70vw;
 `;
 
 const AppLayout: FC = ({ children }) => {
