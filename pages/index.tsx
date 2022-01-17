@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { boardsAtom } from "../atom/atoms";
+import { boardsAtom, ksDepartmentAtom } from "../atom/atoms";
 import AppLayout from "../components/AppLayout";
 import Board from "../components/Board/Board";
 
@@ -13,12 +13,20 @@ export const BoardWrapper = styled.div`
 
 const Home: NextPage = () => {
   const boards = useRecoilValue(boardsAtom);
+  const ksDepartments = useRecoilValue(ksDepartmentAtom);
   return (
     <>
       <AppLayout>
+        <select>
+          {ksDepartments.map(ksDepartment => (
+            <option key={ksDepartment} value={ksDepartment}>
+              {ksDepartment}
+            </option>
+          ))}
+        </select>
         <BoardWrapper>
           {boards.map(board => (
-            <Board />
+            <Board key={board.id} />
           ))}
         </BoardWrapper>
       </AppLayout>
