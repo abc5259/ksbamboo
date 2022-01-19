@@ -8,12 +8,12 @@ export const BoardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
+  box-shadow: rgb(255 255 255 / 5%) 0px 4px 16px 0px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
     transform: translateY(-10px);
-    box-shadow: rgb(0 0 0 / 17%) 0px 4px 16px 0px;
+    box-shadow: rgb(255 255 255 / 17%) 0px 4px 16px 0px;
   }
 `;
 export const Main = styled.div`
