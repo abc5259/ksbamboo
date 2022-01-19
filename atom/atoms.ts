@@ -1,27 +1,37 @@
 import { atom } from "recoil";
 
-interface Idummyuser {
+export interface User {
   id: number;
   nickname: string;
+  email: string;
+  password?: string;
+  emailAuth: boolean;
+  ksDeparment: string;
 }
 
-interface IdummyBoards {
+export interface Board {
   id: number;
   title: string;
   content: string;
   status: string;
   department: string;
-  user: Idummyuser;
+  user: User;
 }
 
-const dummyBoards: IdummyBoards[] = [
+const dummyBoards: Board[] = [
   {
     id: 1,
     title: "더미 포스트입니다",
     content: "더미 포스트의 content입니다1",
     status: "익명",
     department: "컴퓨터공학과",
-    user: { id: 1, nickname: "serf" },
+    user: {
+      id: 1,
+      nickname: "serf",
+      email: "123@ks.ac.kr",
+      emailAuth: true,
+      ksDeparment: "컴퓨터공학과",
+    },
   },
   {
     id: 2,
@@ -29,7 +39,13 @@ const dummyBoards: IdummyBoards[] = [
     content: "더미 포스트의 content입니다2",
     status: "익명",
     department: "국어국문학과",
-    user: { id: 1, nickname: "serf2" },
+    user: {
+      id: 2,
+      nickname: "serf2",
+      email: "1234@ks.ac.kr",
+      emailAuth: true,
+      ksDeparment: "국어국문학과",
+    },
   },
   {
     id: 3,
@@ -37,7 +53,13 @@ const dummyBoards: IdummyBoards[] = [
     content: "더미 포스트의 content입니다3",
     status: "익명",
     department: "컴퓨터공학과",
-    user: { id: 1, nickname: "serf3" },
+    user: {
+      id: 3,
+      nickname: "serf3",
+      email: "1235@ks.ac.kr",
+      emailAuth: true,
+      ksDeparment: "컴퓨터공학과",
+    },
   },
   {
     id: 4,
@@ -45,7 +67,13 @@ const dummyBoards: IdummyBoards[] = [
     content: "더미 포스트의 content입니다4",
     status: "익명",
     department: "영어영문학과",
-    user: { id: 1, nickname: "serf4" },
+    user: {
+      id: 4,
+      nickname: "serf4",
+      email: "1236@ks.ac.kr",
+      emailAuth: true,
+      ksDeparment: "영어영문학과",
+    },
   },
 ];
 

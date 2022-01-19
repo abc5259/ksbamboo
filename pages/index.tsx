@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         </select>
         <BoardWrapper>
           {boards.map(board => (
-            <Board key={board.id} />
+            <Board key={board.id} boardId={board.id} />
           ))}
         </BoardWrapper>
       </AppLayout>
