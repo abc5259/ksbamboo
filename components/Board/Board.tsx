@@ -31,6 +31,7 @@ const Board = ({ boardId }: IBoardProps) => {
             {board?.status === "익명" ? "익명" : board?.user.nickname}
           </span>
         </Author>
+        <div>{board?.department}</div>
         <LikeWrapper>
           <Like viewBox="0 0 24 24">
             <path
