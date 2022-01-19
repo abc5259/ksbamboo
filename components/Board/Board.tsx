@@ -14,6 +14,7 @@ const Board = ({ boardId }: IBoardProps) => {
       <h1>{board?.title}</h1>
       <p>{board?.content}</p>
       <h3>{board?.user.nickname}</h3>
+      <h3>{board?.department}</h3>
     </BoardStyle>
   );
 };
