@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 import { boardsAtom } from "../../atom/atoms";
 import {
   Bottom,
-  BoardStyle,
+  BoardWrapper,
   Content,
   Main,
   Title,
@@ -19,7 +19,7 @@ const Board = ({ boardId }: IBoardProps) => {
   const boards = useRecoilValue(boardsAtom);
   const board = boards.find(board => board.id === boardId);
   return (
-    <BoardStyle>
+    <BoardWrapper>
       <Main>
         <Title>{board?.title}</Title>
         <Content>{board?.content}</Content>
@@ -42,7 +42,7 @@ const Board = ({ boardId }: IBoardProps) => {
           <span>100</span>
         </LikeWrapper>
       </Bottom>
-    </BoardStyle>
+    </BoardWrapper>
   );
 };
 

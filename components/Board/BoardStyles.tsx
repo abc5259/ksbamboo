@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const BoardStyle = styled.div`
+export const BoardWrapper = styled.div`
   max-width: 450px;
   height: 350px;
   border-radius: 5px;
@@ -8,6 +8,13 @@ export const BoardStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: rgb(0 0 0 / 17%) 0px 4px 16px 0px;
+  }
 `;
 export const Main = styled.div`
   padding: 20px 10px;
