@@ -40,3 +40,12 @@ export const TextArea = styled(motion.textarea)`
     outline-color: #fef5ed;
   }
 `;
+
+export const Button = styled.button`
+  border: none;
+  width: 100px;
+  height: 45px;
+  border-radius: 7px;
+  font-weight: 800;
+  background-color: #adc2a9;
+`;
