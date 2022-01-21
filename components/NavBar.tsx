@@ -2,11 +2,11 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const Header = styled.header`
-  height: 10vh;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h1`

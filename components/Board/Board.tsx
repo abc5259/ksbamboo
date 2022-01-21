@@ -10,6 +10,7 @@ import {
   Author,
   Like,
   LikeWrapper,
+  Time,
 } from "./BoardStyles";
 
 interface IBoardProps {
@@ -25,6 +26,7 @@ const Board = ({ boardId }: IBoardProps) => {
         <Main>
           <Title>{board?.title}</Title>
           <Content>{board?.content}</Content>
+          <Time>2021년 1월 19일 수</Time>
         </Main>
         <Bottom>
           <Author>

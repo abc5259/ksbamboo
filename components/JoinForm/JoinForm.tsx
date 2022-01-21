@@ -138,6 +138,7 @@ const JoinForm = () => {
               validate: value =>
                 value !== watch("password") ? "비밀번호가 같지 않습니다" : true,
             })}
+            type="password"
             name="passwordConfirm"
           />
           <ErrorMessage>{errors.passwordConfirm?.message}</ErrorMessage>

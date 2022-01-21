@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BoardWrapper = styled.div`
-  max-width: 450px;
+  max-width: 500px;
   height: 350px;
   border-radius: 5px;
   background-color: ${props => props.theme.bgColor.lighter};
@@ -27,6 +27,12 @@ export const Title = styled.h3`
 
 export const Content = styled.p`
   font-size: 0.9rem;
+  margin-bottom: 10px;
+`;
+
+export const Time = styled.div`
+  font-size: 0.8rem;
+  color: rgb(134, 142, 150);
 `;
 
 export const Bottom = styled.div`

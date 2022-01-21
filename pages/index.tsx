@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { boardsAtom, ksDepartmentAtom } from "../atom/atoms";
 import AppLayout from "../components/AppLayout";
 import Board from "../components/Board/Board";
+import BoardForm from "../components/BoardForm/BoardForm";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
             </option>
           ))}
         </select>
+        <BoardForm />
         <BoardWrapper>
           {boards.map(board => {
             if (department === "전체") {
