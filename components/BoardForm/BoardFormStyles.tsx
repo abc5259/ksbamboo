@@ -32,7 +32,6 @@ export const TextArea = styled(motion.textarea)`
   color: inherit;
   border: none;
   transform-origin: center top;
-  /* height: 300px; */
   background-color: #adc2a9;
   font-size: inherit;
   border-radius: 7px;
@@ -48,4 +47,10 @@ export const Button = styled.button`
   border-radius: 7px;
   font-weight: 800;
   background-color: #adc2a9;
+  cursor: pointer;
+`;
+
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 0.9rem;
 `;
