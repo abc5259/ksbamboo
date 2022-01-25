@@ -1,6 +1,9 @@
 import { useAnimation } from "framer-motion";
+import { title } from "process";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSetRecoilState } from "recoil";
+import { Board, boardsAtom } from "../../atom/atoms";
 import { Button, ErrorMessage, Form, Input, TextArea } from "./BoardFormStyles";
 interface IBoardForm {
   title: string;
@@ -8,6 +11,7 @@ interface IBoardForm {
 }
 
 const BoardForm = () => {
+  const setBoards = useSetRecoilState(boardsAtom);
   const {
     register,
     watch,
@@ -18,7 +22,23 @@ const BoardForm = () => {
   const textAreaAnimation = useAnimation();
 
   const onValid = (data: IBoardForm) => {
-    //서버로 데이터 보내기 (게시물 생성)
+    //서버로 데이터 보내기 (게시물 생성) with React Query
+    //더미데이터
+    const board: Board = {
+      id: Date.now(),
+      title: data.title,
+      content: data.content,
+      status: "익명",
+      department: "컴퓨터공학과",
+      user: {
+        id: 4,
+        nickname: "serf",
+        email: "123@ks.ac.kr",
+        emailAuth: true,
+        ksDeparment: "컴퓨터공학과",
+      },
+    };
+    setBoards(prevBoards => [board, ...prevBoards]);
     setValue("title", "");
     setValue("content", "");
     textAreaAnimation.start({ height: 70 });
@@ -49,7 +69,6 @@ const BoardForm = () => {
         {...register("content", {
           required: "content를 입력하세요",
         })}
-        // ref={textareaRef}
         placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
         initial={{ height: 70 }}
         animate={textAreaAnimation}

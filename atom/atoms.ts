@@ -124,12 +124,12 @@ const ksDepartment = [
   "체육학과",
 ];
 
-export const boardsAtom = atom({
-  key: "boards",
+export const boardsAtom = atom<Board[]>({
+  key: "isBoards",
   default: dummyBoards,
 });
 
-export const ksDepartmentAtom = atom({
-  key: "ksDepartment",
+export const ksDepartmentAtom = atom<string[]>({
+  key: "isKsDepartment",
   default: ksDepartment,
 });
