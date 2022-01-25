@@ -2,10 +2,11 @@ import { atom } from "recoil";
 
 export interface User {
   id: number;
-  nickname: string;
+  username: string;
   email: string;
   password?: string;
-  emailAuth: boolean;
+  verified: boolean;
+  boards?: Board[];
   ksDeparment: string;
 }
 
@@ -27,9 +28,9 @@ const dummyBoards: Board[] = [
     department: "컴퓨터공학과",
     user: {
       id: 1,
-      nickname: "serf",
+      username: "serf",
       email: "123@ks.ac.kr",
-      emailAuth: true,
+      verified: true,
       ksDeparment: "컴퓨터공학과",
     },
   },
@@ -41,9 +42,9 @@ const dummyBoards: Board[] = [
     department: "국어국문학과",
     user: {
       id: 2,
-      nickname: "serf2",
+      username: "serf2",
       email: "1234@ks.ac.kr",
-      emailAuth: true,
+      verified: true,
       ksDeparment: "국어국문학과",
     },
   },
@@ -55,9 +56,9 @@ const dummyBoards: Board[] = [
     department: "컴퓨터공학과",
     user: {
       id: 3,
-      nickname: "serf3",
+      username: "serf3",
       email: "1235@ks.ac.kr",
-      emailAuth: true,
+      verified: true,
       ksDeparment: "컴퓨터공학과",
     },
   },
@@ -69,9 +70,9 @@ const dummyBoards: Board[] = [
     department: "영어영문학과",
     user: {
       id: 4,
-      nickname: "serf4",
+      username: "serf4",
       email: "1236@ks.ac.kr",
-      emailAuth: true,
+      verified: true,
       ksDeparment: "영어영문학과",
     },
   },
@@ -132,4 +133,9 @@ export const boardsAtom = atom<Board[]>({
 export const ksDepartmentAtom = atom<string[]>({
   key: "isKsDepartment",
   default: ksDepartment,
+});
+
+export const loginAtom = atom<User | null>({
+  key: "isUserLogin",
+  default: null,
 });

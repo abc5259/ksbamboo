@@ -11,10 +11,8 @@ const Container = styled.div`
 const AppLayout: FC = ({ children }) => {
   return (
     <>
-      <Container>
-        <NavBar />
-        {children}
-      </Container>
+      <NavBar />
+      <Container>{children}</Container>
     </>
   );
 };

@@ -32,9 +32,9 @@ const BoardForm = () => {
       department: "컴퓨터공학과",
       user: {
         id: 4,
-        nickname: "serf",
+        username: "serf",
         email: "123@ks.ac.kr",
-        emailAuth: true,
+        verified: true,
         ksDeparment: "컴퓨터공학과",
       },
     };

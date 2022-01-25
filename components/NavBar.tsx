@@ -27,23 +27,34 @@ const List = styled.li`
   }
 `;
 
+const NaveBarWrapper = styled.div`
+  padding: 0 30px;
+  background-color: #202329;
+  color: white;
+`;
+
 const NavBar = () => {
   return (
     <>
-      <Header>
-        <Title>KSB</Title>
-        <Nav>
-          <List>
-            <Link href="/">게시판</Link>
-          </List>
-          <List>
-            <Link href="/login">로그인</Link>
-          </List>
-          <List>
-            <Link href="/join">회원가입</Link>
-          </List>
-        </Nav>
-      </Header>
+      <NaveBarWrapper>
+        <Header>
+          <Title>
+            <Link href="/">KSB</Link>
+          </Title>
+
+          <Nav>
+            <List>
+              <Link href="/">게시판</Link>
+            </List>
+            <List>
+              <Link href="/login">로그인</Link>
+            </List>
+            <List>
+              <Link href="/join">회원가입</Link>
+            </List>
+          </Nav>
+        </Header>
+      </NaveBarWrapper>
     </>
   );
 };

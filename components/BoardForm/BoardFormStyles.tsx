@@ -19,10 +19,10 @@ export const Input = styled.input`
   border: none;
   color: inherit;
   font-size: inherit;
-  background-color: #adc2a9;
+  background-color: #e7f5e9;
   border-radius: 7px;
   &:focus {
-    outline-color: #fef5ed;
+    outline-color: #6eb9d4;
   }
 `;
 
@@ -31,12 +31,13 @@ export const TextArea = styled(motion.textarea)`
   padding: 10px;
   color: inherit;
   border: none;
+  resize: none;
   transform-origin: center top;
-  background-color: #adc2a9;
+  background-color: #e7f5e9;
   font-size: inherit;
   border-radius: 7px;
   &:focus {
-    outline-color: #fef5ed;
+    outline-color: #6eb9d4;
   }
 `;
 
@@ -46,7 +47,7 @@ export const Button = styled.button`
   height: 45px;
   border-radius: 7px;
   font-weight: 800;
-  background-color: #adc2a9;
+  background-color: #e7f5e9;
   cursor: pointer;
 `;
 
