@@ -1,14 +1,14 @@
 import { Meta, Story } from "@storybook/react";
-import BoardForm from "./BoardForm";
+import NavBar from "./NavBar";
 
 export default {
-  title: "Atoms / BoardForm",
-  component: BoardForm,
+  title: "Organisms / NavBar",
+  component: NavBar,
 } as Meta;
 
 const Template: Story<any> = args => (
   <>
-    <BoardForm {...args} />;
+    <NavBar {...args} />;
   </>
 );
 

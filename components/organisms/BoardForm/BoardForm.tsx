@@ -2,7 +2,7 @@ import { useAnimation } from "framer-motion";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import { Board, boardsAtom } from "../../atom/atoms";
+import { Board, boardsAtom } from "../../../atom/atoms";
 import { Button, ErrorMessage, Form, Input, TextArea } from "./BoardFormStyles";
 interface IBoardForm {
   title: string;

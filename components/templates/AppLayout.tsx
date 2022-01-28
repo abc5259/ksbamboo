@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import NavBar from "./NavBar";
+import NavBar from "../organisms/NavBar/NavBar";
 
 const Container = styled.div`
   margin: 0 auto;

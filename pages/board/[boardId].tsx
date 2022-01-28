@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import AppLayout from "../../components/AppLayout";
+import AppLayout from "../../components/templates/AppLayout";
 
 const BoardPage = () => {
   const router = useRouter();

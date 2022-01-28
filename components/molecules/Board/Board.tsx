@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
-import { boardsAtom } from "../../atom/atoms";
+import { boardsAtom } from "../../../atom/atoms";
+
 import {
   Bottom,
   BoardWrapper,

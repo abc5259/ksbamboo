@@ -1,14 +1,14 @@
-import Board, { IBoardProps } from "./Board";
 import { Meta, Story } from "@storybook/react";
+import LoginForm from "./LoginForm";
 
 export default {
-  title: "Atoms / Titlee",
-  component: Board,
+  title: "Organisms / LoginForm",
+  component: LoginForm,
 } as Meta;
 
-const Template: Story<IBoardProps> = args => (
+const Template: Story<any> = args => (
   <>
-    <Board {...args} />;
+    <LoginForm {...args} />;
   </>
 );
 

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import AppLayout from "../components/AppLayout";
-import JoinForm from "../components/JoinForm/JoinForm";
+import AppLayout from "../components/templates/AppLayout";
+import JoinForm from "../components/organisms/JoinForm/JoinForm";
 
 const Join: NextPage = () => {
   return (

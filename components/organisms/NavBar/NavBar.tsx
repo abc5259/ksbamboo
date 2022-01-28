@@ -1,37 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-
-const Header = styled.header`
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-`;
-
-const Title = styled.h1`
-  font-size: 32px;
-  color: #44bd32;
-`;
-
-const Nav = styled.ul`
-  display: flex;
-`;
-
-const List = styled.li`
-  margin-left: 10px;
-  transition: color 0.2s ease-in;
-  font-size: 18px;
-  &:hover {
-    color: ${props => props.theme.accentColor};
-  }
-`;
-
-const NaveBarWrapper = styled.div`
-  padding: 0 30px;
-  background-color: #202329;
-  color: white;
-`;
+import { Title, Header, List, Nav, NaveBarWrapper } from "./NavBarstyles";
 
 const NavBar = () => {
   return (

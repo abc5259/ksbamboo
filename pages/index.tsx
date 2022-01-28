@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { boardsAtom, ksDepartmentAtom } from "../atom/atoms";
-import AppLayout from "../components/AppLayout";
-import Board from "../components/Board/Board";
-import BoardForm from "../components/BoardForm/BoardForm";
+import AppLayout from "../components/templates/AppLayout";
+import Board from "../components/molecules/Board/Board";
+import BoardForm from "../components/organisms/BoardForm/BoardForm";
 
 export const BoardWrapper = styled.div`
   display: grid;
