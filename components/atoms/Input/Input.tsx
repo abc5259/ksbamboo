@@ -1,16 +1,19 @@
-import { UseFormRegister } from "react-hook-form";
+import React from "react";
 import { StyledInput } from "./InputStyles";
 
 export interface IAtomInputProps {
   placeholder?: string;
   width?: string;
-  height?: string;
+  fontSize?: string;
   bgColor?: string;
-  register: UseFormRegister<TFieldValues>;
+  type: string;
 }
 
-const Input = (props: IAtomInputProps) => {
-  return <StyledInput {...props} />;
+//타입 나중에 바꿔야함 any => ??
+const Input = (props: any) => {
+  return (
+    <StyledInput {...props} placeholder={props.placeholder} type={props.type} />
+  );
 };
 
 export default Input;

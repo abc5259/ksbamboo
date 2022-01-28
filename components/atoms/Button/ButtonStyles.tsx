@@ -2,15 +2,7 @@ import styled, { css } from "styled-components";
 import { IAtomButtonProps } from "./Button";
 
 export const StyledButton = styled.button<IAtomButtonProps>`
-  ${props => {
-    const {
-      width,
-      height,
-      bgColor,
-      color,
-      redius,
-      theme: { accentColor },
-    } = props;
+  ${({ width, height, bgColor, color, redius, theme: { accentColor } }) => {
     const backgroundColor = bgColor ? bgColor : accentColor;
     return css`
       border: none;

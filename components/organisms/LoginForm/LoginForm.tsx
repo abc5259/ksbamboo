@@ -51,7 +51,7 @@ const LoginForm = () => {
         </InputWrapper>
         <InputWrapper>
           <Label>비발번호</Label>
-          <Input
+          <Atom.Input
             {...register("password", {
               required: "비밀번호를 적어주세요",
             })}
@@ -59,7 +59,6 @@ const LoginForm = () => {
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </InputWrapper>
-        <Atom.Input {...register("email")} />
         <Atom.Button className="big" color="inherit">
           로그인
         </Atom.Button>
