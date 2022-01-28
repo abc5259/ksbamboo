@@ -41,6 +41,5 @@ Default.parameters = {};
 Default.args = {
   width: "120px",
   height: "50px",
-  bgColor: "black",
   color: "#fff",
 };

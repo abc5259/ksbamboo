@@ -59,6 +59,7 @@ const LoginForm = () => {
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </InputWrapper>
+        <Atom.Input {...register("email")} />
         <Atom.Button className="big" color="inherit">
           로그인
         </Atom.Button>
