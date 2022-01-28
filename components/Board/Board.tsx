@@ -13,7 +13,7 @@ import {
   Time,
 } from "./BoardStyles";
 
-interface IBoardProps {
+export interface IBoardProps {
   boardId: number;
 }
 
@@ -32,7 +32,7 @@ const Board = ({ boardId }: IBoardProps) => {
           <Author>
             By{" "}
             <span>
-              {board?.status === "익명" ? "익명" : board?.user.nickname}
+              {board?.status === "익명" ? "익명" : board?.user.username}
             </span>
           </Author>
           <div>{board?.department}</div>
