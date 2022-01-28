@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Atom from "../../atoms";
 import {
-  Button,
   ErrorMessage,
   Form,
   Input,
@@ -59,7 +59,9 @@ const LoginForm = () => {
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </InputWrapper>
-        <Button type="submit">로그인</Button>
+        <Atom.Button className="big" color="inherit">
+          로그인
+        </Atom.Button>
         <Register>
           <span>KSB가 처음이신가요?</span>
           <Link href="/join">회원가입</Link>

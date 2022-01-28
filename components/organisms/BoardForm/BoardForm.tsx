@@ -3,7 +3,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { Board, boardsAtom } from "../../../atom/atoms";
-import { Button, ErrorMessage, Form, Input, TextArea } from "./BoardFormStyles";
+import Atom from "../../atoms";
+import { ErrorMessage, Form, Input, TextArea } from "./BoardFormStyles";
 interface IBoardForm {
   title: string;
   content: string;
@@ -77,7 +78,14 @@ const BoardForm = () => {
         onBlur={onTextAreaBlur}
       ></TextArea>
       <ErrorMessage>{errors.content?.message}</ErrorMessage>
-      <Button type="submit">작성하기</Button>
+      <Atom.Button
+        className="small"
+        bgColor="#E7F5E9"
+        color="inherit"
+        redius={7}
+      >
+        작성하기
+      </Atom.Button>
     </Form>
   );
 };

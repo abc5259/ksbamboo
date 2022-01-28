@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Atom from "../../atoms";
 import { ErrorMessage, Register } from "../LoginForm/LoginFormStyles";
 import {
   Form,
   JoinContainer,
   Title,
   Input,
-  Button,
   Select,
   SelectWrapper,
   InputWrapper,
@@ -143,7 +143,9 @@ const JoinForm = () => {
           />
           <ErrorMessage>{errors.passwordConfirm?.message}</ErrorMessage>
         </InputWrapper>
-        <Button type="submit">회원가입</Button>
+        <Atom.Button className="big" color="inherit">
+          회원가입
+        </Atom.Button>
       </Form>
       <Register>
         <span>이미 회원가입을 하셨나요?</span>

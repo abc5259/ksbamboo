@@ -21,11 +21,17 @@ const Template: Story<IAtomButtonProps> = args => (
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <span>small</span>
-      <Button {...args} className="small" />
+      <Button {...args} className="small">
+        test
+      </Button>
       <span>middle</span>
-      <Button {...args} className="middle" />
+      <Button {...args} className="middle">
+        test
+      </Button>
       <span>big</span>
-      <Button {...args} className="big" />
+      <Button {...args} className="big">
+        test
+      </Button>
     </div>
   </>
 );
@@ -37,5 +43,4 @@ Default.args = {
   height: "50px",
   bgColor: "black",
   color: "#fff",
-  text: "test",
 };

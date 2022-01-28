@@ -68,16 +68,6 @@ export const ErrorMessage = styled.span`
   color: red;
 `;
 
-export const Button = styled.button`
-  border: none;
-  width: 100%;
-  padding: 10px 5px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  background-color: ${props => props.theme.accentColor};
-  cursor: pointer;
-`;
-
 export const Join = styled.p`
   margin-top: 20px;
   text-align: center;

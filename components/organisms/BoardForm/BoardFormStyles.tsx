@@ -41,16 +41,6 @@ export const TextArea = styled(motion.textarea)`
   }
 `;
 
-export const Button = styled.button`
-  border: none;
-  width: 100px;
-  height: 45px;
-  border-radius: 7px;
-  font-weight: 800;
-  background-color: #e7f5e9;
-  cursor: pointer;
-`;
-
 export const ErrorMessage = styled.div`
   color: red;
   font-size: 0.9rem;
