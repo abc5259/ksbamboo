@@ -13,7 +13,7 @@ import {
   Label,
 } from "./LoginFormStyles";
 
-interface ILoginForm {
+export interface ILoginForm {
   email: string;
   password: string;
 }
@@ -51,12 +51,7 @@ const LoginForm = () => {
         </InputWrapper>
         <InputWrapper>
           <Label>비발번호</Label>
-          <Atom.Input
-            {...register("password", {
-              required: "비밀번호를 적어주세요",
-            })}
-            type="password"
-          />
+          <Atom.Input register={register} type="password" />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </InputWrapper>
         <Atom.Button className="big" color="inherit">
