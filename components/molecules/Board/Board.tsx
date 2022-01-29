@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import { boardsAtom } from "../../../atom/atoms";
+import Atom from "../../atoms";
 
 import {
   Bottom,
@@ -9,7 +10,6 @@ import {
   Main,
   Title,
   Author,
-  Like,
   LikeWrapper,
   Time,
 } from "./BoardStyles";
@@ -38,12 +38,7 @@ const Board = ({ boardId }: IBoardProps) => {
           </Author>
           <div>{board?.department}</div>
           <LikeWrapper>
-            <Like viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"
-              ></path>
-            </Like>
+            <Atom.Like mr="5px" />
             <span>100</span>
           </LikeWrapper>
         </Bottom>

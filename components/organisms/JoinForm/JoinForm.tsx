@@ -7,7 +7,6 @@ import {
   Form,
   JoinContainer,
   Title,
-  Input,
   Select,
   SelectWrapper,
   InputWrapper,
