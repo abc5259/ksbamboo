@@ -43,8 +43,6 @@ const JoinForm = () => {
     },
   });
 
-  console.log(errors);
-
   const onEmailButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (watch("email") === "") setEmailErrorMessage("학교 이메일을 입력하세요");
@@ -90,14 +88,16 @@ const JoinForm = () => {
         <InputWrapper>
           <Label>경성대학교 이메일</Label>
           <EmailWrapper>
-            <Input
-              {...register("email", {
-                required: "학교 이메일을 적어주세요",
-                validate: value =>
-                  value.includes("@ks.ac.kr")
-                    ? true
-                    : "학교 이메일이어야 합니다.",
-              })}
+            <Atom.Input
+              register={{
+                ...register("email", {
+                  required: "학교 이메일을 적어주세요",
+                  validate: value =>
+                    value.includes("@ks.ac.kr")
+                      ? true
+                      : "학교 이메일이어야 합니다.",
+                }),
+              }}
               name="email"
               placeholder="이메일"
             />
@@ -110,21 +110,25 @@ const JoinForm = () => {
         {emailAuth && (
           <InputWrapper>
             <Label>인증번호 입력</Label>
-            <Input
+            <Atom.Input
+              register={{
+                ...register("emailAuthNumber", {
+                  required: "인증번호를 입력하세요",
+                }),
+              }}
               type="number"
-              {...register("emailAuthNumber", {
-                required: "인증번호를 입력하세요",
-              })}
             />
             <ErrorMessage>{errors.emailAuthNumber?.message}</ErrorMessage>
           </InputWrapper>
         )}
         <InputWrapper>
           <Label>비밀번호</Label>
-          <Input
-            {...register("password", {
-              required: "비밀번호를 입력하세요",
-            })}
+          <Atom.Input
+            register={{
+              ...register("password", {
+                required: "비밀번호를 입력하세요",
+              }),
+            }}
             type="password"
             name="password"
           />
@@ -132,12 +136,16 @@ const JoinForm = () => {
         </InputWrapper>
         <InputWrapper>
           <Label>비밀번호 확인</Label>
-          <Input
-            {...register("passwordConfirm", {
-              required: "비밀번호 확인을 입력하세요",
-              validate: value =>
-                value !== watch("password") ? "비밀번호가 같지 않습니다" : true,
-            })}
+          <Atom.Input
+            register={{
+              ...register("passwordConfirm", {
+                required: "비밀번호 확인을 입력하세요",
+                validate: value =>
+                  value !== watch("password")
+                    ? "비밀번호가 같지 않습니다"
+                    : true,
+              }),
+            }}
             type="password"
             name="passwordConfirm"
           />

@@ -38,14 +38,16 @@ const LoginForm = () => {
       <Form onSubmit={handleSubmit(onValid)}>
         <InputWrapper>
           <Label>학교 이메일</Label>
-          <Input
-            {...register("email", {
-              required: "이메일을 적어주세요",
-              validate: value =>
-                value.includes("@ks.ac.kr")
-                  ? true
-                  : "학교 이메일이어야 합니다.",
-            })}
+          <Atom.Input
+            register={{
+              ...register("email", {
+                required: "이메일을 적어주세요",
+                validate: value =>
+                  value.includes("@ks.ac.kr")
+                    ? true
+                    : "학교 이메일이어야 합니다.",
+              }),
+            }}
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
         </InputWrapper>

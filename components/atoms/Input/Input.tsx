@@ -1,22 +1,24 @@
 import React from "react";
-import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
-import { ILoginForm } from "../../organisms/LoginForm/LoginForm";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledInput } from "./InputStyles";
 
-type InputType = "email" | "password" | "text" | "search" | "submit";
+type InputType = "email" | "password" | "text" | "search" | "submit" | "number";
 
 export interface IAtomInputProps {
   placeholder?: string;
   width?: string;
   fontSize?: string;
   bgColor?: string;
-  type: InputType;
+  type?: InputType;
   register?: UseFormRegisterReturn;
+  name?: string;
+  spellCheck?: boolean;
+  outlineColor?: string;
+  borderRadius?: string;
 }
 
-//타입 나중에 바꿔야함 any => ??
 const Input = (props: IAtomInputProps) => {
-  return <StyledInput {...props} />;
+  return <StyledInput {...props} {...props.register} />;
 };
 
 export default Input;

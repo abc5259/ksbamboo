@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { Board, boardsAtom } from "../../../atom/atoms";
 import Atom from "../../atoms";
-import { ErrorMessage, Form, Input, TextArea } from "./BoardFormStyles";
+import { ErrorMessage, Form, TextArea } from "./BoardFormStyles";
 interface IBoardForm {
   title: string;
   content: string;
@@ -55,14 +55,21 @@ const BoardForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onValid)}>
-      <Input
-        {...register("title", {
-          required: "제목을 입력하세요",
-          maxLength: { value: 30, message: "제목은 30자 이하여야 합니다" },
-        })}
+      <Atom.Input
+        register={{
+          ...register("title", {
+            required: "제목을 입력하세요",
+            maxLength: { value: 30, message: "제목은 30자 이하여야 합니다" },
+          }),
+        }}
         type="text"
         placeholder="제목"
-        spellCheck="false"
+        spellCheck={false}
+        width="50%"
+        bgColor="#e7f5e9"
+        outlineColor="#6eb9d4"
+        fontSize="inherit"
+        borderRadius="7px"
       />
       <ErrorMessage>{errors.title?.message}</ErrorMessage>
       <TextArea
