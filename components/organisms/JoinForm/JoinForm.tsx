@@ -82,7 +82,9 @@ const JoinForm = () => {
               </option>
             ))}
           </Select>
-          <ErrorMessage>{errors.enterYear?.message}</ErrorMessage>
+          <Atom.Message className="error" fontSize="0.9rem">
+            {errors.enterYear?.message}
+          </Atom.Message>
         </SelectWrapper>
         <InputWrapper>
           <Label>경성대학교 이메일</Label>
@@ -102,9 +104,9 @@ const JoinForm = () => {
             />
             <button onClick={onEmailButtonClick}>인증번호받기</button>
           </EmailWrapper>
-          <ErrorMessage>
+          <Atom.Message className="error" fontSize="0.9rem">
             {errors.email?.message || emailErrorMessage}
-          </ErrorMessage>
+          </Atom.Message>
         </InputWrapper>
         {emailAuth && (
           <InputWrapper>
@@ -117,7 +119,9 @@ const JoinForm = () => {
               }}
               type="number"
             />
-            <ErrorMessage>{errors.emailAuthNumber?.message}</ErrorMessage>
+            <Atom.Message className="error" fontSize="0.9rem">
+              {errors.emailAuthNumber?.message}
+            </Atom.Message>
           </InputWrapper>
         )}
         <InputWrapper>
@@ -131,7 +135,9 @@ const JoinForm = () => {
             type="password"
             name="password"
           />
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          <Atom.Message className="error" fontSize="0.9rem">
+            {errors.password?.message}
+          </Atom.Message>
         </InputWrapper>
         <InputWrapper>
           <Label>비밀번호 확인</Label>
@@ -148,7 +154,9 @@ const JoinForm = () => {
             type="password"
             name="passwordConfirm"
           />
-          <ErrorMessage>{errors.passwordConfirm?.message}</ErrorMessage>
+          <Atom.Message className="error" fontSize="0.9rem">
+            {errors.passwordConfirm?.message}
+          </Atom.Message>
         </InputWrapper>
         <Atom.Button className="big" color="inherit">
           회원가입

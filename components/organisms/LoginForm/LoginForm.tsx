@@ -49,7 +49,9 @@ const LoginForm = () => {
               }),
             }}
           />
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          <Atom.Message className="error" fontSize="0.9rem">
+            {errors.email?.message}
+          </Atom.Message>
         </InputWrapper>
         <InputWrapper>
           <Label>비발번호</Label>
@@ -61,7 +63,9 @@ const LoginForm = () => {
             }}
             type="password"
           />
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          <Atom.Message className="error" fontSize="0.9rem">
+            {errors.password?.message}
+          </Atom.Message>
         </InputWrapper>
         <Atom.Button className="big" color="inherit">
           로그인

@@ -71,7 +71,9 @@ const BoardForm = () => {
         fontSize="inherit"
         borderRadius="7px"
       />
-      <ErrorMessage>{errors.title?.message}</ErrorMessage>
+      <Atom.Message className="error" fontSize="0.9rem">
+        {errors.title?.message}
+      </Atom.Message>
       <TextArea
         {...register("content", {
           required: "content를 입력하세요",
@@ -84,7 +86,9 @@ const BoardForm = () => {
         onFocus={onTextAreaFocus}
         onBlur={onTextAreaBlur}
       ></TextArea>
-      <ErrorMessage>{errors.content?.message}</ErrorMessage>
+      <Atom.Message className="error" fontSize="0.9rem">
+        {errors.content?.message}
+      </Atom.Message>
       <Atom.Button
         className="small"
         bgColor="#E7F5E9"

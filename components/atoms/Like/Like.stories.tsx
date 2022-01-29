@@ -2,7 +2,7 @@ import { Meta, Story } from "@storybook/react";
 import Like, { IAtomLikeProps } from "./Like";
 
 export default {
-  title: "Atoms/Input",
+  title: "Atoms/Like",
   component: Like,
   parameters: {},
   argTypes: {},
