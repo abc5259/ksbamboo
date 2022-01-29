@@ -13,11 +13,14 @@ const Template: Story<IAtomTextareaProps> = args => (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Textarea {...args}>TextArea</Textarea>
+      <Textarea {...args}></Textarea>
     </div>
   </>
 );
 
 export const Default = Template.bind({});
 Default.parameters = {};
-Default.args = {};
+Default.args = {
+  animateHeight: 100,
+  placeholder: "test",
+};
