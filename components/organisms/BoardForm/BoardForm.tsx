@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { Board, boardsAtom } from "../../../atom/atoms";
 import Atom from "../../atoms";
-import { ErrorMessage, Form, TextArea } from "./BoardFormStyles";
+import { Form, TextArea } from "./BoardFormStyles";
 interface IBoardForm {
   title: string;
   content: string;
@@ -64,7 +64,6 @@ const BoardForm = () => {
         }}
         type="text"
         placeholder="제목"
-        spellCheck={false}
         width="50%"
         bgColor="#e7f5e9"
         outlineColor="#6eb9d4"
@@ -74,18 +73,16 @@ const BoardForm = () => {
       <Atom.Message className="error" fontSize="0.9rem">
         {errors.title?.message}
       </Atom.Message>
-      <TextArea
-        {...register("content", {
-          required: "content를 입력하세요",
-        })}
+      <Atom.Textarea
+        register={{
+          ...register("content", {
+            required: "content를 입력하세요",
+          }),
+        }}
         placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
-        initial={{ height: 70 }}
-        animate={textAreaAnimation}
-        transition={{ type: "linear" }}
-        spellCheck="false"
-        onFocus={onTextAreaFocus}
-        onBlur={onTextAreaBlur}
-      ></TextArea>
+        animateHeight={300}
+        value={watch("content")}
+      ></Atom.Textarea>
       <Atom.Message className="error" fontSize="0.9rem">
         {errors.content?.message}
       </Atom.Message>

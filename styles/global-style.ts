@@ -57,6 +57,7 @@ html {
 body {
   background-color: ${props => props.theme.bgColor.default};
   color:  ${props => props.theme.textColor};
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 a {

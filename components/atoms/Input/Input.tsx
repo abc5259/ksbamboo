@@ -12,13 +12,12 @@ export interface IAtomInputProps {
   type?: InputType;
   register?: UseFormRegisterReturn;
   name?: string;
-  spellCheck?: boolean;
   outlineColor?: string;
   borderRadius?: string;
 }
 
 const Input = (props: IAtomInputProps) => {
-  return <StyledInput {...props} {...props.register} />;
+  return <StyledInput spellCheck={false} {...props} {...props.register} />;
 };
 
 export default Input;
