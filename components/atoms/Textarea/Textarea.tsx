@@ -5,7 +5,7 @@ import { StyledTextarea } from "./TextareaStyles";
 export interface IAtomTextareaProps {
   placeholder?: string;
   register: UseFormRegisterReturn;
-  animateHeight?: number;
+  animateheight?: number;
   value: string;
 }
 
@@ -14,13 +14,15 @@ const Textarea: React.FC<IAtomTextareaProps> = props => {
 
   const onTextAreaFocus = () => {
     textAreaAnimation.start({
-      height: props.animateHeight ? props.animateHeight : 50,
+      height: props.animateheight ? props.animateheight : 50,
     });
   };
+
   const onTextAreaBlur = () => {
     if (props.value) return;
     textAreaAnimation.start({ height: 50 });
   };
+
   return (
     <StyledTextarea
       animate={textAreaAnimation}

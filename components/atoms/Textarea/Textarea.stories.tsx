@@ -21,6 +21,6 @@ const Template: Story<IAtomTextareaProps> = args => (
 export const Default = Template.bind({});
 Default.parameters = {};
 Default.args = {
-  animateHeight: 100,
+  animateheight: 100,
   placeholder: "test",
 };

@@ -38,7 +38,7 @@ const Board = ({ boardId }: IBoardProps) => {
           </Author>
           <div>{board?.department}</div>
           <LikeWrapper>
-            <Atom.Like mr="5px" />
+            <Atom.Like mr="8px" />
             <span>100</span>
           </LikeWrapper>
         </Bottom>

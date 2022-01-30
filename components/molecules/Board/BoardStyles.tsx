@@ -16,9 +16,11 @@ export const BoardWrapper = styled.div`
     box-shadow: rgb(255 255 255 / 17%) 0px 4px 16px 0px;
   }
 `;
+
 export const Main = styled.div`
-  padding: 20px 10px;
+  padding: 20px;
 `;
+
 export const Title = styled.h3`
   font-size: 1rem;
   font-weight: 800;
@@ -37,7 +39,7 @@ export const Time = styled.div`
 
 export const Bottom = styled.div`
   height: 10%;
-  padding: 20px 10px;
+  padding: 20px;
   border-top: 1px solid black;
   display: flex;
   align-items: center;

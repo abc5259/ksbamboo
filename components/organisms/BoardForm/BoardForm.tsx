@@ -80,7 +80,7 @@ const BoardForm = () => {
           }),
         }}
         placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
-        animateHeight={300}
+        animateheight={300}
         value={watch("content")}
       ></Atom.Textarea>
       <Atom.Message className="error" fontSize="0.9rem">
