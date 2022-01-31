@@ -2,10 +2,9 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Atom from "../../atoms";
+import Molecule from "../../molecules";
 import {
-  ErrorMessage,
   Form,
-  Input,
   LoginContainer,
   InputWrapper,
   Register,
@@ -36,7 +35,7 @@ const LoginForm = () => {
     <LoginContainer>
       <Title>KSB</Title>
       <Form onSubmit={handleSubmit(onValid)}>
-        <InputWrapper>
+        {/* <InputWrapper>
           <Label>학교 이메일</Label>
           <Atom.Input
             register={{
@@ -51,8 +50,21 @@ const LoginForm = () => {
           />
           <Atom.Message className="error" fontSize="0.9rem">
             {errors.email?.message}
-          </Atom.Message>
-        </InputWrapper>
+          </Atom.Message> 
+        </InputWrapper> */}
+        <Molecule.LoginInput
+          register={{
+            ...register("email", {
+              required: "이메일을 적어주세요",
+              validate: value =>
+                value.includes("@ks.ac.kr")
+                  ? true
+                  : "학교 이메일이어야 합니다.",
+            }),
+          }}
+          labelTest="학교 이메일"
+          message={errors.email?.message}
+        />
         <InputWrapper>
           <Label>비발번호</Label>
           <Atom.Input

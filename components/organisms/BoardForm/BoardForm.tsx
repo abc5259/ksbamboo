@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { Board, boardsAtom } from "../../../atom/atoms";
 import Atom from "../../atoms";
+import Molecule from "../../molecules";
 import { Form, TextArea } from "./BoardFormStyles";
 interface IBoardForm {
   title: string;
@@ -55,20 +56,13 @@ const BoardForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onValid)}>
-      <Atom.Input
+      <Molecule.BoardInput
         register={{
           ...register("title", {
             required: "제목을 입력하세요",
             maxLength: { value: 30, message: "제목은 30자 이하여야 합니다" },
           }),
         }}
-        type="text"
-        placeholder="제목"
-        width="50%"
-        bgColor="#e7f5e9"
-        outlineColor="#6eb9d4"
-        fontSize="inherit"
-        borderRadius="7px"
       />
       <Atom.Message className="error" fontSize="0.9rem">
         {errors.title?.message}

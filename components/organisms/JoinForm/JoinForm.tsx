@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Atom from "../../atoms";
-import { ErrorMessage, Register } from "../LoginForm/LoginFormStyles";
+import { Register } from "../LoginForm/LoginFormStyles";
 import {
   Form,
   JoinContainer,

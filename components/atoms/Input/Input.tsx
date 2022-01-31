@@ -2,7 +2,13 @@ import React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { StyledInput } from "./InputStyles";
 
-type InputType = "email" | "password" | "text" | "search" | "submit" | "number";
+export type InputType =
+  | "email"
+  | "password"
+  | "text"
+  | "search"
+  | "submit"
+  | "number";
 
 export interface IAtomInputProps {
   placeholder?: string;
