@@ -21,7 +21,7 @@ const enterYear: number[] = [
 interface IJoinForm {
   enterYear: string;
   email: string;
-  nickname: string;
+  username: string;
   password: string;
   passwordConfirm: string;
   emailAuthNumber: number;
@@ -85,6 +85,16 @@ const JoinForm = () => {
             {errors.enterYear?.message}
           </Atom.Message>
         </SelectWrapper>
+        <Molecule.TextInput
+          register={{
+            ...register("username", {
+              required: "이름을 적어주세요",
+            }),
+          }}
+          labelText="이름"
+          message={errors.username?.message}
+          mb="20px"
+        />
         <Molecule.TextInput
           register={{
             ...register("email", {
