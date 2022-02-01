@@ -3,14 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
-import {
-  Form,
-  LoginContainer,
-  InputWrapper,
-  Register,
-  Title,
-  Label,
-} from "./LoginFormStyles";
+import { Form, LoginContainer, Register, Title } from "./LoginFormStyles";
 
 export interface ILoginForm {
   email: string;
@@ -35,24 +28,7 @@ const LoginForm = () => {
     <LoginContainer>
       <Title>KSB</Title>
       <Form onSubmit={handleSubmit(onValid)}>
-        {/* <InputWrapper>
-          <Label>학교 이메일</Label>
-          <Atom.Input
-            register={{
-              ...register("email", {
-                required: "이메일을 적어주세요",
-                validate: value =>
-                  value.includes("@ks.ac.kr")
-                    ? true
-                    : "학교 이메일이어야 합니다.",
-              }),
-            }}
-          />
-          <Atom.Message className="error" fontSize="0.9rem">
-            {errors.email?.message}
-          </Atom.Message> 
-        </InputWrapper> */}
-        <Molecule.LoginInput
+        <Molecule.TextInput
           register={{
             ...register("email", {
               required: "이메일을 적어주세요",
@@ -62,23 +38,21 @@ const LoginForm = () => {
                   : "학교 이메일이어야 합니다.",
             }),
           }}
-          labelTest="학교 이메일"
+          labelText="학교 이메일"
           message={errors.email?.message}
+          mb="20px"
         />
-        <InputWrapper>
-          <Label>비발번호</Label>
-          <Atom.Input
-            register={{
-              ...register("password", {
-                required: "패스워드를 입력해 주세요",
-              }),
-            }}
-            type="password"
-          />
-          <Atom.Message className="error" fontSize="0.9rem">
-            {errors.password?.message}
-          </Atom.Message>
-        </InputWrapper>
+        <Molecule.TextInput
+          register={{
+            ...register("password", {
+              required: "패스워드를 입력해 주세요",
+            }),
+          }}
+          type="password"
+          labelText="비밀번호"
+          message={errors.password?.message}
+          mb="20px"
+        />
         <Atom.Button className="big" color="inherit">
           로그인
         </Atom.Button>

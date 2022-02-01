@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Atom from "../../atoms";
+import Molecule from "../../molecules";
 import { Register } from "../LoginForm/LoginFormStyles";
 import {
   Form,
@@ -86,78 +87,44 @@ const JoinForm = () => {
             {errors.enterYear?.message}
           </Atom.Message>
         </SelectWrapper>
-        <InputWrapper>
-          <Label>경성대학교 이메일</Label>
-          <EmailWrapper>
-            <Atom.Input
-              register={{
-                ...register("email", {
-                  required: "학교 이메일을 적어주세요",
-                  validate: value =>
-                    value.includes("@ks.ac.kr")
-                      ? true
-                      : "학교 이메일이어야 합니다.",
-                }),
-              }}
-              name="email"
-              placeholder="이메일"
-            />
-            <button onClick={onEmailButtonClick}>인증번호받기</button>
-          </EmailWrapper>
-          <Atom.Message className="error" fontSize="0.9rem">
-            {errors.email?.message || emailErrorMessage}
-          </Atom.Message>
-        </InputWrapper>
-        {emailAuth && (
-          <InputWrapper>
-            <Label>인증번호 입력</Label>
-            <Atom.Input
-              register={{
-                ...register("emailAuthNumber", {
-                  required: "인증번호를 입력하세요",
-                }),
-              }}
-              type="number"
-            />
-            <Atom.Message className="error" fontSize="0.9rem">
-              {errors.emailAuthNumber?.message}
-            </Atom.Message>
-          </InputWrapper>
-        )}
-        <InputWrapper>
-          <Label>비밀번호</Label>
-          <Atom.Input
-            register={{
-              ...register("password", {
-                required: "비밀번호를 입력하세요",
-              }),
-            }}
-            type="password"
-            name="password"
-          />
-          <Atom.Message className="error" fontSize="0.9rem">
-            {errors.password?.message}
-          </Atom.Message>
-        </InputWrapper>
-        <InputWrapper>
-          <Label>비밀번호 확인</Label>
-          <Atom.Input
-            register={{
-              ...register("passwordConfirm", {
-                required: "비밀번호 확인을 입력하세요",
-                validate: value =>
-                  value !== watch("password")
-                    ? "비밀번호가 같지 않습니다"
-                    : true,
-              }),
-            }}
-            type="password"
-            name="passwordConfirm"
-          />
-          <Atom.Message className="error" fontSize="0.9rem">
-            {errors.passwordConfirm?.message}
-          </Atom.Message>
-        </InputWrapper>
+        <Molecule.TextInput
+          register={{
+            ...register("email", {
+              required: "학교 이메일을 적어주세요",
+              validate: value =>
+                value.includes("@ks.ac.kr")
+                  ? true
+                  : "학교 이메일이어야 합니다.",
+            }),
+          }}
+          labelText="경성대학교 이메일"
+          message={errors.email?.message || emailErrorMessage}
+          mb="20px"
+        />
+        <Molecule.TextInput
+          register={{
+            ...register("password", {
+              required: "비밀번호를 입력하세요",
+            }),
+          }}
+          type="password"
+          labelText="비밀번호"
+          message={errors.password?.message}
+          mb="20px"
+        />
+        <Molecule.TextInput
+          register={{
+            ...register("passwordConfirm", {
+              required: "비밀번호 확인을 입력하세요",
+              validate: value =>
+                value !== watch("password") ? "비밀번호가 같지 않습니다" : true,
+            }),
+          }}
+          type="password"
+          labelText="비밀번호 확인"
+          message={errors.passwordConfirm?.message}
+          mb="20px"
+        />
         <Atom.Button className="big" color="inherit">
           회원가입
         </Atom.Button>

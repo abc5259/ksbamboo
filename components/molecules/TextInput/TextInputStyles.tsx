@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { ILoginInputProps } from "./LoginInput";
 
-export const StyledLoginInput = styled.div<{ mb?: string }>`
+export const StyledTextInput = styled.div<{ mb?: string }>`
   margin-bottom: ${props => props.mb || "0"};
   label {
     display: block;

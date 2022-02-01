@@ -1,11 +1,11 @@
 import Board from "./Board/Board";
 import BoardInput from "./BoardInput/BoardInput";
-import LoginInput from "./LoginInput/LoginInput";
+import TextInput from "./TextInput/TextInput";
 
 const Molecule = {
   Board,
   BoardInput,
-  LoginInput,
+  TextInput,
 };
 
 export default Molecule;

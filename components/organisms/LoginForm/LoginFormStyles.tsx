@@ -27,20 +27,6 @@ export const Label = styled.label`
   color: #8b949e;
 `;
 
-export const Input = styled.input.attrs({ require: true })`
-  width: 100%;
-  font-size: 18px;
-  padding: 10px 5px;
-  margin-bottom: 10px;
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const ErrorMessage = styled.span`
-  color: red;
-`;
-
 export const Register = styled.p`
   margin-top: 20px;
   text-align: center;
