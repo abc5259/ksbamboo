@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
 import { Register } from "../LoginForm/LoginFormStyles";
+import axios from "axios";
+
 import {
   Form,
   JoinContainer,
@@ -52,8 +54,17 @@ const JoinForm = () => {
     }
   };
 
-  const onVaild = (data: IJoinForm) => {
+  const onVaild = async (data: IJoinForm) => {
     console.log(data);
+    try {
+      const response = await axios.post(
+        "http://localhost:3050/auth/join",
+        data
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
