@@ -10,9 +10,7 @@ import {
   Title,
   Select,
   SelectWrapper,
-  InputWrapper,
   Label,
-  EmailWrapper,
 } from "./JoinFormStyles";
 
 const enterYear: number[] = [

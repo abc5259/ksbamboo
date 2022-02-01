@@ -18,15 +18,6 @@ export const Form = styled.form`
   flex-direction: column;
 `;
 
-export const InputWrapper = styled.div``;
-
-export const Label = styled.label`
-  display: block;
-  padding: 5px;
-  font-size: 12px;
-  color: #8b949e;
-`;
-
 export const Register = styled.p`
   margin-top: 20px;
   text-align: center;
