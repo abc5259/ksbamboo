@@ -5,6 +5,7 @@ import Message from "./Message/Message";
 import Textarea from "./Textarea/Textarea";
 import Tag from "./Tag/Tag";
 import Content from "./Content/Content";
+import Select from "./Select/Select";
 
 const Atom = {
   Button,
@@ -14,6 +15,7 @@ const Atom = {
   Textarea,
   Tag,
   Content,
+  Select,
 };
 
 export default Atom;
