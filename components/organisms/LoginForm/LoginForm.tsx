@@ -31,11 +31,13 @@ const LoginForm = () => {
         <Molecule.TextInput
           register={{
             ...register("email", {
-              required: "이메일을 적어주세요",
+              required: "학교 이메일을 적어주세요",
+              pattern: {
+                value: /@ks.ac.kr$/g,
+                message: "학교 이메일이어야 합니다.",
+              },
               validate: value =>
-                value.includes("@ks.ac.kr")
-                  ? true
-                  : "학교 이메일이어야 합니다.",
+                value === "@ks.ac.kr" ? "이메일을 적어주세요" : true,
             }),
           }}
           labelText="학교 이메일"

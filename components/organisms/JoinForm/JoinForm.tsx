@@ -45,17 +45,25 @@ const JoinForm = () => {
     },
   });
 
-  const onVaild = async (data: IJoinForm) => {
+  const onVaild = (data: IJoinForm) => {
     console.log(data);
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3050/auth/join",
-    //     data
-    //   );
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+
+    axios
+      .post("http://localhost:3050/auth/join", data)
+      .then(response => {
+        if (response.data.ok) {
+          // 이메일 인증 확인 페이지로 redirect
+        }
+      })
+      .catch(error => {
+        console.log(error.response.data.statusCode);
+        if (error.response.data.statusCode === 400) {
+          alert(error.response.data.message[0]);
+        } else {
+          alert(error.response.data.message);
+        }
+        // alert(error.respones?.data);
+      });
   };
 
   return (
