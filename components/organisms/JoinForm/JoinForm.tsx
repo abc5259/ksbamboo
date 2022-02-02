@@ -5,6 +5,7 @@ import Atom from "../../atoms";
 import Molecule from "../../molecules";
 import { Register } from "../LoginForm/LoginFormStyles";
 import axios from "axios";
+import { ksDepartmentAtom } from "../../../atom/atoms";
 
 import {
   Form,
@@ -14,6 +15,7 @@ import {
   SelectWrapper,
   Label,
 } from "./JoinFormStyles";
+import { useRecoilValue } from "recoil";
 
 const enterYear: number[] = [
   2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010,
@@ -27,11 +29,11 @@ interface IJoinForm {
   password: string;
   passwordConfirm: string;
   emailAuthNumber: number;
+  ksDepartment: string;
 }
 
 const JoinForm = () => {
-  const [emailAuth, setEmailAuth] = useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const ksDepartment = useRecoilValue(ksDepartmentAtom);
   const {
     register,
     watch,
@@ -43,28 +45,17 @@ const JoinForm = () => {
     },
   });
 
-  const onEmailButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (watch("email") === "") setEmailErrorMessage("학교 이메일을 입력하세요");
-    if (!watch("email").includes("@ks.ac.kr")) {
-      setEmailErrorMessage("학교 이메일이어야 합니다.");
-    } else {
-      // 인증번호 서버로 요청
-      setEmailAuth(true);
-    }
-  };
-
   const onVaild = async (data: IJoinForm) => {
     console.log(data);
-    try {
-      const response = await axios.post(
-        "http://localhost:3050/auth/join",
-        data
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3050/auth/join",
+    //     data
+    //   );
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -75,31 +66,35 @@ const JoinForm = () => {
           register={{
             ...register("email", {
               required: "학교 이메일을 적어주세요",
+              pattern: {
+                value: /@ks.ac.kr$/g,
+                message: "학교 이메일이어야 합니다.",
+              },
               validate: value =>
-                value.includes("@ks.ac.kr")
-                  ? true
-                  : "학교 이메일이어야 합니다.",
+                value === "@ks.ac.kr" ? "이메일을 적어주세요" : true,
             }),
           }}
           labelText="경성대학교 이메일"
-          message={errors.email?.message || emailErrorMessage}
+          message={errors.email?.message}
           mb="20px"
         />
         <Molecule.TextInput
           register={{
             ...register("username", {
               required: "이름을 적어주세요",
+              pattern: {
+                value: /^[가-힣a-zA-Z]+$/,
+                message: "이름은 한글 또는 영어만 가능합니다.",
+              },
             }),
           }}
           labelText="이름"
           message={errors.username?.message}
           mb="20px"
         />
-        {/* 학과 */}
-        <SelectWrapper>
-          <Label>입학년도</Label>
-          <Select
-            {...register("enterYear", {
+        <Molecule.LabelSelect
+          register={{
+            ...register("enterYear", {
               validate: value => {
                 if (value.trim() == "연도 선택 (학번)".trim()) {
                   return "학번을 선택하세요";
@@ -107,24 +102,43 @@ const JoinForm = () => {
                   return true;
                 }
               },
-            })}
-            id="enter_year"
-          >
-            <option>연도 선택 (학번)</option>
-            {enterYear.map(year => (
-              <option key={year} value={year}>
-                {year}학번
-              </option>
-            ))}
-          </Select>
-          <Atom.Message className="error" fontSize="0.9rem">
-            {errors.enterYear?.message}
-          </Atom.Message>
-        </SelectWrapper>
+            }),
+          }}
+          options={enterYear}
+          text="학번"
+          labelText="입학년도"
+          mb="20px"
+          message={errors.enterYear?.message}
+          default="연도 선택 (학번)"
+        />
+        <Molecule.LabelSelect
+          register={{
+            ...register("ksDepartment", {
+              validate: value => {
+                if (value.trim() == "학과 선택".trim()) {
+                  return "학과를 선택하세요";
+                } else {
+                  return true;
+                }
+              },
+            }),
+          }}
+          options={ksDepartment}
+          labelText="학과"
+          mb="20px"
+          message={errors.ksDepartment?.message}
+          default="학과 선택"
+        />
         <Molecule.TextInput
           register={{
             ...register("password", {
               required: "비밀번호를 입력하세요",
+              pattern: {
+                value:
+                  /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
+                message:
+                  "숫자와 영문자, 특수문자 조합으로 8~20자리를 사용해야 합니다.",
+              },
             }),
           }}
           type="password"

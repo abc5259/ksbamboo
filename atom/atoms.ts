@@ -79,7 +79,6 @@ const dummyBoards: Board[] = [
 ];
 
 const ksDepartment = [
-  "전체",
   "국어국문학과",
   "영어영문학과",
   "중어중문학과",

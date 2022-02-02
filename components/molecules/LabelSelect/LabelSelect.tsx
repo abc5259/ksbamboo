@@ -8,6 +8,8 @@ export interface ILabelSelectProps {
   text?: string;
   register: UseFormRegisterReturn;
   mb?: string;
+  message?: string;
+  default?: string;
 }
 
 const LabelSelect = (props: ILabelSelectProps) => {
@@ -18,7 +20,11 @@ const LabelSelect = (props: ILabelSelectProps) => {
         options={props.options}
         register={props.register}
         text={props.text}
+        defualt={props.default}
       />
+      <Atom.Message className="error" fontSize="0.9rem">
+        {props.message}
+      </Atom.Message>
     </StyledLabelSelect>
   );
 };
