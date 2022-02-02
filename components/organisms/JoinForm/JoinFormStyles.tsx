@@ -19,66 +19,6 @@ export const Form = styled.form`
   flex-direction: column;
 `;
 
-export const SelectWrapper = styled.div`
-  select {
-    width: 100%;
-    &:focus {
-      border-color: inherit;
-    }
-  }
-`;
-
-export const InputWrapper = styled.div`
-  margin-bottom: 10px;
-`;
-
-export const EmailWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  button {
-    padding: 5px 10px;
-    border-radius: 20px;
-  }
-`;
-
-export const Select = styled.select`
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-`;
-
-export const Label = styled.label`
-  display: block;
-  padding: 5px;
-  font-size: 12px;
-  color: #8b949e;
-`;
-
-export const Input = styled.input.attrs({ require: true })`
-  width: 100%;
-  font-size: 18px;
-  padding: 10px 5px;
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const ErrorMessage = styled.span`
-  color: red;
-`;
-
-export const Join = styled.p`
-  margin-top: 20px;
-  text-align: center;
-  span {
-    margin-right: 10px;
-  }
-  a {
-    color: ${props => props.theme.accentColor};
-  }
-`;
-
 export const Register = styled.p`
   margin-top: 20px;
   text-align: center;

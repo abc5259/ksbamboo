@@ -1,20 +1,14 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
-import { Register } from "../LoginForm/LoginFormStyles";
 import axios from "axios";
 import { ksDepartmentAtom } from "../../../atom/atoms";
+import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 
-import {
-  Form,
-  JoinContainer,
-  Title,
-  Select,
-  SelectWrapper,
-  Label,
-} from "./JoinFormStyles";
+import { Form, JoinContainer, Title, Register } from "./JoinFormStyles";
 import { useRecoilValue } from "recoil";
 
 const enterYear: number[] = [
@@ -34,6 +28,7 @@ interface IJoinForm {
 
 const JoinForm = () => {
   const ksDepartment = useRecoilValue(ksDepartmentAtom);
+  const router = useRouter();
   const {
     register,
     watch,
@@ -53,22 +48,24 @@ const JoinForm = () => {
       .then(response => {
         if (response.data.ok) {
           // 이메일 인증 확인 페이지로 redirect
+          router.push(`/join/emailAuth?email=${data.email}`);
         }
       })
       .catch(error => {
         console.log(error.response.data.statusCode);
         if (error.response.data.statusCode === 400) {
-          alert(error.response.data.message[0]);
+          toast.error(error.response.data.message[0]);
         } else {
-          alert(error.response.data.message);
+          toast.error(error.response.data.message);
         }
-        // alert(error.respones?.data);
       });
   };
 
   return (
     <JoinContainer>
-      <Title>KSB 회원가입</Title>
+      <Atom.Title fontSize="24px" mb="20px">
+        KSB 회원가입
+      </Atom.Title>
       <Form onSubmit={handleSubmit(onVaild)}>
         <Molecule.TextInput
           register={{
@@ -175,6 +172,7 @@ const JoinForm = () => {
         <span>이미 회원가입을 하셨나요?</span>
         <Link href="/login">로그인</Link>
       </Register>
+      <ToastContainer />
     </JoinContainer>
   );
 };

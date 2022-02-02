@@ -1,11 +1,14 @@
 import AppLayout from "../../components/templates/AppLayout";
+import { useRouter } from "next/router";
+import EmailAuth from "../../components/organisms/EmailAuth/EmailAuth";
 
-const EmailAuth = () => {
+const Email = () => {
+  const { query } = useRouter();
   return (
     <AppLayout>
-      <div>EmailAuth</div>
+      <EmailAuth email={`${query.email}`} />
     </AppLayout>
   );
 };
 
-export default EmailAuth;
+export default Email;

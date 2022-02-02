@@ -7,6 +7,7 @@ import Tag from "./Tag/Tag";
 import Content from "./Content/Content";
 import Select from "./Select/Select";
 import Label from "./Label/Label";
+import Title from "./Title/Title";
 
 const Atom = {
   Button,
@@ -18,6 +19,7 @@ const Atom = {
   Content,
   Select,
   Label,
+  Title,
 };
 
 export default Atom;

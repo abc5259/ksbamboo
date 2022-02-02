@@ -6,7 +6,7 @@ export interface IAtomButtonProps {
   height?: string;
   redius?: number;
   bgColor?: string;
-  color: string;
+  color?: string;
   className?: string;
 }
 

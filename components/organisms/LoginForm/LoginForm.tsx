@@ -26,7 +26,9 @@ const LoginForm = () => {
 
   return (
     <LoginContainer>
-      <Title>KSB</Title>
+      <Atom.Title fontSize="24px" mb="20px">
+        KSB
+      </Atom.Title>
       <Form onSubmit={handleSubmit(onValid)}>
         <Molecule.TextInput
           register={{

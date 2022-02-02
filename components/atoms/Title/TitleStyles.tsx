@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { IAtomTitleProps } from "./Title";
 
 export const StyledTitle = styled.h3<IAtomTitleProps>`
-  ${({ fontSize, fontWeight, color, theme: { textColor } }) => {
+  ${({ fontSize, fontWeight, mb, color, theme: { textColor } }) => {
     const titleSize = fontSize ? fontSize : "1.2rem";
     const titleeight = fontWeight ? fontWeight : 400;
     const titleColor = color ? color : textColor;
@@ -10,6 +10,7 @@ export const StyledTitle = styled.h3<IAtomTitleProps>`
       font-size: ${titleSize};
       font-weight: ${titleeight};
       color: ${titleColor};
+      margin-bottom: ${mb || 0};
     `;
   }}
 `;

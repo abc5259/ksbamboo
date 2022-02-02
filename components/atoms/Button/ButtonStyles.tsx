@@ -2,14 +2,21 @@ import styled, { css } from "styled-components";
 import { IAtomButtonProps } from "./Button";
 
 export const StyledButton = styled.button<IAtomButtonProps>`
-  ${({ width, height, bgColor, color, redius, theme: { accentColor } }) => {
+  ${({
+    width,
+    height,
+    bgColor,
+    color,
+    redius,
+    theme: { accentColor, textColor },
+  }) => {
     const backgroundColor = bgColor ? bgColor : accentColor;
     return css`
       border: none;
       width: ${width};
       height: ${height};
       background-color: ${backgroundColor};
-      color: ${color};
+      color: ${color || textColor};
       border-radius: ${redius}px;
       cursor: pointer;
       &.small {

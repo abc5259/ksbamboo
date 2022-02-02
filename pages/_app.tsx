@@ -6,6 +6,7 @@ import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
 import { theme } from "../styles/theme";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 
