@@ -71,6 +71,31 @@ const JoinForm = () => {
     <JoinContainer>
       <Title>KSB 회원가입</Title>
       <Form onSubmit={handleSubmit(onVaild)}>
+        <Molecule.TextInput
+          register={{
+            ...register("email", {
+              required: "학교 이메일을 적어주세요",
+              validate: value =>
+                value.includes("@ks.ac.kr")
+                  ? true
+                  : "학교 이메일이어야 합니다.",
+            }),
+          }}
+          labelText="경성대학교 이메일"
+          message={errors.email?.message || emailErrorMessage}
+          mb="20px"
+        />
+        <Molecule.TextInput
+          register={{
+            ...register("username", {
+              required: "이름을 적어주세요",
+            }),
+          }}
+          labelText="이름"
+          message={errors.username?.message}
+          mb="20px"
+        />
+        {/* 학과 */}
         <SelectWrapper>
           <Label>입학년도</Label>
           <Select
@@ -96,30 +121,6 @@ const JoinForm = () => {
             {errors.enterYear?.message}
           </Atom.Message>
         </SelectWrapper>
-        <Molecule.TextInput
-          register={{
-            ...register("username", {
-              required: "이름을 적어주세요",
-            }),
-          }}
-          labelText="이름"
-          message={errors.username?.message}
-          mb="20px"
-        />
-        <Molecule.TextInput
-          register={{
-            ...register("email", {
-              required: "학교 이메일을 적어주세요",
-              validate: value =>
-                value.includes("@ks.ac.kr")
-                  ? true
-                  : "학교 이메일이어야 합니다.",
-            }),
-          }}
-          labelText="경성대학교 이메일"
-          message={errors.email?.message || emailErrorMessage}
-          mb="20px"
-        />
         <Molecule.TextInput
           register={{
             ...register("password", {

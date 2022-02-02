@@ -20,4 +20,6 @@ const Template: Story<IAtomSelectProps> = args => (
 
 export const Default = Template.bind({});
 Default.parameters = {};
-Default.args = {};
+Default.args = {
+  options: ["test", "test2", "test3"],
+};
