@@ -8,10 +8,13 @@ export default {
 
 const Template: Story<ILabelSelectProps> = args => (
   <>
-    <LabelSelect {...args} />;
+    <LabelSelect {...args} />
   </>
 );
 
 export const Default = Template.bind({});
 Default.parameters = {};
-Default.args = {};
+Default.args = {
+  labelText: "label",
+  options: ["test", "test2", "test3"],
+};

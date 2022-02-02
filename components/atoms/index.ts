@@ -6,6 +6,7 @@ import Textarea from "./Textarea/Textarea";
 import Tag from "./Tag/Tag";
 import Content from "./Content/Content";
 import Select from "./Select/Select";
+import Label from "./Label/Label";
 
 const Atom = {
   Button,
@@ -16,6 +17,7 @@ const Atom = {
   Tag,
   Content,
   Select,
+  Label,
 };
 
 export default Atom;

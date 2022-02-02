@@ -20,7 +20,7 @@ const TextInput = ({
 }: ITextInputProps) => {
   return (
     <StyledTextInput mb={mb}>
-      <label>{labelText}</label>
+      <Atom.Label>{labelText}</Atom.Label>
       <Atom.Input register={register} type={type} />
       <Atom.Message className="error" fontSize="0.8rem">
         {message}

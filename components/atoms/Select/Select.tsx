@@ -12,7 +12,7 @@ const Select = (props: IAtomSelectProps) => {
     <StyledSelect {...props.register}>
       {props.options.map(option => (
         <option key={option} value={option}>
-          {props.text ? `option${props.text}` : option}
+          {props.text ? `option${props.text}` : `${option}`}
         </option>
       ))}
     </StyledSelect>

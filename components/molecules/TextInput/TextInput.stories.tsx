@@ -8,7 +8,7 @@ export default {
 
 const Template: Story<ITextInputProps> = args => (
   <>
-    <TextInput {...args} />;
+    <TextInput {...args} />
   </>
 );
 
