@@ -1,18 +1,22 @@
+import { AxiosError } from "axios";
 import { useAnimation } from "framer-motion";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
-import { Board, boardsAtom } from "../../../atom/atoms";
+import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
+import { createBoardAPI } from "../../../apis/board";
+import IBoard from "../../../interfaces/board";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
-import { Form, TextArea } from "./BoardFormStyles";
+import { Form } from "./BoardFormStyles";
+
 interface IBoardForm {
   title: string;
   content: string;
 }
 
-const BoardForm = () => {
-  const setBoards = useSetRecoilState(boardsAtom);
+const BoardForm = (props: { token: string }) => {
+  const queryClient = useQueryClient();
   const {
     register,
     watch,
@@ -21,37 +25,35 @@ const BoardForm = () => {
     formState: { errors },
   } = useForm<IBoardForm>();
   const textAreaAnimation = useAnimation();
+  const mutation = useMutation<
+    { board: IBoard }, //success했을때 data값의 타입
+    AxiosError, // error타입
+    { token: string; title: string; content: string } // loginAPI의 인자로 들어갈 타입
+  >("myBoards", createBoardAPI, {
+    onMutate: () => {}, // 뮤테이션 시작
+    onError: error => {
+      // 에러가 났음
+      if (error.response?.data.statusCode === 400) {
+        toast.error(error.response.data.message[0]);
+      } else {
+        toast.error(error.response?.data.message);
+      }
+    },
+    onSuccess: data => {
+      // 성공
+      queryClient.setQueryData("myBoards", data.board); //user라는 이름으로 data.user값이 캐싱됨
+      queryClient.fetchQuery("allboards");
+      queryClient.fetchQuery("user");
+      setValue("title", "");
+      setValue("content", "");
+      textAreaAnimation.start({ height: 70 });
+    },
+    onSettled: () => {}, // 성공이든 에러든 어쨌든 끝났을 때
+  });
 
   const onValid = (data: IBoardForm) => {
     //서버로 데이터 보내기 (게시물 생성) with React Query
-    //더미데이터
-    const board: Board = {
-      id: Date.now(),
-      title: data.title,
-      content: data.content,
-      status: "익명",
-      department: "컴퓨터공학과",
-      user: {
-        id: 4,
-        username: "serf",
-        email: "123@ks.ac.kr",
-        verified: true,
-        ksDeparment: "컴퓨터공학과",
-      },
-    };
-    setBoards(prevBoards => [board, ...prevBoards]);
-    setValue("title", "");
-    setValue("content", "");
-    textAreaAnimation.start({ height: 70 });
-  };
-
-  const onTextAreaFocus = () => {
-    textAreaAnimation.start({ height: 300 });
-  };
-
-  const onTextAreaBlur = () => {
-    if (watch("content")) return;
-    textAreaAnimation.start({ height: 70 });
+    mutation.mutate({ token: props.token, ...data });
   };
 
   return (

@@ -8,3 +8,15 @@ export const allBoardsAPI = (token: string) => {
     .get(`/boards`, { headers: { Authorization: `Bearer ${token}` } })
     .then(response => response.data);
 };
+
+export const createBoardAPI = (data: {
+  token: string;
+  title: string;
+  content: string;
+}) => {
+  return axios
+    .post("/boards", data, {
+      headers: { Authorization: `Bearer ${data.token}` },
+    })
+    .then(response => response.data);
+};

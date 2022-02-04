@@ -11,7 +11,16 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
     <StyledAllBoards>
       {boards.length > 0 ? (
         boards.map(board => {
-          return <Board key={board.id} boardId={board.id} />;
+          return (
+            <Board
+              key={board.id}
+              boardId={board.id}
+              title={board.title}
+              content={board.content}
+              status={board.status}
+              user={board.user}
+            />
+          );
         })
       ) : (
         <div>게시글이 존재하지 않습니다.</div>

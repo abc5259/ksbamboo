@@ -57,7 +57,7 @@ const Home: NextPage = () => {
             </option>
           ))}
         </select>
-        <BoardForm />
+        <BoardForm token={token} />
         {boards ? <AllBoards boards={boards} /> : <div>로딩중...</div>}
       </AppLayout>
     </>

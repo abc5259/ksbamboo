@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { useRecoilValue } from "recoil";
-import { boardsAtom } from "../../../atom/atoms";
+import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 
 import {
@@ -16,27 +15,26 @@ import {
 
 export interface IBoardProps {
   boardId: number;
+  title: string;
+  content: string;
+  status: string;
+  user: User;
 }
 
-const Board = ({ boardId }: IBoardProps) => {
-  const boards = useRecoilValue(boardsAtom);
-  const board = boards.find(board => board.id === boardId);
+const Board = ({ boardId, title, content, status, user }: IBoardProps) => {
   return (
     <Link href={`/board/${boardId}`}>
       <BoardWrapper>
         <Main>
-          <Title>{board?.title}</Title>
-          <Content>{board?.content}</Content>
+          <Title>{title}</Title>
+          <Content>{content}</Content>
           <Time>2021년 1월 19일 수</Time>
         </Main>
         <Bottom>
           <Author>
-            By{" "}
-            <span>
-              {board?.status === "익명" ? "익명" : board?.user.username}
-            </span>
+            By <span>{status === "PRIVATE" ? "익명" : user.username}</span>
           </Author>
-          <div>{board?.department}</div>
+          <div>{user.ksDeparment}</div>
           <LikeWrapper>
             <Atom.Like mr="8px" />
             <span>100</span>
