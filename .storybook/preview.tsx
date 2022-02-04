@@ -5,14 +5,20 @@ import { theme } from "../styles/theme";
 import { RecoilRoot } from "recoil";
 import { GlobalStyle } from "../styles/global-style";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+
 export const decorators = [
   Story => (
     <>
       <RecoilRoot>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Story />
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Story />
+          </ThemeProvider>
+        </QueryClientProvider>
       </RecoilRoot>
     </>
   ),

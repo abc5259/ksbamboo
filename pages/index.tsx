@@ -6,6 +6,7 @@ import { boardsAtom, ksDepartmentAtom } from "../atom/atoms";
 import AppLayout from "../components/templates/AppLayout";
 import Board from "../components/molecules/Board/Board";
 import BoardForm from "../components/organisms/BoardForm/BoardForm";
+import AllBoards from "../components/organisms/AllBoards/AllBoards";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -31,7 +32,8 @@ const Home: NextPage = () => {
           ))}
         </select>
         <BoardForm />
-        <BoardWrapper>
+        <AllBoards boards={[]} />
+        {/* <BoardWrapper>
           {boards.map(board => {
             if (department === "전체") {
               return <Board key={board.id} boardId={board.id} />;
@@ -40,7 +42,7 @@ const Home: NextPage = () => {
               return <Board key={board.id} boardId={board.id} />;
             }
           })}
-        </BoardWrapper>
+        </BoardWrapper> */}
       </AppLayout>
     </>
   );

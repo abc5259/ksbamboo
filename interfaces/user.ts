@@ -1,4 +1,4 @@
-import Board from "./board";
+import IBoard from "./board";
 
 export default interface User {
   id: number;
@@ -7,5 +7,5 @@ export default interface User {
   password: string;
   verified: boolean;
   ksDeparment: string;
-  boards?: Board[];
+  boards?: IBoard[];
 }
