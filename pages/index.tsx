@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { boardsAtom, ksDepartmentAtom } from "../atom/atoms";
@@ -7,6 +7,12 @@ import AppLayout from "../components/templates/AppLayout";
 import Board from "../components/molecules/Board/Board";
 import BoardForm from "../components/organisms/BoardForm/BoardForm";
 import AllBoards from "../components/organisms/AllBoards/AllBoards";
+import { useQuery } from "react-query";
+import { allBoardsAPI } from "../apis/board";
+import IBoard from "../interfaces/board";
+import { useRouter } from "next/router";
+import { getUserAPI } from "../apis/user";
+import User from "../interfaces/user";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -15,12 +21,32 @@ export const BoardWrapper = styled.div`
 `;
 
 const Home: NextPage = () => {
-  const boards = useRecoilValue(boardsAtom);
+  const router = useRouter();
+  const [token, setToken] = useState("");
+  const { data: me } = useQuery<User>(
+    "user",
+    () => getUserAPI(token),
+    { enabled: !!token } // token이 있을때만 useQuery실행
+  );
+  const { isLoading, data: boards } = useQuery<IBoard[]>(
+    "allboards",
+    () => allBoardsAPI(token),
+    {
+      enabled: !!token,
+    }
+  );
   const ksDepartments = useRecoilValue(ksDepartmentAtom);
   const [department, setDepartment] = useState("전체");
   const onChangeDepartment = (e: React.FormEvent<HTMLSelectElement>) => {
     setDepartment(e.currentTarget.value);
   };
+  useEffect(() => {
+    setToken(localStorage.getItem("accessToken") || "");
+    if (!me) {
+      router.replace("/login");
+    }
+  }, [token, me]);
+
   return (
     <>
       <AppLayout>
@@ -32,17 +58,7 @@ const Home: NextPage = () => {
           ))}
         </select>
         <BoardForm />
-        <AllBoards boards={[]} />
-        {/* <BoardWrapper>
-          {boards.map(board => {
-            if (department === "전체") {
-              return <Board key={board.id} boardId={board.id} />;
-            }
-            if (board.department === department) {
-              return <Board key={board.id} boardId={board.id} />;
-            }
-          })}
-        </BoardWrapper> */}
+        {boards ? <AllBoards boards={boards} /> : <div>로딩중...</div>}
       </AppLayout>
     </>
   );
