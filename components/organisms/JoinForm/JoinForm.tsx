@@ -172,7 +172,6 @@ const JoinForm = () => {
         <span>이미 회원가입을 하셨나요?</span>
         <Link href="/login">로그인</Link>
       </Register>
-      <ToastContainer />
     </JoinContainer>
   );
 };

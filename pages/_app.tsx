@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
 import { theme } from "../styles/theme";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function App({ Component, pageProps }: AppProps) {
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Component {...pageProps} />
+            <ToastContainer />
             <ReactQueryDevtools initialIsOpen={true} />
           </ThemeProvider>
         </QueryClientProvider>

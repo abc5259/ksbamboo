@@ -1,9 +1,14 @@
+import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import { toast } from "react-toastify";
+import { getUserFetcher } from "../../../utils/user/api";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
-import { Form, LoginContainer, Register, Title } from "./LoginFormStyles";
+import { Form, LoginContainer, Register } from "./LoginFormStyles";
 
 export interface ILoginForm {
   email: string;
@@ -11,6 +16,13 @@ export interface ILoginForm {
 }
 
 const LoginForm = () => {
+  const router = useRouter();
+  const [token, setToken] = useState("");
+  const { isLoading, error, data } = useQuery(
+    "userData",
+    () => getUserFetcher(token),
+    { enabled: !!token }
+  );
   const {
     register,
     handleSubmit,
@@ -18,11 +30,34 @@ const LoginForm = () => {
     setValue,
   } = useForm<ILoginForm>();
 
+  useEffect(() => {
+    setToken(localStorage.getItem("accessToken") || "");
+  }, []);
   const onValid = (data: ILoginForm) => {
-    // 서버요청
-    setValue("email", "");
-    setValue("password", "");
+    // 로그인
+    axios
+      .post("http://localhost:3050/auth/login", data)
+      .then(response => {
+        setValue("email", "");
+        setValue("password", "");
+        console.log(response.data.accessToken);
+        localStorage.setItem("accessToken", response.data.accessToken);
+        setToken(localStorage.getItem("accessToken") || "");
+        console.log("token", token);
+      })
+      .catch(error => {
+        console.log(error.response.data);
+        if (error.response.data.statusCode === 400) {
+          toast.error(error.response.data.message[0]);
+        } else {
+          toast.error(error.response.data.message);
+        }
+      });
   };
+  console.log(data);
+  if (isLoading) {
+    return <div>Lodding..</div>;
+  }
 
   return (
     <LoginContainer>
@@ -49,7 +84,7 @@ const LoginForm = () => {
         <Molecule.TextInput
           register={{
             ...register("password", {
-              required: "패스워드를 입력해 주세요",
+              required: "비밀번호를 입력해 주세요",
             }),
           }}
           type="password"

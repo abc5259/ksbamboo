@@ -11,6 +11,4 @@ const Login: NextPage = () => {
     </>
   );
 };
-//good
-//example
 export default Login;
