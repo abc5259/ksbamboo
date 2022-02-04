@@ -1,11 +1,12 @@
-import axios from "axios";
+import { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { getUserFetcher } from "../../../utils/user/api";
+import { loginAPI } from "../../../apis/user";
+import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
 import { Form, LoginContainer, Register } from "./LoginFormStyles";
@@ -17,12 +18,32 @@ export interface ILoginForm {
 
 const LoginForm = () => {
   const router = useRouter();
-  const [token, setToken] = useState("");
-  const { isLoading, error, data } = useQuery(
-    "userData",
-    () => getUserFetcher(token),
-    { enabled: !!token }
-  );
+  const queryClient = useQueryClient();
+  const mutation = useMutation<
+    { accessToken: string; user: User }, //success했을때 data값의 타입
+    AxiosError, // error타입
+    { email: string; password: string } // loginAPI의 인자로 들어갈 타입
+  >("user", loginAPI, {
+    onMutate: () => {}, // 뮤테이션 시작
+    onError: error => {
+      // 에러가 났음
+      if (error.response?.data.statusCode === 400) {
+        toast.error(error.response.data.message[0]);
+      } else {
+        toast.error(error.response?.data.message);
+      }
+    },
+    onSuccess: data => {
+      // 성공
+      queryClient.setQueryData("user", data.user); //user라는 이름으로 data.user값이 캐싱됨
+      setValue("email", "");
+      setValue("password", "");
+      localStorage.setItem("accessToken", data.accessToken);
+      // setToken(localStorage.getItem("accessToken") || "");
+      router.push("/");
+    },
+    onSettled: () => {}, // 성공이든 에러든 어쨌든 끝났을 때
+  });
   const {
     register,
     handleSubmit,
@@ -30,34 +51,9 @@ const LoginForm = () => {
     setValue,
   } = useForm<ILoginForm>();
 
-  useEffect(() => {
-    setToken(localStorage.getItem("accessToken") || "");
-  }, []);
   const onValid = (data: ILoginForm) => {
-    // 로그인
-    axios
-      .post("http://localhost:3050/auth/login", data)
-      .then(response => {
-        setValue("email", "");
-        setValue("password", "");
-        console.log(response.data.accessToken);
-        localStorage.setItem("accessToken", response.data.accessToken);
-        setToken(localStorage.getItem("accessToken") || "");
-        console.log("token", token);
-      })
-      .catch(error => {
-        console.log(error.response.data);
-        if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0]);
-        } else {
-          toast.error(error.response.data.message);
-        }
-      });
+    mutation.mutate(data);
   };
-  console.log(data);
-  if (isLoading) {
-    return <div>Lodding..</div>;
-  }
 
   return (
     <LoginContainer>
