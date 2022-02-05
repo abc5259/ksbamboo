@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledKsToggle = styled.div`
   ul {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     li {
       color: ${props => props.theme.textColor};
       margin-bottom: 10px;

@@ -40,7 +40,7 @@ export const Time = styled.div`
 export const Bottom = styled.div`
   height: 10%;
   padding: 20px;
-  border-top: 1px solid black;
+  border-top: 0.6px solid #dfdfdf;
   display: flex;
   align-items: center;
   justify-content: space-between;

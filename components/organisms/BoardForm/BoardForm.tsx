@@ -46,6 +46,7 @@ const BoardForm = (props: { token: string }) => {
       queryClient.refetchQueries("user");
       setValue("title", "");
       setValue("content", "");
+      textAreaAnimation.start({ height: 70 });
     },
     onSettled: () => {
       textAreaAnimation.start({ height: 70 });

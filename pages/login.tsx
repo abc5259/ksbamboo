@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import AppLayout from "../components/templates/AppLayout";
 import LoginForm from "../components/organisms/LoginForm/LoginForm";
 import { getUserAPI } from "../apis/user";
 import { useQuery } from "react-query";
@@ -7,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import User from "../interfaces/user";
 import { AxiosError } from "axios";
+import HeaderLayout from "../components/layouts/HeaderLayout/HeaderLayout";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -28,9 +28,9 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <AppLayout>
+      <HeaderLayout>
         <LoginForm />
-      </AppLayout>
+      </HeaderLayout>
     </>
   );
 };

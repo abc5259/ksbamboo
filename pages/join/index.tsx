@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import AppLayout from "../../components/templates/AppLayout";
 import JoinForm from "../../components/organisms/JoinForm/JoinForm";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import User from "../../interfaces/user";
 import { getUserAPI } from "../../apis/user";
+import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
 
 const Join: NextPage = () => {
   const router = useRouter();
@@ -23,9 +23,9 @@ const Join: NextPage = () => {
   }, [token, me]);
   return (
     <>
-      <AppLayout>
+      <HeaderLayout>
         <JoinForm />
-      </AppLayout>
+      </HeaderLayout>
     </>
   );
 };

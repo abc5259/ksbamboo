@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import AppLayout from "../../components/templates/AppLayout";
+import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
 
 const BoardPage = () => {
   const router = useRouter();
   const { boardId } = router.query;
-  return <AppLayout>{boardId}</AppLayout>;
+  return <HeaderLayout>{boardId}</HeaderLayout>;
 };
 export default BoardPage;

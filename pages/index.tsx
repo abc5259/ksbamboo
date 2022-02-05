@@ -1,11 +1,6 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { ksDepartmentAtom } from "../atom/atoms";
-import AppLayout from "../components/templates/AppLayout";
-import BoardForm from "../components/organisms/BoardForm/BoardForm";
-import AllBoards from "../components/organisms/AllBoards/AllBoards";
 import { useQuery } from "react-query";
 import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
@@ -38,11 +33,7 @@ const HomePage: NextPage = () => {
       enabled: !!token,
     }
   );
-  const ksDepartments = useRecoilValue(ksDepartmentAtom);
-  const [department, setDepartment] = useState("전체");
-  const onChangeDepartment = (e: React.FormEvent<HTMLSelectElement>) => {
-    setDepartment(e.currentTarget.value);
-  };
+
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
     console.log(me, isLoading);
