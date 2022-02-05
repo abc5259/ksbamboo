@@ -29,7 +29,7 @@ Default.args = {
         email: "abc5259",
         password: "123",
         verified: true,
-        ksDeparment: "컴퓨터공학과",
+        ksDepartment: "컴퓨터공학과",
       },
     },
   ],

@@ -6,6 +6,6 @@ export default interface User {
   email: string;
   password: string;
   verified: boolean;
-  ksDeparment: string;
+  ksDepartment: string;
   boards?: IBoard[];
 }

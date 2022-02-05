@@ -34,7 +34,7 @@ const Board = ({ boardId, title, content, status, user }: IBoardProps) => {
           <Author>
             By <span>{status === "PRIVATE" ? "익명" : user.username}</span>
           </Author>
-          <div>{user.ksDeparment}</div>
+          <div>{user.ksDepartment}</div>
           <LikeWrapper>
             <Atom.Like mr="8px" />
             <span>100</span>
