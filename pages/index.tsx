@@ -2,9 +2,8 @@ import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { boardsAtom, ksDepartmentAtom } from "../atom/atoms";
+import { ksDepartmentAtom } from "../atom/atoms";
 import AppLayout from "../components/templates/AppLayout";
-import Board from "../components/molecules/Board/Board";
 import BoardForm from "../components/organisms/BoardForm/BoardForm";
 import AllBoards from "../components/organisms/AllBoards/AllBoards";
 import { useQuery } from "react-query";
@@ -13,6 +12,7 @@ import IBoard from "../interfaces/board";
 import { useRouter } from "next/router";
 import { getUserAPI } from "../apis/user";
 import User from "../interfaces/user";
+import { AxiosError } from "axios";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -23,16 +23,17 @@ export const BoardWrapper = styled.div`
 const Home: NextPage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
-  const { data: me } = useQuery<User>(
-    "user",
-    () => getUserAPI(token),
-    { enabled: !!token } // token이 있을때만 useQuery실행
+  const { error, data: me } = useQuery<User, AxiosError>("user", () =>
+    getUserAPI(token)
   );
-  const { isLoading, data: boards } = useQuery<IBoard[]>(
+  const { data: boards } = useQuery<IBoard[]>(
     "allboards",
     () => allBoardsAPI(token),
     {
       enabled: !!token,
+      onError: () => {
+        console.log("에러야!");
+      },
     }
   );
   const ksDepartments = useRecoilValue(ksDepartmentAtom);
@@ -42,10 +43,10 @@ const Home: NextPage = () => {
   };
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    if (!me) {
+    if (!me || error?.response?.data.statusCode === 401) {
       router.replace("/login");
     }
-  }, [token, me]);
+  }, [token, me, error]);
 
   return (
     <>

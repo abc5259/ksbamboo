@@ -42,13 +42,14 @@ const BoardForm = (props: { token: string }) => {
     onSuccess: data => {
       // 성공
       queryClient.setQueryData("myBoards", data.board); //user라는 이름으로 data.user값이 캐싱됨
-      queryClient.fetchQuery("allboards");
-      queryClient.fetchQuery("user");
+      queryClient.refetchQueries("allboards");
+      queryClient.refetchQueries("user");
       setValue("title", "");
       setValue("content", "");
-      textAreaAnimation.start({ height: 70 });
     },
-    onSettled: () => {}, // 성공이든 에러든 어쨌든 끝났을 때
+    onSettled: () => {
+      textAreaAnimation.start({ height: 70 });
+    }, // 성공이든 에러든 어쨌든 끝났을 때
   });
 
   const onValid = (data: IBoardForm) => {
