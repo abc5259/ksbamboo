@@ -83,12 +83,12 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
           <li>정보통신공학과</li>
         </ul>
       )}
-      {departmentTitle === "약학대학" && (
+      {detailKsDepartment === "약학대학" && (
         <ul>
           <li>약학과</li>
         </ul>
       )}
-      {departmentTitle === "예술종합대학" && (
+      {detailKsDepartment === "예술종합대학" && (
         <ul>
           <li>음악학부</li>
           <li>디자인학부</li>
@@ -102,7 +102,7 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
           <li>패션디자인학과</li>
         </ul>
       )}
-      {departmentTitle === "생명보건대학" && (
+      {detailKsDepartment === "생명보건대학" && (
         <ul>
           <li>간호학과</li>
           <li>물리치료학과</li>
@@ -114,7 +114,7 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
           <li>제약공학과</li>
         </ul>
       )}
-      {departmentTitle === "글로벌학부" && (
+      {detailKsDepartment === "글로벌학부" && (
         <ul>
           <li>글로벌학부</li>
         </ul>

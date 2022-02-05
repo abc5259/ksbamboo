@@ -6,16 +6,8 @@ export const StyledSideBar = styled.nav`
   @media only screen and (max-width: 1024px) {
     width: 270px;
   }
-  ul {
+  & > ul {
     background-color: inherit;
     padding: 60px 40px;
-    li {
-      margin-bottom: 30px;
-      color: #6d6d6d;
-      cursor: pointer;
-      &:hover {
-        color: ${props => props.theme.textColor};
-      }
-    }
   }
 `;

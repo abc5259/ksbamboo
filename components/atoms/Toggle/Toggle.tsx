@@ -1,7 +1,6 @@
 import { StyledToggle } from "./ToggleStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 export type DepartmentTitleType =
   | "문과대학"
