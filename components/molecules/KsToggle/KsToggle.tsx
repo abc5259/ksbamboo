@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Atom from "../../atoms";
 import { DepartmentTitleType } from "../../atoms/Toggle/Toggle";
 import { StyledKsToggle } from "./KsToggleStyles";
@@ -7,10 +8,26 @@ export interface IKsToggleProps {
 }
 
 const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
+  const [detailKsDepartment, setDetailKsDepartment] = useState("");
+  const [up, setUp] = useState(false);
+
+  const onClickToggle = () => {
+    setUp(prev => !prev);
+    if (detailKsDepartment) {
+      return setDetailKsDepartment("");
+    }
+    setDetailKsDepartment(departmentTitle);
+  };
+
   return (
     <StyledKsToggle>
-      <Atom.Toggle departmentTitle={departmentTitle} />
-      {departmentTitle === "문과대학" && (
+      <Atom.Toggle
+        up={up}
+        onClick={onClickToggle}
+        departmentTitle={departmentTitle}
+        mb="20px"
+      />
+      {detailKsDepartment === "문과대학" && (
         <ul>
           <li>인문문화학부</li>
           <li>글로컬문화학부</li>
@@ -22,7 +39,7 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
           <li>심리학과</li>
         </ul>
       )}
-      {departmentTitle === "사회과학대학" && (
+      {detailKsDepartment === "사회과학대학" && (
         <ul>
           <li>법학과</li>
           <li>경찰행정학과</li>
@@ -31,7 +48,7 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
           <li>사회복지학과</li>
         </ul>
       )}
-      {departmentTitle === "상경대학" && (
+      {detailKsDepartment === "상경대학" && (
         <ul>
           <li>경제금융물류학부</li>
           <li>호텔관광외식경영학부</li>
@@ -41,14 +58,14 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
           <li>빅데이터응용통계학과</li>
         </ul>
       )}
-      {departmentTitle === "이과대학" && (
+      {detailKsDepartment === "이과대학" && (
         <ul>
           <li>응용수학과</li>
           <li>화학신소재학과</li>
           <li>에너지과학과</li>
         </ul>
       )}
-      {departmentTitle === "공과대학" && (
+      {detailKsDepartment === "공과대학" && (
         <ul>
           <li>기계자동차공학과</li>
           <li>메카트로닉스공학과</li>

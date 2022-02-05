@@ -14,4 +14,4 @@ const Template: Story<IKsToggleProps> = args => (
 
 export const Default = Template.bind({});
 Default.parameters = {};
-Default.args = {};
+Default.args = { departmentTitle: "공과대학" };

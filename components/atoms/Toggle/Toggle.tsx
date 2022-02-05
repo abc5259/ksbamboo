@@ -18,15 +18,21 @@ export interface IAtomToggleProps {
   onClick?: () => void;
   departmentTitle: DepartmentTitleType;
   fontSize?: string;
+  up?: boolean;
+  mb?: string;
 }
 
 const Toggle = (props: IAtomToggleProps) => {
-  const [Up, setUp] = useState(false);
   return (
     <>
-      <StyledToggle fontSize={props.fontSize} onClick={props.onClick}>
+      <StyledToggle
+        up={props.up}
+        fontSize={props.fontSize}
+        mb={props.mb}
+        onClick={props.onClick}
+      >
         <span>{props.departmentTitle}</span>
-        {!Up ? (
+        {!props.up ? (
           <FontAwesomeIcon icon={faChevronDown} size={"xs"} />
         ) : (
           <FontAwesomeIcon icon={faChevronUp} size={"xs"} />
