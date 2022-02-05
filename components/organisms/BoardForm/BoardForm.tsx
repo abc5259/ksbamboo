@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useAnimation } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
@@ -16,6 +16,7 @@ interface IBoardForm {
 }
 
 const BoardForm = (props: { token: string }) => {
+  const [postSuccess, setSuccess] = useState(false);
   const queryClient = useQueryClient();
   const {
     register,
@@ -41,16 +42,14 @@ const BoardForm = (props: { token: string }) => {
     },
     onSuccess: data => {
       // 성공
+      setSuccess(true);
       queryClient.setQueryData("myBoards", data.board); //user라는 이름으로 data.user값이 캐싱됨
       queryClient.refetchQueries("allboards");
       queryClient.refetchQueries("user");
       setValue("title", "");
       setValue("content", "");
-      textAreaAnimation.start({ height: 70 });
     },
-    onSettled: () => {
-      textAreaAnimation.start({ height: 70 });
-    }, // 성공이든 에러든 어쨌든 끝났을 때
+    onSettled: () => {}, // 성공이든 에러든 어쨌든 끝났을 때
   });
 
   const onValid = (data: IBoardForm) => {
@@ -80,6 +79,7 @@ const BoardForm = (props: { token: string }) => {
         placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
         animateheight={300}
         value={watch("content")}
+        success={postSuccess}
       ></Atom.Textarea>
       <Atom.Message className="error" fontSize="0.9rem">
         {errors.content?.message}

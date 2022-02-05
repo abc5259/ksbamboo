@@ -13,7 +13,7 @@ export const StyledInput = styled.input<IAtomInputProps>`
     return css`
       border: none;
       width: ${inputWidth};
-      font-size: ${inputSize};
+      font-size: ${inputSize} || "0.9rem";
       padding: 10px 5px;
       color: inherit;
       /* margin-bottom: 10px; */

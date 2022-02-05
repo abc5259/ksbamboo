@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
+import HeaderAndSideBar from "../../components/layouts/HeaderAndSideBar/HeaderAndSideBar";
 
 const BoardPage = () => {
   const router = useRouter();
   const { boardId } = router.query;
-  return <HeaderLayout>{boardId}</HeaderLayout>;
+  return <HeaderAndSideBar>{boardId}</HeaderAndSideBar>;
 };
 export default BoardPage;

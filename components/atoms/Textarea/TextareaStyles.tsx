@@ -10,6 +10,7 @@ export const StyledTextarea = styled(motion.textarea)`
   height: 50px;
   padding: 10px 5px;
   color: inherit;
+  font-size: 0.9rem;
   border-radius: 7px;
   background-color: #e7f5e9;
   &:focus {
