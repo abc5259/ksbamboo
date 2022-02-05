@@ -10,14 +10,14 @@ import { getUserAPI } from "../../apis/user";
 const Join: NextPage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
-  const { data: me } = useQuery<User>(
+  const { error, data: me } = useQuery<User>(
     "user",
     () => getUserAPI(token),
     { enabled: !!token } // token이 있을때만 useQuery실행
   );
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    if (me) {
+    if (me && !error) {
       router.replace("/");
     }
   }, [token, me]);

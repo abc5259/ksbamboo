@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { getUserAPI } from "../apis/user";
 import User from "../interfaces/user";
 import { AxiosError } from "axios";
+import Home from "../components/templates/Home/Home";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -20,20 +21,21 @@ export const BoardWrapper = styled.div`
   gap: 30px;
 `;
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
-  const { error, data: me } = useQuery<User, AxiosError>("user", () =>
-    getUserAPI(token)
-  );
+  const {
+    isLoading,
+    error,
+    data: me,
+  } = useQuery<User, AxiosError>("user", () => getUserAPI(token), {
+    enabled: !!token,
+  });
   const { data: boards } = useQuery<IBoard[]>(
     "allboards",
     () => allBoardsAPI(token),
     {
       enabled: !!token,
-      onError: () => {
-        console.log("에러야!");
-      },
     }
   );
   const ksDepartments = useRecoilValue(ksDepartmentAtom);
@@ -43,26 +45,19 @@ const Home: NextPage = () => {
   };
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    if (!me || error?.response?.data.statusCode === 401) {
+    console.log(me, isLoading);
+    if (!me && !isLoading) {
       router.replace("/login");
     }
-  }, [token, me, error]);
-
+  }, [token, me, isLoading]);
+  if (error?.response?.data.statusCode === 401) {
+    router.replace("/login");
+  }
   return (
     <>
-      <AppLayout>
-        <select onChange={onChangeDepartment}>
-          {ksDepartments.map(ksDepartment => (
-            <option key={ksDepartment} value={ksDepartment}>
-              {ksDepartment}
-            </option>
-          ))}
-        </select>
-        <BoardForm token={token} />
-        {boards ? <AllBoards boards={boards} /> : <div>로딩중...</div>}
-      </AppLayout>
+      <Home token={token} boards={boards} />
     </>
   );
 };
 
-export default Home;
+export default HomePage;

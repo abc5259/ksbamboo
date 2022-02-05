@@ -5,7 +5,6 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
 `;
 
 export const Title = styled.h1`
@@ -27,6 +26,10 @@ export const List = styled.li`
 `;
 
 export const NaveBarWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
   padding: 0 30px;
   background-color: #202329;
   color: white;

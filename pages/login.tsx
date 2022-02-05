@@ -21,7 +21,7 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    if (me) {
+    if (me && !error) {
       router.replace("/");
     }
   }, [token, me]);

@@ -10,7 +10,6 @@ const NavBar = () => {
           <Title>
             <Link href="/">KSB</Link>
           </Title>
-
           <Nav>
             <List>
               <Link href="/">게시판</Link>
