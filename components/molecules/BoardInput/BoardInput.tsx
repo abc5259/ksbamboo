@@ -2,11 +2,11 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import Atom from "../../atoms";
 import { StyledBoardInput } from "./BoardIputStyles";
 
-export interface IModuleBoardInputProps {
+export interface IBoardInputProps {
   register?: UseFormRegisterReturn;
 }
 
-const BoardInput = (props: IModuleBoardInputProps) => {
+const BoardInput = (props: IBoardInputProps) => {
   return (
     <StyledBoardInput>
       <Atom.Input

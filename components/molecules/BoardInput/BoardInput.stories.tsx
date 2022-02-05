@@ -1,4 +1,4 @@
-import BoardInput, { IModuleBoardInputProps } from "./BoardInput";
+import BoardInput, { IBoardInputProps } from "./BoardInput";
 import { Meta, Story } from "@storybook/react";
 
 export default {
@@ -6,7 +6,7 @@ export default {
   component: BoardInput,
 } as Meta;
 
-const Template: Story<IModuleBoardInputProps> = args => (
+const Template: Story<IBoardInputProps> = args => (
   <>
     <BoardInput {...args} />;
   </>

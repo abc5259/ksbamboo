@@ -21,5 +21,5 @@ const Template: Story<IAtomToggleProps> = args => (
 export const Default = Template.bind({});
 Default.parameters = {};
 Default.args = {
-  title: "test",
+  departmentTitle: "문과대학",
 };
