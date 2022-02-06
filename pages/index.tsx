@@ -36,11 +36,10 @@ const HomePage: NextPage = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    console.log(me, isLoading);
-    if (!me && error?.response?.data.statusCode === 401) {
+    if (!me) {
       router.replace("/login");
     }
-  }, [token, me, error]);
+  }, [token, me]);
 
   return (
     <>

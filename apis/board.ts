@@ -13,6 +13,7 @@ export const createBoardAPI = (data: {
   token: string;
   title: string;
   content: string;
+  category: string;
 }) => {
   return axios
     .post("/boards", data, {

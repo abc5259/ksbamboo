@@ -12,13 +12,13 @@ const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
   const [token, setToken] = useState("");
-  const {
-    isLoading,
-    error,
-    data: me,
-  } = useQuery<User, AxiosError>("user", () => getUserAPI(token), {
-    enabled: !!token,
-  });
+  const { error, data: me } = useQuery<User, AxiosError>(
+    "user",
+    () => getUserAPI(token),
+    {
+      enabled: !!token,
+    }
+  );
   const { data: boards } = useQuery<IBoard[]>(
     ["boards", category],
     () => allCategoryBoardsAPI(token, category as string),
@@ -29,11 +29,11 @@ const CategoryPage = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    console.log(me, isLoading);
-    if (!me && error?.response?.data.statusCode === 401) {
+    if (!me) {
       router.replace("/login");
     }
   }, [token, me, error]);
+
   return (
     <>
       <Home token={token} boards={boards} />

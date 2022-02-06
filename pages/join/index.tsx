@@ -17,10 +17,11 @@ const Join: NextPage = () => {
   );
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
-    if (me && !error) {
+    if (me) {
       router.replace("/");
     }
   }, [token, me]);
+
   return (
     <>
       <HeaderLayout>

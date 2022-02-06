@@ -79,7 +79,7 @@ const BoardForm = (props: IBoardFormProps) => {
 
   return (
     <>
-      <Atom.Title>{boardCategory} 게시판</Atom.Title>
+      <Atom.Tag>{boardCategory} 게시판</Atom.Tag>
       <Form onSubmit={handleSubmit(onValid)}>
         <Molecule.BoardInput
           register={{
