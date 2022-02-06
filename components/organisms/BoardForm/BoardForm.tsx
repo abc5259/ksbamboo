@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useAnimation } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
@@ -21,8 +21,14 @@ export interface IBoardFormProps {
 }
 
 const BoardForm = (props: IBoardFormProps) => {
-  const { pathname } = useRouter();
+  const [boardCategory, setBoardCategory] = useState("");
   const [postSuccess, setSuccess] = useState("");
+  const router = useRouter();
+  const { category } = router.query;
+  useEffect(() => {
+    const routerCategory = category ? category : "전체";
+    setBoardCategory(routerCategory as string);
+  }, [category]);
   const queryClient = useQueryClient();
   const {
     register,
@@ -34,7 +40,7 @@ const BoardForm = (props: IBoardFormProps) => {
   const mutation = useMutation<
     { board: IBoard }, //success했을때 data값의 타입
     AxiosError, // error타입
-    { token: string; title: string; content: string } // loginAPI의 인자로 들어갈 타입
+    { token: string; title: string; content: string; category: string } // loginAPI의 인자로 들어갈 타입
   >("myBoards", createBoardAPI, {
     onMutate: () => {}, // 뮤테이션 시작
     onError: error => {
@@ -63,14 +69,17 @@ const BoardForm = (props: IBoardFormProps) => {
     if (!props.token) {
       return toast.error("로그인이 필요합니다.");
     }
-    const category = pathname === "/" ? "전체" : pathname;
-    mutation.mutate({ token: props.token, ...data });
+    mutation.mutate({
+      token: props.token,
+      ...data,
+      category: boardCategory as string,
+    });
   };
-  console.log("router", pathname);
+  // console.log("router", category);
 
   return (
     <>
-      <Atom.Title>전체 게시판</Atom.Title>
+      <Atom.Title>{boardCategory} 게시판</Atom.Title>
       <Form onSubmit={handleSubmit(onValid)}>
         <Molecule.BoardInput
           register={{
