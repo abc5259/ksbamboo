@@ -20,3 +20,11 @@ export const createBoardAPI = (data: {
     })
     .then(response => response.data);
 };
+
+export const allCategoryBoardsAPI = (token: string, category: string) => {
+  return axios
+    .get(`/boards/category/${category}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(response => response.data);
+};

@@ -37,13 +37,11 @@ const HomePage: NextPage = () => {
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
     console.log(me, isLoading);
-    if (!me && !isLoading) {
+    if (!me && error?.response?.data.statusCode === 401) {
       router.replace("/login");
     }
-  }, [token, me, isLoading]);
-  if (error?.response?.data.statusCode === 401) {
-    router.replace("/login");
-  }
+  }, [token, me, error]);
+
   return (
     <>
       <Home token={token} boards={boards} />

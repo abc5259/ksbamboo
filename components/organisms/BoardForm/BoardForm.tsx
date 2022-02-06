@@ -9,14 +9,20 @@ import IBoard from "../../../interfaces/board";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
 import { Form } from "./BoardFormStyles";
+import { useRouter } from "next/router";
 
 interface IBoardForm {
   title: string;
   content: string;
 }
 
-const BoardForm = (props: { token: string }) => {
-  const [postSuccess, setSuccess] = useState(false);
+export interface IBoardFormProps {
+  token?: string;
+}
+
+const BoardForm = (props: IBoardFormProps) => {
+  const { pathname } = useRouter();
+  const [postSuccess, setSuccess] = useState("");
   const queryClient = useQueryClient();
   const {
     register,
@@ -25,7 +31,6 @@ const BoardForm = (props: { token: string }) => {
     setValue,
     formState: { errors },
   } = useForm<IBoardForm>();
-  const textAreaAnimation = useAnimation();
   const mutation = useMutation<
     { board: IBoard }, //success했을때 data값의 타입
     AxiosError, // error타입
@@ -42,8 +47,9 @@ const BoardForm = (props: { token: string }) => {
     },
     onSuccess: data => {
       // 성공
-      setSuccess(true);
-      queryClient.setQueryData("myBoards", data.board); //user라는 이름으로 data.user값이 캐싱됨
+      setSuccess("true");
+      console.log(data);
+      queryClient.setQueryData("myBoards", data); //myBoards 이름으로 data.board값이 캐싱됨
       queryClient.refetchQueries("allboards");
       queryClient.refetchQueries("user");
       setValue("title", "");
@@ -54,45 +60,53 @@ const BoardForm = (props: { token: string }) => {
 
   const onValid = (data: IBoardForm) => {
     //서버로 데이터 보내기 (게시물 생성) with React Query
+    if (!props.token) {
+      return toast.error("로그인이 필요합니다.");
+    }
+    const category = pathname === "/" ? "전체" : pathname;
     mutation.mutate({ token: props.token, ...data });
   };
+  console.log("router", pathname);
 
   return (
-    <Form onSubmit={handleSubmit(onValid)}>
-      <Molecule.BoardInput
-        register={{
-          ...register("title", {
-            required: "제목을 입력하세요",
-            maxLength: { value: 30, message: "제목은 30자 이하여야 합니다" },
-          }),
-        }}
-      />
-      <Atom.Message className="error" fontSize="0.9rem">
-        {errors.title?.message}
-      </Atom.Message>
-      <Atom.Textarea
-        register={{
-          ...register("content", {
-            required: "content를 입력하세요",
-          }),
-        }}
-        placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
-        animateheight={300}
-        value={watch("content")}
-        success={postSuccess}
-      ></Atom.Textarea>
-      <Atom.Message className="error" fontSize="0.9rem">
-        {errors.content?.message}
-      </Atom.Message>
-      <Atom.Button
-        className="small"
-        bgColor="#E7F5E9"
-        color="inherit"
-        redius={7}
-      >
-        작성하기
-      </Atom.Button>
-    </Form>
+    <>
+      <Atom.Title>전체 게시판</Atom.Title>
+      <Form onSubmit={handleSubmit(onValid)}>
+        <Molecule.BoardInput
+          register={{
+            ...register("title", {
+              required: "제목을 입력하세요",
+              maxLength: { value: 30, message: "제목은 30자 이하여야 합니다" },
+            }),
+          }}
+        />
+        <Atom.Message className="error" fontSize="0.9rem">
+          {errors.title?.message}
+        </Atom.Message>
+        <Atom.Textarea
+          register={{
+            ...register("content", {
+              required: "content를 입력하세요",
+            }),
+          }}
+          placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
+          animateheight={300}
+          value={watch("content")}
+          success={postSuccess}
+        ></Atom.Textarea>
+        <Atom.Message className="error" fontSize="0.9rem">
+          {errors.content?.message}
+        </Atom.Message>
+        <Atom.Button
+          className="small"
+          bgColor="#E7F5E9"
+          color="inherit"
+          redius={7}
+        >
+          작성하기
+        </Atom.Button>
+      </Form>
+    </>
   );
 };
 

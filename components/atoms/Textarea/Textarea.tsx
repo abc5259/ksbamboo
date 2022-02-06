@@ -7,7 +7,7 @@ export interface IAtomTextareaProps {
   register: UseFormRegisterReturn;
   animateheight?: number;
   value: string;
-  success?: boolean;
+  success?: string;
 }
 
 const Textarea: React.FC<IAtomTextareaProps> = props => {
@@ -24,7 +24,7 @@ const Textarea: React.FC<IAtomTextareaProps> = props => {
     textAreaAnimation.start({ height: 50 });
   };
 
-  if (props.success) {
+  if (props.success === "true") {
     textAreaAnimation.start({ height: 50 });
   }
 
