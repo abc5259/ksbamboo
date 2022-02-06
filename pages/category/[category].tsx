@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { allBoardsAPI, allCategoryBoardsAPI } from "../../apis/board";
+import { allCategoryBoardsAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
 import Home from "../../components/templates/Home/Home";
 import IBoard from "../../interfaces/board";
@@ -17,6 +17,9 @@ const CategoryPage = () => {
     () => getUserAPI(token),
     {
       enabled: !!token,
+      onError: error => {
+        console.log(error.response?.data);
+      },
     }
   );
   const { data: boards } = useQuery<IBoard[]>(

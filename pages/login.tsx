@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import User from "../interfaces/user";
 import { AxiosError } from "axios";
 import HeaderLayout from "../components/layouts/HeaderLayout/HeaderLayout";
+import jwt_decode from "jwt-decode";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -25,7 +26,11 @@ const Login: NextPage = () => {
       router.replace("/");
     }
   }, [token]);
-
+  if (token) {
+    const decode = jwt_decode(token);
+    console.log(decode);
+    //Math.floor(new Date().getTime() / 1000);
+  }
   return (
     <>
       <HeaderLayout>

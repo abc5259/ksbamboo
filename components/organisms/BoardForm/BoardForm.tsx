@@ -55,6 +55,7 @@ const BoardForm = (props: IBoardFormProps) => {
       // 성공
       setSuccess("true");
       console.log(data);
+      queryClient.refetchQueries(["boards", boardCategory]);
       queryClient.setQueryData("myBoards", data); //myBoards 이름으로 data.board값이 캐싱됨
       queryClient.refetchQueries("allboards");
       queryClient.refetchQueries("user");
