@@ -19,13 +19,13 @@ export const BoardWrapper = styled.div`
 const HomePage: NextPage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
-  const {
-    isLoading,
-    error,
-    data: me,
-  } = useQuery<User, AxiosError>("user", () => getUserAPI(token), {
-    enabled: !!token,
-  });
+  const { data: me } = useQuery<User, AxiosError>(
+    "user",
+    () => getUserAPI(token),
+    {
+      enabled: !!token,
+    }
+  );
   const { data: boards } = useQuery<IBoard[]>(
     "allboards",
     () => allBoardsAPI(token),
