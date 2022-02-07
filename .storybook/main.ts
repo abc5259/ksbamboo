@@ -4,7 +4,11 @@ module.exports = {
     // "../stories/**/*.stories.mdx",
     "../components/**/*.stories.@(js|jsx|ts|tsx)",
   ],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "storybook-addon-next-router",
+  ],
   framework: "@storybook/react",
   webpackFinal: async config => {
     config.module.rules.push({
@@ -12,7 +16,6 @@ module.exports = {
       include: /node_modules/,
       type: "javascript/auto",
     });
-
     return config;
   },
 };

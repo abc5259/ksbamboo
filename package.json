@@ -27,6 +27,7 @@
     "react-query": "^3.34.8",
     "react-toastify": "^8.1.1",
     "recoil": "^0.5.2",
+    "storybook-addon-next-router": "^3.1.1",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
