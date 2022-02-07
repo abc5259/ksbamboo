@@ -33,7 +33,6 @@ const Join: NextPage = () => {
       jwt_decode(token);
     const currentTime = Math.floor(new Date().getTime() / 1000);
     const time = new Date((decode.exp - currentTime) * 1000);
-    console.log(time.getTime());
     if (time.getTime() < 10000) {
       axios
         .post(`/auth/refresh`, { refresh_token: refreshToken })

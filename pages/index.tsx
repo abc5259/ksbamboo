@@ -61,7 +61,7 @@ const HomePage = () => {
         })
         .catch(error => {
           console.log(error);
-          if (error?.response?.data.statusCode === 401) {
+          if (error.response.data.statusCode === 401) {
             router.replace("/login");
           }
         });
