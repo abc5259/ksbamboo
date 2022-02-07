@@ -10,6 +10,7 @@ import Label from "./Label/Label";
 import Title from "./Title/Title";
 import Toggle from "./Toggle/Toggle";
 import Time from "./Time/Time";
+import Avatar from "./Avatar/Avatar";
 
 const Atom = {
   Button,
@@ -24,6 +25,7 @@ const Atom = {
   Title,
   Toggle,
   Time,
+  Avatar,
 };
 
 export default Atom;

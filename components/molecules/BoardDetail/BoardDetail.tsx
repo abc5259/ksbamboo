@@ -39,9 +39,7 @@ const BoardDetail = ({
         <Atom.Tag>{category} 게시판</Atom.Tag>
         <Card>
           <CardHeader>
-            <Avatar>
-              <FontAwesomeIcon icon={faUser} size={"sm"} />
-            </Avatar>
+            <Atom.Avatar />
             <Info>
               <span>
                 {status === "PRIVATE" ? "익명" : user.username} (

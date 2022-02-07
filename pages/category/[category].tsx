@@ -12,7 +12,6 @@ import jwt_decode from "jwt-decode";
 const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
-  console.log(category);
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const queryClient = new QueryClient();

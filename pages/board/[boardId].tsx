@@ -14,19 +14,17 @@ import User from "../../interfaces/user";
 const BoardPage = () => {
   const router = useRouter();
   const { boardId } = router.query;
-  console.log(boardId);
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [getBoardId, setGetBoardId] = useState("");
   const queryClient = new QueryClient();
-  const {
-    isLoading,
-    isSuccess,
-    error,
-    data: me,
-  } = useQuery<User, AxiosError>("user", () => getUserAPI(token), {
-    enabled: !!token,
-  });
+  const { error, data: me } = useQuery<User, AxiosError>(
+    "user",
+    () => getUserAPI(token),
+    {
+      enabled: !!token,
+    }
+  );
   const { data: board } = useQuery<IBoard>(
     ["board", boardId],
     () => getBoardAPI(boardId as string),
@@ -40,7 +38,6 @@ const BoardPage = () => {
     setRefreshToken(localStorage.getItem("refreshToken") || "");
     setGetBoardId(boardId as string);
   }, [token, boardId]);
-  // console.log(me);
 
   if (token || error?.response?.data.statusCode === 401) {
     const decode: { email: string; iat: number; exp: number } =
@@ -67,7 +64,7 @@ const BoardPage = () => {
         });
     }
   }
-  // console.log(queryClient.getQueryData(["allboards"]));
+
   return (
     <HeaderAndSideBar>
       {board && (
