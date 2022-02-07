@@ -19,6 +19,7 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
               content={board.content}
               status={board.status}
               user={board.user}
+              category={board.category}
             />
           );
         })

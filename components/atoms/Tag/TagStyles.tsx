@@ -2,13 +2,14 @@ import styled, { css } from "styled-components";
 import { IAtomTagProps } from "./Tag";
 
 export const StyledTag = styled.div<IAtomTagProps>`
-  ${({ bgColor, theme }) => {
+  ${({ bgColor, theme, height }) => {
     const tagBgColof = bgColor ? bgColor : theme.accentColor;
+    const tagHeight = height || "50px";
     return css`
       max-width: 450px;
       min-width: 200px;
       margin: 0 auto;
-      height: 50px;
+      height: ${tagHeight};
       border-radius: 10px;
       display: flex;
       justify-content: center;
@@ -16,6 +17,7 @@ export const StyledTag = styled.div<IAtomTagProps>`
       color: ${theme.textColor};
       font-weight: 600;
       background-color: #cfebd3;
+      margin-bottom: 25px;
     `;
   }}
 `;

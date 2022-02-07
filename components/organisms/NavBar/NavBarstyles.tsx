@@ -33,4 +33,7 @@ export const NaveBarWrapper = styled.div`
   padding: 0 80px;
   background-color: #202329;
   color: white;
+  a {
+    cursor: pointer;
+  }
 `;

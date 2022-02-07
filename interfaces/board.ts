@@ -6,4 +6,5 @@ export default interface IBoard {
   content: string;
   status: string;
   user: User;
+  category: string;
 }

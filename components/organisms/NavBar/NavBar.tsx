@@ -25,9 +25,7 @@ const NavBar = () => {
       <NaveBarWrapper>
         <Header>
           <Title>
-            <Link href="/">
-              <a>KSB</a>
-            </Link>
+            <a>KSB</a>
           </Title>
           <Nav>
             {isLogin ? (

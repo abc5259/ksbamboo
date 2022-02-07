@@ -19,13 +19,22 @@ export interface IBoardProps {
   content: string;
   status: string;
   user: User;
+  category?: string;
 }
 
-const Board = ({ boardId, title, content, status, user }: IBoardProps) => {
+const Board = ({
+  boardId,
+  title,
+  content,
+  status,
+  user,
+  category,
+}: IBoardProps) => {
   return (
     <Link href={`/board/${boardId}`}>
       <BoardWrapper>
         <Main>
+          <Atom.Tag height="30px">{category} 게시판</Atom.Tag>
           <Title>{title}</Title>
           <Content>{content}</Content>
           <Time>2021년 1월 19일 수</Time>
