@@ -1,5 +1,6 @@
 import axios from "axios";
 export const BASE_URL = "http://localhost:3050";
+const JWT_EXPIRY_TIME = 60 * 1000;
 
 axios.defaults.baseURL = BASE_URL;
 

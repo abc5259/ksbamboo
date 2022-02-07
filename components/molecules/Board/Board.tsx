@@ -34,7 +34,9 @@ const Board = ({
     <Link href={`/board/${boardId}`}>
       <BoardWrapper>
         <Main>
-          <Atom.Tag height="30px">{category} 게시판</Atom.Tag>
+          <Atom.Tag width="100%" height="30px">
+            {category} 게시판
+          </Atom.Tag>
           <Title>{title}</Title>
           <Content>{content}</Content>
           <Time>2021년 1월 19일 수</Time>

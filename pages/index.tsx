@@ -47,6 +47,7 @@ const HomePage = () => {
           refresh_token: refreshToken,
         })
         .then(response => {
+          localStorage.removeItem("accessToken");
           localStorage.setItem("accessToken", response.data?.accessToken);
           setToken(response.data?.accessToken);
           queryClient.refetchQueries("user");

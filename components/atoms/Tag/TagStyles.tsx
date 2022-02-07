@@ -2,10 +2,11 @@ import styled, { css } from "styled-components";
 import { IAtomTagProps } from "./Tag";
 
 export const StyledTag = styled.div<IAtomTagProps>`
-  ${({ bgColor, theme, height }) => {
+  ${({ bgColor, theme, height, width }) => {
     const tagHeight = height || "50px";
+    const tagWidth = width || "450px";
     return css`
-      max-width: 450px;
+      max-width: ${tagWidth};
       min-width: 200px;
       margin: 0 auto;
       height: ${tagHeight};
