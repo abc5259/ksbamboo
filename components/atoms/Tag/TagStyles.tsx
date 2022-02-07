@@ -3,7 +3,6 @@ import { IAtomTagProps } from "./Tag";
 
 export const StyledTag = styled.div<IAtomTagProps>`
   ${({ bgColor, theme, height }) => {
-    const tagBgColof = bgColor ? bgColor : theme.accentColor;
     const tagHeight = height || "50px";
     return css`
       max-width: 450px;

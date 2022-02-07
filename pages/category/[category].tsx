@@ -12,6 +12,7 @@ import jwt_decode from "jwt-decode";
 const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
+  console.log(category);
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const queryClient = new QueryClient();
@@ -22,20 +23,16 @@ const CategoryPage = () => {
       enabled: !!token,
     }
   );
-  const { data: boards } = useQuery<IBoard[]>(
-    ["boards", category],
-    () => allCategoryBoardsAPI(token, category as string),
-    {
-      enabled: !!token,
-    }
+  const { data: boards } = useQuery<IBoard[]>(["boards", category], () =>
+    allCategoryBoardsAPI(category as string)
   );
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
     setRefreshToken(localStorage.getItem("refreshToken") || "");
-    if (!me) {
-      router.replace("/login");
-    }
+    // if (!me) {
+    //   router.replace("/login");
+    // }
   }, [token, me]);
   if (token || error?.response?.data.statusCode === 401) {
     const decode: { email: string; iat: number; exp: number } =
@@ -55,7 +52,9 @@ const CategoryPage = () => {
         .catch(error => {
           console.log(error);
           if (error?.response?.data.statusCode === 401) {
-            router.replace("/login");
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            queryClient.removeQueries("user");
           }
         });
     }

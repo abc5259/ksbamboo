@@ -3,10 +3,8 @@ export const BASE_URL = "http://localhost:3050";
 
 axios.defaults.baseURL = BASE_URL;
 
-export const allBoardsAPI = (token: string) => {
-  return axios
-    .get(`/boards`, { headers: { Authorization: `Bearer ${token}` } })
-    .then(response => response.data);
+export const allBoardsAPI = () => {
+  return axios.get(`/boards`).then(response => response.data);
 };
 
 export const createBoardAPI = (data: {
@@ -22,10 +20,12 @@ export const createBoardAPI = (data: {
     .then(response => response.data);
 };
 
-export const allCategoryBoardsAPI = (token: string, category: string) => {
+export const allCategoryBoardsAPI = (category: string) => {
   return axios
-    .get(`/boards/category/${category}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    .get(`/boards/category/${category}`)
     .then(response => response.data);
+};
+
+export const getBoardAPI = (boardId: string) => {
+  return axios.get(`/boards/${boardId}`).then(response => response.data);
 };

@@ -27,7 +27,7 @@ const Login: NextPage = () => {
     if (me) {
       router.replace("/");
     }
-  }, [token, refreshToken]);
+  }, [token, refreshToken, me]);
   if (token) {
     const decode: { email: string; iat: number; exp: number } =
       jwt_decode(token);

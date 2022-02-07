@@ -29,21 +29,13 @@ const HomePage = () => {
       enabled: !!token,
     }
   );
-  const { data: boards } = useQuery<IBoard[]>(
-    "allboards",
-    () => allBoardsAPI(token),
-    {
-      enabled: !!token,
-    }
-  );
+  const { data: boards } = useQuery<IBoard[]>("allboards", allBoardsAPI);
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
     setRefreshToken(localStorage.getItem("refreshToken") || "");
-    if (!me) {
-      router.replace("/login");
-    }
-  }, [token, me]);
+  }, [token]);
+
   if (token || error?.response?.data.statusCode === 401) {
     const decode: { email: string; iat: number; exp: number } =
       jwt_decode(token);

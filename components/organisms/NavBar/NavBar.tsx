@@ -19,7 +19,6 @@ const NavBar = () => {
       setIsLogin(true);
     }
   }, [queryClient.getQueryData("user")]);
-  console.log(isLogin);
   return (
     <>
       <NaveBarWrapper>
@@ -42,9 +41,9 @@ const NavBar = () => {
             ) : (
               <>
                 <List>
-                  {/* <Link href="/">
-                <a>게시판</a>
-              </Link> */}
+                  <Link href="/">
+                    <a>게시판</a>
+                  </Link>
                 </List>
                 <List>
                   <Link href="/login">
