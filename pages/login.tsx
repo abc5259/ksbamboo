@@ -1,17 +1,18 @@
 import type { NextPage } from "next";
 import LoginForm from "../components/organisms/LoginForm/LoginForm";
-import { getUserAPI } from "../apis/user";
+import { getUserAPI, newAccessTokenAPI } from "../apis/user";
 import { useQuery } from "react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import User from "../interfaces/user";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import HeaderLayout from "../components/layouts/HeaderLayout/HeaderLayout";
 import jwt_decode from "jwt-decode";
 
 const Login: NextPage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
   const { error, data: me } = useQuery<User | AxiosError>(
     "user",
     () => getUserAPI(token),
@@ -22,14 +23,28 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken") || "");
+    setRefreshToken(localStorage.getItem("refreshToken") || "");
     if (me) {
       router.replace("/");
     }
-  }, [token]);
+  }, [token, refreshToken]);
   if (token) {
-    const decode = jwt_decode(token);
-    console.log(decode);
-    //Math.floor(new Date().getTime() / 1000);
+    const decode: { email: string; iat: number; exp: number } =
+      jwt_decode(token);
+    const currentTime = Math.floor(new Date().getTime() / 1000);
+    const time = new Date((decode.exp - currentTime) * 1000);
+    console.log(time.getTime());
+    if (time.getTime() < 10000) {
+      axios
+        .post(`/auth/refresh`, { refresh_token: refreshToken })
+        .then(response => {
+          localStorage.setItem("accessToken", response.data?.accessToken);
+          setToken(response.data?.accessToken);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
   return (
     <>

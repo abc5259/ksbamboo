@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useQuery } from "react-query";
+import { QueryClient, useQuery } from "react-query";
 import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
 import { useRouter } from "next/router";
@@ -9,6 +9,7 @@ import { getUserAPI, newAccessTokenAPI } from "../apis/user";
 import User from "../interfaces/user";
 import axios, { AxiosError } from "axios";
 import Home from "../components/templates/Home/Home";
+import jwt_decode from "jwt-decode";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -16,20 +17,16 @@ export const BoardWrapper = styled.div`
   gap: 30px;
 `;
 
-const HomePage: NextPage = () => {
+const HomePage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
+  const queryClient = new QueryClient();
   const { error, data: me } = useQuery<User, AxiosError>(
     "user",
     () => getUserAPI(token),
     {
       enabled: !!token,
-      onError: error => {
-        // if (error?.response?.data.statusCode === 401) {
-        //   const {accessToken} =  newAccessTokenAPI({ refresh_token: refreshToken });
-        // }
-      },
     }
   );
   const { data: boards } = useQuery<IBoard[]>(
@@ -47,6 +44,29 @@ const HomePage: NextPage = () => {
       router.replace("/login");
     }
   }, [token, me]);
+  if (token || error?.response?.data.statusCode === 401) {
+    const decode: { email: string; iat: number; exp: number } =
+      jwt_decode(token);
+    const currentTime = Math.floor(new Date().getTime() / 1000);
+    const dif = new Date((decode.exp - currentTime) * 1000);
+    if (dif.getTime() < 30000) {
+      axios
+        .post(`http://localhost:3050/auth/refresh`, {
+          refresh_token: refreshToken,
+        })
+        .then(response => {
+          localStorage.setItem("accessToken", response.data?.accessToken);
+          setToken(response.data?.accessToken);
+          queryClient.refetchQueries("user");
+        })
+        .catch(error => {
+          console.log(error);
+          if (error?.response?.data.statusCode === 401) {
+            router.replace("/login");
+          }
+        });
+    }
+  }
 
   return (
     <>
