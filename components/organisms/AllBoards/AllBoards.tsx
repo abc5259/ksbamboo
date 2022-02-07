@@ -7,10 +7,11 @@ export interface IOrgAllBoardsProps {
 }
 
 const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
+  const reversBoard = [...boards].reverse();
   return (
     <StyledAllBoards>
       {boards.length > 0 ? (
-        boards.map(board => {
+        [...boards].reverse().map(board => {
           return (
             <Board
               key={board.id}
@@ -20,6 +21,7 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
               status={board.status}
               user={board.user}
               category={board.category}
+              createdAt={board.createdAt}
             />
           );
         })

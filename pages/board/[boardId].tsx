@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { QueryClient, useQuery } from "react-query";
 import { getBoardAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
-import { User } from "../../atom/atoms";
+
 import HeaderAndSideBar from "../../components/layouts/HeaderAndSideBar/HeaderAndSideBar";
 import jwt_decode from "jwt-decode";
 import IBoard from "../../interfaces/board";
+import Molecule from "../../components/molecules";
+import User from "../../interfaces/user";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -17,13 +19,14 @@ const BoardPage = () => {
   const [refreshToken, setRefreshToken] = useState("");
   const [getBoardId, setGetBoardId] = useState("");
   const queryClient = new QueryClient();
-  const { error, data: me } = useQuery<User, AxiosError>(
-    "user",
-    () => getUserAPI(token),
-    {
-      enabled: !!token,
-    }
-  );
+  const {
+    isLoading,
+    isSuccess,
+    error,
+    data: me,
+  } = useQuery<User, AxiosError>("user", () => getUserAPI(token), {
+    enabled: !!token,
+  });
   const { data: board } = useQuery<IBoard>(
     ["board", boardId],
     () => getBoardAPI(boardId as string),
@@ -37,6 +40,7 @@ const BoardPage = () => {
     setRefreshToken(localStorage.getItem("refreshToken") || "");
     setGetBoardId(boardId as string);
   }, [token, boardId]);
+  // console.log(me);
 
   if (token || error?.response?.data.statusCode === 401) {
     const decode: { email: string; iat: number; exp: number } =
@@ -63,9 +67,22 @@ const BoardPage = () => {
         });
     }
   }
-
+  // console.log(queryClient.getQueryData(["allboards"]));
   return (
-    <HeaderAndSideBar>{board ? board.title : <>로딩중</>}</HeaderAndSideBar>
+    <HeaderAndSideBar>
+      {board && (
+        <Molecule.BoardDetail
+          boardId={board.id}
+          title={board.title}
+          content={board.content}
+          status={board.status}
+          category={board.category}
+          createdAt={board.createdAt}
+          user={board.user}
+          myId={me?.id}
+        />
+      )}
+    </HeaderAndSideBar>
   );
 };
 export default BoardPage;

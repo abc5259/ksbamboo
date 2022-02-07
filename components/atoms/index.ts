@@ -9,6 +9,7 @@ import Select from "./Select/Select";
 import Label from "./Label/Label";
 import Title from "./Title/Title";
 import Toggle from "./Toggle/Toggle";
+import Time from "./Time/Time";
 
 const Atom = {
   Button,
@@ -22,6 +23,7 @@ const Atom = {
   Label,
   Title,
   Toggle,
+  Time,
 };
 
 export default Atom;

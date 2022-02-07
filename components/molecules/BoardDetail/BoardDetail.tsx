@@ -18,9 +18,9 @@ export interface IBoardDetailProps {
   content: string;
   status: string;
   category: string;
-  createAt: string;
+  createdAt: Date;
   user: User;
-  me: User;
+  myId?: number;
 }
 
 const BoardDetail = ({
@@ -29,14 +29,14 @@ const BoardDetail = ({
   content,
   status,
   category,
-  createAt,
+  createdAt,
   user,
-  me,
+  myId,
 }: IBoardDetailProps) => {
   return (
     <>
       <StyledBoardDetail>
-        <Atom.Tag width="100%">{category} 게시판</Atom.Tag>
+        <Atom.Tag>{category} 게시판</Atom.Tag>
         <Card>
           <CardHeader>
             <Avatar>
@@ -47,10 +47,10 @@ const BoardDetail = ({
                 {status === "PRIVATE" ? "익명" : user.username} (
                 {user.ksDepartment})
               </span>
-              <span>{createAt}</span>
+              <Atom.Time createdAt={createdAt} />
             </Info>
             <EditAndDelete>
-              {user.id === me.id && (
+              {user.id === myId && (
                 <>
                   <span>수정</span>
                   <span>삭제</span>

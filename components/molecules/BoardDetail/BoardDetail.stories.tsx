@@ -20,17 +20,12 @@ Default.args = {
   content: "컴공 화이팅",
   status: "PRIVATE",
   category: "컴퓨터공학과",
-  createAt: "2022/01/02",
+  // createAt: "2022/01/02",
   user: {
     id: 10,
     username: "이재훈",
     email: "abc5259@ks.ac.kr",
     ksDepartment: "컴퓨터공학과",
   },
-  me: {
-    id: 10,
-    username: "이재훈",
-    email: "abc5259@ks.ac.kr",
-    ksDepartment: "컴퓨터공학과",
-  },
+  myId: 10,
 };

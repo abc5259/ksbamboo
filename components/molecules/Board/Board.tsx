@@ -1,7 +1,6 @@
 import Link from "next/link";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
-
 import {
   Bottom,
   BoardWrapper,
@@ -10,7 +9,6 @@ import {
   Title,
   Author,
   LikeWrapper,
-  Time,
 } from "./BoardStyles";
 
 export interface IBoardProps {
@@ -20,6 +18,7 @@ export interface IBoardProps {
   status: string;
   user: User;
   category?: string;
+  createdAt: Date;
 }
 
 const Board = ({
@@ -29,6 +28,7 @@ const Board = ({
   status,
   user,
   category,
+  createdAt,
 }: IBoardProps) => {
   return (
     <Link href={`/board/${boardId}`}>
@@ -39,7 +39,7 @@ const Board = ({
           </Atom.Tag>
           <Title>{title}</Title>
           <Content>{content}</Content>
-          <Time>2021년 1월 19일 수</Time>
+          <Atom.Time createdAt={createdAt} />
         </Main>
         <Bottom>
           <Author>
