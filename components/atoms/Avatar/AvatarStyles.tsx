@@ -9,4 +9,9 @@ export const StyledAvatar = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+  &.small {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+  }
 `;

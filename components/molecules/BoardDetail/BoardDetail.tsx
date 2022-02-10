@@ -1,7 +1,6 @@
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import {
-  Avatar,
   StyledBoardDetail,
   Card,
   Info,
@@ -9,8 +8,6 @@ import {
   CardHeader,
   CardInfo,
 } from "./BoardDetailStyles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 export interface IBoardDetailProps {
   boardId: number;
@@ -24,7 +21,6 @@ export interface IBoardDetailProps {
 }
 
 const BoardDetail = ({
-  boardId,
   title,
   content,
   status,

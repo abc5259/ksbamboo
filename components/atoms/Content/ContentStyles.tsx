@@ -6,6 +6,7 @@ export const StyledContent = styled.p<IAtomContentProps>`
     return css`
       width: 100%;
       color: ${props.theme.textColor};
+      font-size: ${props.fontSize};
     `;
   }}
 `;

@@ -44,6 +44,10 @@ export const EditAndDelete = styled.div`
   color: rgb(134, 142, 150);
   span {
     margin-left: 5px;
+    cursor: pointer;
+    &:hover {
+      color: ${props => props.theme.textColor};
+    }
   }
 `;
 

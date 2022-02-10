@@ -1,7 +1,7 @@
 import { StyledContent } from "./ContentStyles";
 
 export interface IAtomContentProps {
-  // content: string;
+  fontSize?: string;
 }
 
 const Content: React.FC<IAtomContentProps> = props => {

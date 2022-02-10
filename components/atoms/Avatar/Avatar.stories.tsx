@@ -14,6 +14,7 @@ const Template: Story<IAtomAvatarProps> = args => (
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Avatar {...args} />
+      <Avatar {...args} className="small" />
     </div>
   </>
 );
