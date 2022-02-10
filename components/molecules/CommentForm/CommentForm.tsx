@@ -19,7 +19,7 @@ const CommentForm = () => {
   } = useForm<IForm>();
   const queryClient = useQueryClient();
   const onValid = (data: IForm) => {
-    if (queryClient.getQueryData("user")) {
+    if (!queryClient.getQueryData("user")) {
       return toast.error("로그인이 필요합니다.");
     }
     console.log(data);

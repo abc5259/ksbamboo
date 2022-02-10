@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { QueryClient, useQuery } from "react-query";
+import { QueryClient, useQuery, useQueryClient } from "react-query";
 import { getBoardAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
 
@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import IBoard from "../../interfaces/board";
 import Molecule from "../../components/molecules";
 import User from "../../interfaces/user";
+import BoardDetailTemp from "../../components/templates/BoardDetailTemp/BoardDetailTemp";
 
 const BoardPage = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const BoardPage = () => {
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [getBoardId, setGetBoardId] = useState("");
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { error, data: me } = useQuery<User, AxiosError>(
     "user",
     () => getUserAPI(token),
@@ -25,7 +26,11 @@ const BoardPage = () => {
       enabled: !!token,
     }
   );
-  const { data: board } = useQuery<IBoard>(
+  const {
+    isLoading,
+    error: boardError,
+    data: board,
+  } = useQuery<IBoard>(
     ["board", boardId],
     () => getBoardAPI(boardId as string),
     {
@@ -64,22 +69,9 @@ const BoardPage = () => {
         });
     }
   }
-
-  return (
-    <HeaderAndSideBar>
-      {board && (
-        <Molecule.BoardDetail
-          boardId={board.id}
-          title={board.title}
-          content={board.content}
-          status={board.status}
-          category={board.category}
-          createdAt={board.createdAt}
-          user={board.user}
-          myId={me?.id}
-        />
-      )}
-    </HeaderAndSideBar>
-  );
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+  return <>{board && <BoardDetailTemp boardId={board.id}></BoardDetailTemp>}</>;
 };
 export default BoardPage;

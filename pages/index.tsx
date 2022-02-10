@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { QueryClient, useQuery } from "react-query";
+import { QueryClient, useQuery, useQueryClient } from "react-query";
 import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
 import { useRouter } from "next/router";
@@ -21,7 +21,7 @@ const HomePage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { error, data: me } = useQuery<User, AxiosError>(
     "user",
     () => getUserAPI(token),

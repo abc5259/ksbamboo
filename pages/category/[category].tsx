@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { QueryClient, useQuery } from "react-query";
+import { QueryClient, useQuery, useQueryClient } from "react-query";
 import { allCategoryBoardsAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
 import Home from "../../components/templates/Home/Home";
@@ -14,7 +14,7 @@ const CategoryPage = () => {
   const { category } = router.query;
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { error, data: me } = useQuery<User, AxiosError>(
     "user",
     () => getUserAPI(token),
