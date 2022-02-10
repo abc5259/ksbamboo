@@ -23,11 +23,12 @@ Default.args = {
       title: "test",
       content: "test content",
       status: "익명",
+      createdAt: new Date(),
+      category: "컴퓨터공학과",
       user: {
         id: 1,
         username: "이재훈",
         email: "abc5259",
-        password: "123",
         verified: true,
         ksDepartment: "컴퓨터공학과",
       },

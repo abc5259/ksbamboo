@@ -1,3 +1,4 @@
+import Comment from "./comment";
 import User from "./user";
 
 export default interface IBoard {
@@ -8,4 +9,5 @@ export default interface IBoard {
   user: User;
   createdAt: Date;
   category: string;
+  comments?: Comment[];
 }
