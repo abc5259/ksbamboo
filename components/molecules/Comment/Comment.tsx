@@ -1,3 +1,5 @@
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQueryClient } from "react-query";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
@@ -27,8 +29,7 @@ const Comment = ({ content, user, status, createdAt, myId }: ICommentProps) => {
         <div className="commment_deletAndEdit">
           {user.id === myId && (
             <>
-              <span>수정</span>
-              <span>삭제</span>
+              <FontAwesomeIcon icon={faEllipsisH} size="sm" />
             </>
           )}
         </div>

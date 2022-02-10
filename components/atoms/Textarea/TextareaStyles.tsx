@@ -7,6 +7,7 @@ export const StyledTextarea = styled(motion.textarea)`
   font-family: inherit;
   font-size: inherit;
   transform-origin: center top;
+  width: 100%;
   height: 50px;
   padding: 10px 5px;
   color: inherit;
