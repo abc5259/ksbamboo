@@ -2,11 +2,11 @@ import { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
+import Molecule from "..";
 import { deleteBoardCommentAPI } from "../../../apis/board";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import Title from "../../atoms/Title/Title";
-import CommentForm from "../CommentForm/CommentForm";
 import { StyledComment } from "./CommentStyles";
 
 export interface ICommentProps {
@@ -64,7 +64,7 @@ const Comment = ({
   return (
     <>
       {editComment ? (
-        <CommentForm
+        <Molecule.CommentForm
           token={token}
           boardId={boardId}
           commentId={commentId}

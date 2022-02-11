@@ -20,16 +20,16 @@ export const Default = Template.bind({});
 Default.parameters = {};
 Default.args = {
   board: {
-    id: 1,
+    id: 21,
     title: "test",
     content: "test content",
     status: "PRIVATE",
     createdAt: new Date(),
     category: "컴퓨터공학과",
     user: {
-      id: 1,
+      id: 10,
       username: "이재훈",
-      email: "abc5259",
+      email: "abc5259@ks.ac.kr",
       verified: true,
       ksDepartment: "컴퓨터공학과",
     },
@@ -75,5 +75,5 @@ Default.args = {
       },
     ],
   },
-  loginUserId: 1,
+  loginUserId: 10,
 };

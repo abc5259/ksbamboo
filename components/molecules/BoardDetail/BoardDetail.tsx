@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
+import Molecule from "..";
 import { deleteBoardAPI } from "../../../apis/board";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
-import BoardForm from "../../organisms/BoardForm/BoardForm";
 import {
   StyledBoardDetail,
   Card,
@@ -66,51 +66,48 @@ const BoardDetail = ({
     setEditBoard(prev => !prev); // true
   }, [editBoard]);
   return (
-    <>
-      <StyledBoardDetail>
-        {editBoard ? (
-          <BoardForm
-            token={token}
-            edit={true}
-            current_title={title}
-            current_textArea={content}
-            boardId={boardId}
-            setEditBoard={setEditBoard}
-          />
-        ) : (
-          <>
-            <Atom.Tag>{category} 게시판</Atom.Tag>
-            <Card>
-              <CardHeader>
-                <Atom.Avatar />
-                <Info>
-                  <span>
-                    {status === "PRIVATE" ? "익명" : user.username} (
-                    {user.ksDepartment})
-                  </span>
-                  <Atom.Time createdAt={createdAt} />
-                </Info>
-                <EditAndDelete>
-                  {user.id === myId && (
-                    <>
-                      <span onClick={onEditClick}>수정</span>
-                      <span onClick={onDeleteClick}>삭제</span>
-                    </>
-                  )}
-                </EditAndDelete>
-              </CardHeader>
-              <CardInfo>
-                <Atom.Title mb="20px" fontWeight={700}>
-                  {title}
-                </Atom.Title>
-                <Atom.Content>{content}</Atom.Content>
-              </CardInfo>
-            </Card>
-          </>
-        )}
-      </StyledBoardDetail>
-    </>
+    <StyledBoardDetail>
+      {editBoard ? (
+        <Molecule.BoardForm
+          token={token}
+          editBoard={editBoard}
+          current_title={title}
+          current_textArea={content}
+          boardId={boardId}
+          setEditBoard={setEditBoard}
+        />
+      ) : (
+        <>
+          <Atom.Tag>{category} 게시판</Atom.Tag>
+          <Card>
+            <CardHeader>
+              <Atom.Avatar />
+              <Info>
+                <span>
+                  {status === "PRIVATE" ? "익명" : user.username} (
+                  {user.ksDepartment})
+                </span>
+                <Atom.Time createdAt={createdAt} />
+              </Info>
+              <EditAndDelete>
+                {user.id === myId && (
+                  <>
+                    <span onClick={onEditClick}>수정</span>
+                    <span onClick={onDeleteClick}>삭제</span>
+                  </>
+                )}
+              </EditAndDelete>
+            </CardHeader>
+            <CardInfo>
+              <Atom.Title mb="20px" fontWeight={700}>
+                {title}
+              </Atom.Title>
+              <Atom.Content>{content}</Atom.Content>
+            </CardInfo>
+          </Card>
+        </>
+      )}
+    </StyledBoardDetail>
   );
 };
-
 export default BoardDetail;

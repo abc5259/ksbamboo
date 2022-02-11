@@ -1,5 +1,6 @@
 import IBoard from "../../../interfaces/board";
 import Molecule from "../../molecules";
+import BoardDetail from "../../molecules/BoardDetail/BoardDetail";
 import { StyledBoardDetailAndComment } from "./BoardDetailAndCommentStyles";
 
 export interface IBoardDetailAndCommentProps {
@@ -15,7 +16,7 @@ const BoardDetailAndComment = ({
 }: IBoardDetailAndCommentProps) => {
   return (
     <StyledBoardDetailAndComment>
-      <Molecule.BoardDetail
+      <BoardDetail
         token={token}
         boardId={board.id}
         title={board.title}

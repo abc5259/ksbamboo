@@ -1,7 +1,7 @@
 import IBoard from "../../../interfaces/board";
 import HeaderAndSideBar from "../../layouts/HeaderAndSideBar/HeaderAndSideBar";
 import AllBoards from "../../organisms/AllBoards/AllBoards";
-import BoardForm from "../../organisms/BoardForm/BoardForm";
+import BoardForm from "../../molecules/BoardForm/BoardForm";
 
 export interface ITempHomeProps {
   token: string;

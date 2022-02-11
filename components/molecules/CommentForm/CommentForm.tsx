@@ -131,19 +131,21 @@ const CommentForm = ({
           {!editComment ? "작성하기" : "수정하기"}
         </Atom.Button>
       </div>
-      <Atom.Message fontSize="0.9rem" className="error">
-        {errors.content?.message}
-      </Atom.Message>
+      <div className="commentForm_errorMessage">
+        <Atom.Message fontSize="0.9rem" className="error">
+          {errors.content?.message}
+        </Atom.Message>
+      </div>
       {editComment && (
         <Atom.Button
           bgColor="#ace4b4"
           color="inherit"
           type="button"
-          width="80px"
+          width="90px"
           height="30px"
           onClick={onEditCancelClick}
         >
-          글 수정 취소
+          댓글 수정 취소
         </Atom.Button>
       )}
     </StyledCommentForm>

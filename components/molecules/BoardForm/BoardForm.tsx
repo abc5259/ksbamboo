@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import React, {
+import {
   Dispatch,
   SetStateAction,
   useCallback,
@@ -12,11 +12,11 @@ import { toast } from "react-toastify";
 import { createBoardAPI, editBoardAPI } from "../../../apis/board";
 import IBoard from "../../../interfaces/board";
 import Atom from "../../atoms";
-import Molecule from "../../molecules";
+import Molecule from "..";
 import { Form } from "./BoardFormStyles";
 import { useRouter } from "next/router";
 
-interface IBoardForm {
+interface IForm {
   title: string;
   content: string;
 }
@@ -26,9 +26,9 @@ export interface IBoardFormProps {
   token?: string;
   current_textArea?: string;
   current_title?: string;
-  edit?: boolean;
-  boardId?: number;
+  editBoard?: boolean;
   setEditBoard?: Dispatch<SetStateAction<boolean>>;
+  boardId?: number;
 }
 
 const BoardForm = (props: IBoardFormProps) => {
@@ -46,7 +46,7 @@ const BoardForm = (props: IBoardFormProps) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IBoardForm>({
+  } = useForm<IForm>({
     defaultValues: {
       title: `${props.current_title || ""}`,
       content: `${props.current_textArea || ""}`,
@@ -107,11 +107,11 @@ const BoardForm = (props: IBoardFormProps) => {
     },
   });
 
-  const onValid = (data: IBoardForm) => {
+  const onValid = (data: IForm) => {
     if (!props.token) {
       return toast.error("로그인이 필요합니다.");
     }
-    if (props.edit) {
+    if (props.editBoard) {
       editBoardMutation.mutate({
         token: props.token,
         ...data,
@@ -130,7 +130,7 @@ const BoardForm = (props: IBoardFormProps) => {
     if (props.setEditBoard) {
       props.setEditBoard(prev => !prev);
     }
-  }, [props.edit, props.setEditBoard]);
+  }, [props.editBoard, props.setEditBoard]);
 
   return (
     <>
@@ -168,10 +168,10 @@ const BoardForm = (props: IBoardFormProps) => {
             color="inherit"
             redius={7}
           >
-            {!props.edit ? "작성하기" : "수정하기"}
+            {!props.editBoard ? "작성하기" : "수정하기"}
           </Atom.Button>
         </div>
-        {props.edit && (
+        {props.editBoard && (
           <Atom.Button
             bgColor="#ace4b4"
             color="inherit"

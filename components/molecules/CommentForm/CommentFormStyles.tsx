@@ -10,4 +10,7 @@ export const StyledCommentForm = styled.form`
     margin-bottom: 8px;
     gap: 10px;
   }
+  .commentForm_errorMessage {
+    margin-bottom: 10px;
+  }
 `;

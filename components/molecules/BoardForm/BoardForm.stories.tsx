@@ -2,7 +2,7 @@ import { Meta, Story } from "@storybook/react";
 import BoardForm from "./BoardForm";
 
 export default {
-  title: "Organisms / BoardForm",
+  title: "Molecules / BoardForm",
   component: BoardForm,
 } as Meta;
 
