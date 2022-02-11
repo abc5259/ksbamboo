@@ -66,18 +66,18 @@ const CommentForm = ({ token, boardId }: ICommentFormProps) => {
           value={watch("content")}
           success={`${mutation.isSuccess}`}
         />
-        <Atom.Message fontSize="0.9rem" className="error">
-          {errors.content?.message}
-        </Atom.Message>
+        <Atom.Button
+          className="small"
+          bgColor="#E7F5E9"
+          color="inherit"
+          redius={7}
+        >
+          작성하기
+        </Atom.Button>
       </div>
-      <Atom.Button
-        className="small"
-        bgColor="#E7F5E9"
-        color="inherit"
-        redius={7}
-      >
-        작성하기
-      </Atom.Button>
+      <Atom.Message fontSize="0.9rem" className="error">
+        {errors.content?.message}
+      </Atom.Message>
     </StyledCommentForm>
   );
 };

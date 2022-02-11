@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Form = styled.form`
+export const Form = styled.form<{ mb?: string }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -9,8 +9,12 @@ export const Form = styled.form`
   background-color: ${props => props.theme.bgColor.lighter};
   color: ${props => props.theme.textColor};
   font-size: 1.1rem;
-  margin: 30px 0;
+  margin: 30px 0 0;
   border-radius: 5px;
+  margin-bottom: ${props => props.mb};
+  .boardForm_button {
+    text-align: end;
+  }
 `;
 
 export const Input = styled.input`

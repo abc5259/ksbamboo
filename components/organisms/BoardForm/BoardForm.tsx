@@ -1,5 +1,11 @@
 import { AxiosError } from "axios";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
@@ -16,6 +22,7 @@ interface IBoardForm {
 }
 
 export interface IBoardFormProps {
+  mb?: string;
   token?: string;
   current_textArea?: string;
   current_title?: string;
@@ -119,10 +126,16 @@ const BoardForm = (props: IBoardFormProps) => {
     }
   };
 
+  const onEditCancelClick = useCallback(() => {
+    if (props.setEditBoard) {
+      props.setEditBoard(prev => !prev);
+    }
+  }, [props.edit, props.setEditBoard]);
+
   return (
     <>
       <Atom.Tag>{boardCategory} 게시판</Atom.Tag>
-      <Form onSubmit={handleSubmit(onValid)}>
+      <Form mb={props.mb} onSubmit={handleSubmit(onValid)}>
         <Molecule.BoardInput
           register={{
             ...register("title", {
@@ -148,14 +161,28 @@ const BoardForm = (props: IBoardFormProps) => {
         <Atom.Message className="error" fontSize="0.9rem">
           {errors.content?.message}
         </Atom.Message>
-        <Atom.Button
-          className="small"
-          bgColor="#E7F5E9"
-          color="inherit"
-          redius={7}
-        >
-          {!props.edit ? "작성하기" : "수정하기"}
-        </Atom.Button>
+        <div className="boardForm_button">
+          <Atom.Button
+            className="small"
+            bgColor="#E7F5E9"
+            color="inherit"
+            redius={7}
+          >
+            {!props.edit ? "작성하기" : "수정하기"}
+          </Atom.Button>
+        </div>
+        {props.edit && (
+          <Atom.Button
+            bgColor="#ace4b4"
+            color="inherit"
+            type="button"
+            width="80px"
+            height="30px"
+            onClick={onEditCancelClick}
+          >
+            글 수정 취소
+          </Atom.Button>
+        )}
       </Form>
     </>
   );

@@ -12,7 +12,7 @@ const Home = ({ token, boards }: ITempHomeProps) => {
   return (
     <>
       <HeaderAndSideBar>
-        <BoardForm token={token} />
+        <BoardForm mb="30px" token={token} />
         {boards ? <AllBoards boards={boards} /> : <div>로딩중...</div>}
       </HeaderAndSideBar>
     </>
