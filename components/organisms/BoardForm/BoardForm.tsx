@@ -41,7 +41,7 @@ const BoardForm = (props: IBoardFormProps) => {
     { board: IBoard }, //success했을때 data값의 타입
     AxiosError, // error타입
     { token: string; title: string; content: string; category: string } // loginAPI의 인자로 들어갈 타입
-  >("myBoards", createBoardAPI, {
+  >("createBoard", createBoardAPI, {
     onMutate: () => {}, // 뮤테이션 시작
     onError: error => {
       // 에러가 났음
@@ -56,7 +56,7 @@ const BoardForm = (props: IBoardFormProps) => {
       setSuccess("true");
       console.log(data);
       queryClient.refetchQueries(["boards", boardCategory]);
-      queryClient.setQueryData("myBoards", data); //myBoards 이름으로 data.board값이 캐싱됨
+      queryClient.setQueryData("createBoard", data); //myBoards 이름으로 data.board값이 캐싱됨
       queryClient.refetchQueries("allboards");
       queryClient.refetchQueries("user");
       setValue("title", "");

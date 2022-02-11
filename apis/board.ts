@@ -29,3 +29,20 @@ export const allCategoryBoardsAPI = (category: string) => {
 export const getBoardAPI = (boardId: string) => {
   return axios.get(`/boards/${boardId}`).then(response => response.data);
 };
+
+//comment
+export const createBoardCommentAPI = (data: {
+  boardId: number;
+  content: string;
+  token: string;
+}) => {
+  return axios
+    .post(
+      `/boards/${data.boardId}/comment`,
+      { content: data.content },
+      {
+        headers: { Authorization: `Bearer ${data.token}` },
+      }
+    )
+    .then(response => response.data);
+};

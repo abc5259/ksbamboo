@@ -1,6 +1,9 @@
+import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
+import { createBoardCommentAPI } from "../../../apis/board";
+import Comment from "../../../interfaces/comment";
 import Atom from "../../atoms";
 import { StyledCommentForm } from "./CommentFormStyles";
 
@@ -11,18 +14,37 @@ interface IForm {
 export interface ICommentFormProps {}
 
 const CommentForm = () => {
+  const queryClient = useQueryClient();
   const {
     register,
     watch,
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-  const queryClient = useQueryClient();
+  const mutation = useMutation<
+    Comment,
+    AxiosError,
+    { token: string; content: string; boardId: number }
+  >("createBoardComment", createBoardCommentAPI, {
+    onError: error => {
+      if (error.response?.data.statusCode === 400) {
+        toast.error(error.response.data.message[0]);
+      } else {
+        toast.error(error.response?.data.message);
+      }
+    },
+    onSuccess: data => {
+      console.log(data);
+      // queryClient.re
+    },
+  });
   const onValid = (data: IForm) => {
     if (!queryClient.getQueryData("user")) {
       return toast.error("로그인이 필요합니다.");
     }
-    console.log(data);
+    // mutation.mutate({
+
+    // })
   };
   return (
     <StyledCommentForm onSubmit={handleSubmit(onValid)}>
