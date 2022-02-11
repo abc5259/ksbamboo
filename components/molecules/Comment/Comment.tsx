@@ -76,13 +76,13 @@ const Comment = ({
         <StyledComment>
           <div className="comment_info">
             <Atom.Avatar className="small" />
-            <Title fontSize="0.9rem" fontWeight={700}>
+            <Atom.Title fontSize="0.9rem" fontWeight={700}>
               {status === "PUBLIC"
                 ? `${user.username} (${user.ksDepartment})`
                 : writerId === user.id
                 ? `글쓴이 (${user.ksDepartment})`
                 : `익명 (${user.ksDepartment})`}
-            </Title>
+            </Atom.Title>
             <div className="commment_deletAndEdit">
               {user.id === myId && (
                 <>

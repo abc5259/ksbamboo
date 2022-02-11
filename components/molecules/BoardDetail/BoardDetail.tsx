@@ -110,4 +110,5 @@ const BoardDetail = ({
     </StyledBoardDetail>
   );
 };
+
 export default BoardDetail;
