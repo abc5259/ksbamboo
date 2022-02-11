@@ -9,8 +9,10 @@ export const StyledComment = styled.div`
       flex: 1;
     }
     .commment_deletAndEdit {
-      color: rgb(134, 142, 150);
-      svg {
+      font-size: 0.9rem;
+      span {
+        color: rgb(134, 142, 150);
+        margin-left: 5px;
         cursor: pointer;
         &:hover {
           color: ${props => props.theme.textColor};

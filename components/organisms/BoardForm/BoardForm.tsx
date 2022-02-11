@@ -45,7 +45,7 @@ const BoardForm = (props: IBoardFormProps) => {
       content: `${props.current_textArea || ""}`,
     },
   });
-  // createBoard
+  //Create Board
   const mutation = useMutation<
     { board: IBoard }, //success했을때 data값의 타입
     AxiosError, // error타입
@@ -101,12 +101,10 @@ const BoardForm = (props: IBoardFormProps) => {
   });
 
   const onValid = (data: IBoardForm) => {
-    //서버로 데이터 보내기 (게시물 생성) with React Query
     if (!props.token) {
       return toast.error("로그인이 필요합니다.");
     }
     if (props.edit) {
-      console.log(data);
       editBoardMutation.mutate({
         token: props.token,
         ...data,
@@ -120,7 +118,6 @@ const BoardForm = (props: IBoardFormProps) => {
       });
     }
   };
-  // console.log("router", category);
 
   return (
     <>
@@ -151,25 +148,14 @@ const BoardForm = (props: IBoardFormProps) => {
         <Atom.Message className="error" fontSize="0.9rem">
           {errors.content?.message}
         </Atom.Message>
-        {!props.edit ? (
-          <Atom.Button
-            className="small"
-            bgColor="#E7F5E9"
-            color="inherit"
-            redius={7}
-          >
-            작성하기
-          </Atom.Button>
-        ) : (
-          <Atom.Button
-            className="small"
-            bgColor="#E7F5E9"
-            color="inherit"
-            redius={7}
-          >
-            수정하기
-          </Atom.Button>
-        )}
+        <Atom.Button
+          className="small"
+          bgColor="#E7F5E9"
+          color="inherit"
+          redius={7}
+        >
+          {!props.edit ? "작성하기" : "수정하기"}
+        </Atom.Button>
       </Form>
     </>
   );

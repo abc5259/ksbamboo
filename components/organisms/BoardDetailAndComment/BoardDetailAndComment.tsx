@@ -35,6 +35,10 @@ const BoardDetailAndComment = ({
             status={comment.status}
             createdAt={comment.createdAt}
             myId={loginUserId}
+            writerId={board.user.id}
+            token={token}
+            commentId={comment.id}
+            boardId={board.id}
           />
         ))}
       </div>

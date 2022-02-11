@@ -91,3 +91,19 @@ export const createBoardCommentAPI = (data: {
     )
     .then(response => response.data);
 };
+
+export const deleteBoardCommentAPI = ({
+  boardId,
+  commentId,
+  token,
+}: {
+  boardId: number;
+  commentId: number;
+  token: string;
+}) => {
+  return axios
+    .delete(`/boards/${boardId}/comment/${commentId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(response => response.data);
+};
