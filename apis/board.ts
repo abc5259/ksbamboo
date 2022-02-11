@@ -7,16 +7,25 @@ export const allBoardsAPI = () => {
   return axios.get(`/boards`).then(response => response.data);
 };
 
-export const createBoardAPI = (data: {
+export const createBoardAPI = ({
+  token,
+  title,
+  content,
+  category,
+}: {
   token: string;
   title: string;
   content: string;
   category: string;
 }) => {
   return axios
-    .post("/boards", data, {
-      headers: { Authorization: `Bearer ${data.token}` },
-    })
+    .post(
+      "/boards",
+      { title, content, category },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     .then(response => response.data);
 };
 
@@ -41,6 +50,28 @@ export const deleteBoardAPI = ({
     .delete(`/boards/${boardId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
+    .then(response => response.data);
+};
+
+export const editBoardAPI = ({
+  title,
+  content,
+  boardId,
+  token,
+}: {
+  title?: string;
+  content?: string;
+  boardId: number;
+  token: string;
+}) => {
+  return axios
+    .patch(
+      `/boards/${boardId}`,
+      { title, content },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     .then(response => response.data);
 };
 

@@ -1,10 +1,9 @@
 import { AxiosError } from "axios";
-import { useAnimation } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { createBoardAPI } from "../../../apis/board";
+import { createBoardAPI, editBoardAPI } from "../../../apis/board";
 import IBoard from "../../../interfaces/board";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
@@ -18,6 +17,11 @@ interface IBoardForm {
 
 export interface IBoardFormProps {
   token?: string;
+  current_textArea?: string;
+  current_title?: string;
+  edit?: boolean;
+  boardId?: number;
+  setEditBoard?: Dispatch<SetStateAction<boolean>>;
 }
 
 const BoardForm = (props: IBoardFormProps) => {
@@ -35,7 +39,13 @@ const BoardForm = (props: IBoardFormProps) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IBoardForm>();
+  } = useForm<IBoardForm>({
+    defaultValues: {
+      title: `${props.current_title || ""}`,
+      content: `${props.current_textArea || ""}`,
+    },
+  });
+  // createBoard
   const mutation = useMutation<
     { board: IBoard }, //success했을때 data값의 타입
     AxiosError, // error타입
@@ -62,16 +72,53 @@ const BoardForm = (props: IBoardFormProps) => {
     onSettled: () => {}, // 성공이든 에러든 어쨌든 끝났을 때
   });
 
+  //Edit Board
+  const editBoardMutation = useMutation<
+    { board: IBoard },
+    AxiosError,
+    {
+      title?: string;
+      content?: string;
+      boardId: number;
+      token: string;
+    }
+  >("editBoard", editBoardAPI, {
+    onError: error => {
+      // 에러가 났음
+      if (error.response?.data.statusCode === 400) {
+        toast.error(error.response.data.message[0]);
+      } else {
+        toast.error(error.response?.data.message);
+      }
+    },
+    onSuccess: () => {
+      if (props.setEditBoard) {
+        props.setEditBoard(prev => !prev);
+      }
+      queryClient.refetchQueries(["board", `${props.boardId}`]);
+      toast.success("해당 게시물이 수정되었습니다.");
+    },
+  });
+
   const onValid = (data: IBoardForm) => {
     //서버로 데이터 보내기 (게시물 생성) with React Query
     if (!props.token) {
       return toast.error("로그인이 필요합니다.");
     }
-    mutation.mutate({
-      token: props.token,
-      ...data,
-      category: boardCategory as string,
-    });
+    if (props.edit) {
+      console.log(data);
+      editBoardMutation.mutate({
+        token: props.token,
+        ...data,
+        boardId: props.boardId as number,
+      });
+    } else {
+      mutation.mutate({
+        token: props.token,
+        ...data,
+        category: boardCategory as string,
+      });
+    }
   };
   // console.log("router", category);
 
@@ -104,14 +151,25 @@ const BoardForm = (props: IBoardFormProps) => {
         <Atom.Message className="error" fontSize="0.9rem">
           {errors.content?.message}
         </Atom.Message>
-        <Atom.Button
-          className="small"
-          bgColor="#E7F5E9"
-          color="inherit"
-          redius={7}
-        >
-          작성하기
-        </Atom.Button>
+        {!props.edit ? (
+          <Atom.Button
+            className="small"
+            bgColor="#E7F5E9"
+            color="inherit"
+            redius={7}
+          >
+            작성하기
+          </Atom.Button>
+        ) : (
+          <Atom.Button
+            className="small"
+            bgColor="#E7F5E9"
+            color="inherit"
+            redius={7}
+          >
+            수정하기
+          </Atom.Button>
+        )}
       </Form>
     </>
   );
