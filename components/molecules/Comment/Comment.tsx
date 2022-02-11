@@ -1,11 +1,12 @@
 import { AxiosError } from "axios";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { deleteBoardCommentAPI } from "../../../apis/board";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import Title from "../../atoms/Title/Title";
+import CommentForm from "../CommentForm/CommentForm";
 import { StyledComment } from "./CommentStyles";
 
 export interface ICommentProps {
@@ -32,6 +33,7 @@ const Comment = ({
   token,
   boardId,
 }: ICommentProps) => {
+  const [editComment, setEditComment] = useState(false);
   const queryClient = useQueryClient();
   const deleteMutation = useMutation<
     { ok: boolean },
@@ -55,29 +57,46 @@ const Comment = ({
     });
   }, [boardId, commentId, token]);
 
+  const onEditComment = useCallback(() => {
+    setEditComment(prev => !prev);
+  }, [editComment]);
+
   return (
-    <StyledComment>
-      <div className="comment_info">
-        <Atom.Avatar className="small" />
-        <Title fontSize="0.9rem" fontWeight={700}>
-          {status === "PUBLIC"
-            ? `${user.username} (${user.ksDepartment})`
-            : writerId === user.id
-            ? `글쓴이 (${user.ksDepartment})`
-            : `익명 (${user.ksDepartment})`}
-        </Title>
-        <div className="commment_deletAndEdit">
-          {user.id === myId && (
-            <>
-              <span>수정</span>
-              <span onClick={onDeleteComment}>삭제</span>
-            </>
-          )}
-        </div>
-      </div>
-      <Atom.Content fontSize="0.9rem">{content}</Atom.Content>
-      <Atom.Time createdAt={createdAt} />
-    </StyledComment>
+    <>
+      {editComment ? (
+        <CommentForm
+          token={token}
+          boardId={boardId}
+          commentId={commentId}
+          editComment={editComment}
+          setEditComment={setEditComment}
+          current_content={content}
+        />
+      ) : (
+        <StyledComment>
+          <div className="comment_info">
+            <Atom.Avatar className="small" />
+            <Title fontSize="0.9rem" fontWeight={700}>
+              {status === "PUBLIC"
+                ? `${user.username} (${user.ksDepartment})`
+                : writerId === user.id
+                ? `글쓴이 (${user.ksDepartment})`
+                : `익명 (${user.ksDepartment})`}
+            </Title>
+            <div className="commment_deletAndEdit">
+              {user.id === myId && (
+                <>
+                  <span onClick={onEditComment}>수정</span>
+                  <span onClick={onDeleteComment}>삭제</span>
+                </>
+              )}
+            </div>
+          </div>
+          <Atom.Content fontSize="0.9rem">{content}</Atom.Content>
+          <Atom.Time createdAt={createdAt} />
+        </StyledComment>
+      )}
+    </>
   );
 };
 

@@ -107,3 +107,25 @@ export const deleteBoardCommentAPI = ({
     })
     .then(response => response.data);
 };
+
+export const updateBoardCommentAPI = ({
+  boardId,
+  commentId,
+  token,
+  content,
+}: {
+  boardId: number;
+  commentId: number;
+  token: string;
+  content: string;
+}) => {
+  return axios
+    .patch(
+      `/boards/${boardId}/comment/${commentId}`,
+      { content },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then(response => response.data);
+};
