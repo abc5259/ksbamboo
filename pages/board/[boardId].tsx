@@ -72,6 +72,10 @@ const BoardPage = () => {
   if (isLoading) {
     return <div>로딩중...</div>;
   }
-  return <>{board && <BoardDetailTemp boardId={board.id}></BoardDetailTemp>}</>;
+  return (
+    <>
+      {board && <BoardDetailTemp board={board} token={token}></BoardDetailTemp>}
+    </>
+  );
 };
 export default BoardPage;

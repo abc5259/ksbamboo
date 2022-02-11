@@ -16,9 +16,6 @@ export interface ICommentProps {
 }
 
 const Comment = ({ content, user, status, createdAt, myId }: ICommentProps) => {
-  const query = useQueryClient();
-  console.log(query.getQueryData("user"));
-
   return (
     <StyledComment>
       <div className="comment_info">

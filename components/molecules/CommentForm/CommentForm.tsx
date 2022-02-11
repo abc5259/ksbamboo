@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
@@ -11,15 +12,19 @@ interface IForm {
   content: string;
 }
 
-export interface ICommentFormProps {}
+export interface ICommentFormProps {
+  token: string;
+  boardId: number;
+}
 
-const CommentForm = () => {
+const CommentForm = ({ token, boardId }: ICommentFormProps) => {
   const queryClient = useQueryClient();
   const {
     register,
     watch,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<IForm>();
   const mutation = useMutation<
     Comment,
@@ -34,17 +39,19 @@ const CommentForm = () => {
       }
     },
     onSuccess: data => {
-      console.log(data);
-      // queryClient.re
+      queryClient.refetchQueries(["board", `${boardId}`]);
+      setValue("content", "");
     },
   });
   const onValid = (data: IForm) => {
     if (!queryClient.getQueryData("user")) {
       return toast.error("로그인이 필요합니다.");
     }
-    // mutation.mutate({
-
-    // })
+    mutation.mutate({
+      token,
+      ...data,
+      boardId,
+    });
   };
   return (
     <StyledCommentForm onSubmit={handleSubmit(onValid)}>
@@ -58,6 +65,7 @@ const CommentForm = () => {
             }),
           }}
           value={watch("content")}
+          success={`${mutation.isSuccess}`}
         />
         <Atom.Message fontSize="0.9rem" className="error">
           {errors.content?.message}

@@ -22,7 +22,6 @@ export interface IBoardFormProps {
 
 const BoardForm = (props: IBoardFormProps) => {
   const [boardCategory, setBoardCategory] = useState("");
-  const [postSuccess, setSuccess] = useState("");
   const router = useRouter();
   const { category } = router.query;
   useEffect(() => {
@@ -53,8 +52,6 @@ const BoardForm = (props: IBoardFormProps) => {
     },
     onSuccess: data => {
       // 성공
-      setSuccess("true");
-      console.log(data);
       queryClient.refetchQueries(["boards", boardCategory]);
       queryClient.setQueryData("createBoard", data); //myBoards 이름으로 data.board값이 캐싱됨
       queryClient.refetchQueries("allboards");
@@ -102,7 +99,7 @@ const BoardForm = (props: IBoardFormProps) => {
           placeholder="타인을 향한 욕설 및 비방은 징계 대상입니다."
           animateheight={300}
           value={watch("content")}
-          success={postSuccess}
+          success={`${mutation.isSuccess}`}
         ></Atom.Textarea>
         <Atom.Message className="error" fontSize="0.9rem">
           {errors.content?.message}

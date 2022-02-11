@@ -6,29 +6,24 @@ import HeaderAndSideBar from "../../layouts/HeaderAndSideBar/HeaderAndSideBar";
 import BoardDetailAndComment from "../../organisms/BoardDetailAndComment/BoardDetailAndComment";
 
 export interface ITempBoardDetailTempProps {
-  boardId: number;
+  board: IBoard;
+  token: string;
 }
 
-const BoardDetailTemp = ({ boardId }: ITempBoardDetailTempProps) => {
-  const [board, setBoard] = useState<IBoard>();
+const BoardDetailTemp = ({ board, token }: ITempBoardDetailTempProps) => {
   const [user, setUser] = useState<User>();
   const queryClient = useQueryClient();
   useEffect(() => {
     if (queryClient.getQueryData("user")) {
       setUser(queryClient.getQueryData("user"));
     }
-    if (queryClient.getQueryData(["board", `${boardId}`])) {
-      setBoard(queryClient.getQueryData(["board", `${boardId}`]));
-    }
-  }, [
-    queryClient.getQueryData("user"),
-    queryClient.getQueryData(["board", boardId]),
-  ]);
+  }, [queryClient.getQueryData("user")]);
   return (
     <>
       <HeaderAndSideBar>
         {board && (
           <BoardDetailAndComment
+            token={token}
             board={board}
             loginUserId={user?.id as number}
           />
