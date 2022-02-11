@@ -53,7 +53,7 @@ const Comment = ({
       commentId,
       token,
     });
-  }, []);
+  }, [boardId, commentId, token]);
 
   return (
     <StyledComment>
