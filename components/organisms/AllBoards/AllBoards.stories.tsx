@@ -32,6 +32,7 @@ Default.args = {
         verified: true,
         ksDepartment: "컴퓨터공학과",
       },
+      comments: []
     },
   ],
 };

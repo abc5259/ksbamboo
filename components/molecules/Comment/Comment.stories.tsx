@@ -15,7 +15,7 @@ const Template: Story<ICommentProps> = args => (
 export const Default = Template.bind({});
 Default.parameters = {};
 Default.args = {
-  content: "컴공 화이팅",
+  content: "길긴하네 ㅋㅋㅋ",
   status: "PRIVATE",
   // createAt: "2022/01/02",
   user: {

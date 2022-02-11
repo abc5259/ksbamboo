@@ -7,7 +7,6 @@ export interface IOrgAllBoardsProps {
 }
 
 const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
-  const reversBoard = [...boards].reverse();
   return (
     <StyledAllBoards>
       {boards.length > 0 ? (
