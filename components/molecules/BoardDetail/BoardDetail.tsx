@@ -1,3 +1,8 @@
+import { AxiosError } from "axios";
+import { useRouter } from "next/router";
+import { useCallback } from "react";
+import { useMutation } from "react-query";
+import { deleteBoardAPI } from "../../../apis/board";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import {
@@ -18,9 +23,12 @@ export interface IBoardDetailProps {
   createdAt: Date;
   user: User;
   myId?: number;
+  token: string;
 }
 
 const BoardDetail = ({
+  boardId,
+  token,
   title,
   content,
   status,
@@ -29,6 +37,26 @@ const BoardDetail = ({
   user,
   myId,
 }: IBoardDetailProps) => {
+  const router = useRouter();
+  const mutation = useMutation<
+    { result: boolean },
+    AxiosError,
+    { token: string; boardId: number }
+  >("deleteBoard", deleteBoardAPI, {
+    onError: error => {
+      console.log(error);
+    },
+    onSuccess: () => {
+      //해당 category게시판으로 push
+      router.replace(`/category/${category}`);
+    },
+  });
+  const onDeleteClick = useCallback(() => {
+    mutation.mutate({
+      token,
+      boardId,
+    });
+  }, [token, boardId]);
   return (
     <>
       <StyledBoardDetail>
@@ -47,7 +75,7 @@ const BoardDetail = ({
               {user.id === myId && (
                 <>
                   <span>수정</span>
-                  <span>삭제</span>
+                  <span onClick={onDeleteClick}>삭제</span>
                 </>
               )}
             </EditAndDelete>

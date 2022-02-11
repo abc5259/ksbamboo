@@ -30,6 +30,20 @@ export const getBoardAPI = (boardId: string) => {
   return axios.get(`/boards/${boardId}`).then(response => response.data);
 };
 
+export const deleteBoardAPI = ({
+  boardId,
+  token,
+}: {
+  boardId: number;
+  token: string;
+}) => {
+  return axios
+    .delete(`/boards/${boardId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then(response => response.data);
+};
+
 //comment
 export const createBoardCommentAPI = (data: {
   boardId: number;

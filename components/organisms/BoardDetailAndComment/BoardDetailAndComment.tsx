@@ -16,6 +16,7 @@ const BoardDetailAndComment = ({
   return (
     <StyledBoardDetailAndComment>
       <Molecule.BoardDetail
+        token={token}
         boardId={board.id}
         title={board.title}
         content={board.content}
@@ -25,7 +26,6 @@ const BoardDetailAndComment = ({
         user={board.user}
         myId={loginUserId}
       />
-      <Molecule.CommentForm token={token} boardId={board.id} />
       <div className="commentWrapper">
         {board.comments?.map(comment => (
           <Molecule.Comment
@@ -38,6 +38,7 @@ const BoardDetailAndComment = ({
           />
         ))}
       </div>
+      <Molecule.CommentForm token={token} boardId={board.id} />
     </StyledBoardDetailAndComment>
   );
 };
