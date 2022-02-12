@@ -51,4 +51,9 @@ export const EditAndDelete = styled.div`
   }
 `;
 
-export const CardInfo = styled.div``;
+export const CardInfo = styled.div`
+  p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+`;

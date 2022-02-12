@@ -22,5 +22,7 @@ export const StyledComment = styled.div`
   }
   p {
     margin-bottom: 5px;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 `;

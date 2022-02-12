@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const BoardWrapper = styled.div`
+  overflow: hidden;
   max-width: 500px;
   height: 350px;
   border-radius: 5px;
@@ -34,6 +35,8 @@ export const Title = styled.h3`
 export const Content = styled.p`
   font-size: 0.9rem;
   margin-bottom: 10px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 `;
 
 export const Time = styled.div`
