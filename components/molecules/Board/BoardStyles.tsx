@@ -19,6 +19,10 @@ export const BoardWrapper = styled.div`
 
 export const Main = styled.div`
   padding: 20px;
+  .board_commentLength {
+    font-size: 0.8rem;
+    color: rgb(134, 142, 150);
+  }
 `;
 
 export const Title = styled.h3`

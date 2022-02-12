@@ -19,6 +19,7 @@ export interface IBoardProps {
   user: User;
   category?: string;
   createdAt: Date;
+  commentLength?: number;
 }
 
 const Board = ({
@@ -29,6 +30,7 @@ const Board = ({
   user,
   category,
   createdAt,
+  commentLength,
 }: IBoardProps) => {
   return (
     <Link href={`/board/${boardId}`}>
@@ -39,7 +41,10 @@ const Board = ({
           </Atom.Tag>
           <Title>{title}</Title>
           <Content>{content}</Content>
-          <Atom.Time createdAt={createdAt} />
+          <Atom.Time createdAt={createdAt} />{" "}
+          <span className="board_commentLength">
+            · {commentLength}개의 댓글
+          </span>
         </Main>
         <Bottom>
           <Author>

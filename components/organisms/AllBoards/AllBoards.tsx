@@ -10,7 +10,7 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
   return (
     <StyledAllBoards>
       {boards.length > 0 ? (
-        [...boards].reverse().map(board => {
+        boards.map(board => {
           return (
             <Board
               key={board.id}
@@ -21,6 +21,7 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
               user={board.user}
               category={board.category}
               createdAt={board.createdAt}
+              commentLength={board.comments?.length}
             />
           );
         })
