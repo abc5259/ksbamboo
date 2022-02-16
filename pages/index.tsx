@@ -1,15 +1,15 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { QueryClient, useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
 import { useRouter } from "next/router";
-import { getUserAPI, newAccessTokenAPI } from "../apis/user";
+import { getUserAPI } from "../apis/user";
 import User from "../interfaces/user";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import Home from "../components/templates/Home/Home";
-import jwt_decode from "jwt-decode";
+import reissueExpToken from "../utils/reissueExpToken";
 
 export const BoardWrapper = styled.div`
   display: grid;
@@ -37,30 +37,7 @@ const HomePage = () => {
   }, [token]);
 
   if (token || error?.response?.data.statusCode === 401) {
-    const decode: { email: string; iat: number; exp: number } =
-      jwt_decode(token);
-    const currentTime = Math.floor(new Date().getTime() / 1000);
-    const dif = new Date((decode.exp - currentTime) * 1000);
-    if (dif.getTime() < 30000) {
-      axios
-        .post(`http://localhost:3050/auth/refresh`, {
-          refresh_token: refreshToken,
-        })
-        .then(response => {
-          localStorage.removeItem("accessToken");
-          localStorage.setItem("accessToken", response.data?.accessToken);
-          setToken(response.data?.accessToken);
-          queryClient.refetchQueries("user");
-        })
-        .catch(error => {
-          console.log(error);
-          if (error?.response?.data.statusCode === 401) {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            queryClient.removeQueries("user");
-          }
-        });
-    }
+    reissueExpToken(token, refreshToken, setToken, queryClient);
   }
 
   return (

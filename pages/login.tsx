@@ -5,9 +5,9 @@ import { useQuery } from "react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import User from "../interfaces/user";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import HeaderLayout from "../components/layouts/HeaderLayout/HeaderLayout";
-import jwt_decode from "jwt-decode";
+import reissueExpToken from "../utils/reissueExpToken";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -29,21 +29,7 @@ const Login: NextPage = () => {
     }
   }, [token, refreshToken, me]);
   if (token) {
-    const decode: { email: string; iat: number; exp: number } =
-      jwt_decode(token);
-    const currentTime = Math.floor(new Date().getTime() / 1000);
-    const time = new Date((decode.exp - currentTime) * 1000);
-    if (time.getTime() < 10000) {
-      axios
-        .post(`/auth/refresh`, { refresh_token: refreshToken })
-        .then(response => {
-          localStorage.setItem("accessToken", response.data?.accessToken);
-          setToken(response.data?.accessToken);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+    reissueExpToken(token, refreshToken, setToken);
   }
   return (
     <>

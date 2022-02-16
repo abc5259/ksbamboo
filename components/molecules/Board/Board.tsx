@@ -41,10 +41,12 @@ const Board = ({
           </Atom.Tag>
           <Title>{title}</Title>
           <Content>{content}</Content>
-          <Atom.Time createdAt={createdAt} />{" "}
-          <span className="board_commentLength">
-            · {commentLength}개의 댓글
-          </span>
+          <div className="board_info">
+            <Atom.Time createdAt={createdAt} />{" "}
+            <span className="board_commentLength">
+              · {commentLength}개의 댓글
+            </span>
+          </div>
         </Main>
         <Bottom>
           <Author>
