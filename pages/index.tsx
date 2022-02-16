@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { useQuery, useQueryClient } from "react-query";
 import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
@@ -11,18 +10,12 @@ import { AxiosError } from "axios";
 import Home from "../components/templates/Home/Home";
 import reissueExpToken from "../utils/reissueExpToken";
 
-export const BoardWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-`;
-
 const HomePage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const queryClient = useQueryClient();
-  const { error, data: me } = useQuery<User, AxiosError>(
+  const { data: me } = useQuery<User | boolean, AxiosError>(
     "user",
     () => getUserAPI(token),
     {
@@ -36,7 +29,7 @@ const HomePage = () => {
     setRefreshToken(localStorage.getItem("refreshToken") || "");
   }, [token]);
 
-  if (token || error?.response?.data.statusCode === 401) {
+  if (token || me === false) {
     reissueExpToken(token, refreshToken, setToken, queryClient);
   }
 

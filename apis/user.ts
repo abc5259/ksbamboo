@@ -4,12 +4,16 @@ const JWT_EXPIRY_TIME = 60 * 1000;
 
 axios.defaults.baseURL = BASE_URL;
 
-export const getUserAPI = (token: string) => {
+export const getUserAPI = async (token: string) => {
   return axios
     .get(`/auth/user`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-    .then(response => response.data);
+    .then(response => response.data)
+    .catch(error => {
+      console.log(error);
+      return false;
+    });
 };
 
 export const loginAPI = (data: { email: string; password: string }) => {

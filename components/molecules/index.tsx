@@ -7,6 +7,7 @@ import Comment from "./Comment/Comment";
 import CommentForm from "./CommentForm/CommentForm";
 import BoardDetail from "./BoardDetail/BoardDetail";
 import BoardForm from "./BoardForm/BoardForm";
+import MobileSideBarBtn from "./MobileSideBarBtn/MobileSideBarBtn";
 
 const Molecule = {
   Board,
@@ -18,6 +19,7 @@ const Molecule = {
   Comment,
   CommentForm,
   BoardForm,
+  MobileSideBarBtn,
 };
 
 export default Molecule;

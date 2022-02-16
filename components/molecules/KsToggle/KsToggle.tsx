@@ -136,7 +136,7 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
             .filter(detail => detail.title === detailKsDepartment)[0]
             .departments.map(department => (
               <Link key={department} href={`/category/${department}`}>
-                <a onClick={() => setShowSideBar(prev => !prev)}>
+                <a onClick={() => setShowSideBar(false)}>
                   <li>{department}</li>
                 </a>
               </Link>

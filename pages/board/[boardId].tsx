@@ -16,7 +16,7 @@ const BoardPage = () => {
   const [refreshToken, setRefreshToken] = useState("");
   const [getBoardId, setGetBoardId] = useState("");
   const queryClient = useQueryClient();
-  const { error, data: me } = useQuery<User, AxiosError>(
+  const { error, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
     () => getUserAPI(token),
     {
@@ -41,7 +41,7 @@ const BoardPage = () => {
     setGetBoardId(boardId as string);
   }, [token, boardId]);
 
-  if (token || error?.response?.data.statusCode === 401) {
+  if (token || me === false) {
     reissueExpToken(token, refreshToken, setToken, queryClient);
   }
   if (isLoading) {

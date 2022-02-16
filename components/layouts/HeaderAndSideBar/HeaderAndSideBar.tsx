@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { showSideBarAtom } from "../../../atom/atoms";
-import MobileSideBarBtn from "../../molecules/MobileSideBarBtn/MobileSideBarBtn";
+import Molecule from "../../molecules";
 import MobileSideBar from "../../organisms/MobileSideBar/MobileSideBar";
 import NavBar from "../../organisms/NavBar/NavBar";
 import SideBar from "../../organisms/SideBar/SideBar";
@@ -11,10 +11,9 @@ const HeaderAndSideBar: React.FC = props => {
   const [windowWidth, setWindowWidth] = useState<number>();
   const [showMobileSideBar, setShowMobileSideBar] =
     useRecoilState(showSideBarAtom);
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setWindowWidth(window.innerWidth);
-    console.log(windowWidth);
-  };
+  }, [windowWidth]);
   useEffect(() => {
     setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -22,7 +21,6 @@ const HeaderAndSideBar: React.FC = props => {
       window.removeEventListener("resize", handleResize);
     };
   }, [windowWidth]);
-  console.log(showMobileSideBar);
 
   const onClickMobileSideBarIcon = () => {
     setShowMobileSideBar(prev => !prev);
@@ -36,9 +34,10 @@ const HeaderAndSideBar: React.FC = props => {
       <NavBar />
       <StyledHeaderAndSideBar>
         <Container>{props.children}</Container>
-        {windowWidth >= 600 && <SideBar />}
-        {windowWidth < 600 && (
-          <MobileSideBarBtn
+        {windowWidth >= 600 ? (
+          <SideBar />
+        ) : (
+          <Molecule.MobileSideBarBtn
             onClick={onClickMobileSideBarIcon}
             showMobileSideBar={showMobileSideBar}
           />

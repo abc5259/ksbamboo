@@ -15,7 +15,7 @@ const CategoryPage = () => {
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const queryClient = useQueryClient();
-  const { error, data: me } = useQuery<User, AxiosError>(
+  const { error, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
     () => getUserAPI(token),
     {
@@ -33,7 +33,7 @@ const CategoryPage = () => {
     //   router.replace("/login");
     // }
   }, [token, me]);
-  if (token || error?.response?.data.statusCode === 401) {
+  if (token || me === false) {
     reissueExpToken(token, refreshToken, setToken, queryClient);
   }
   return (

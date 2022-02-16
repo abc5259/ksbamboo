@@ -13,7 +13,7 @@ const Join: NextPage = () => {
   const router = useRouter();
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const { error, data: me } = useQuery<User | AxiosError>(
+  const { error, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
     () => getUserAPI(token),
     {
@@ -28,7 +28,7 @@ const Join: NextPage = () => {
       router.replace("/");
     }
   }, [token, refreshToken, me]);
-  if (token) {
+  if (token || me === false) {
     reissueExpToken(token, refreshToken, setToken);
   }
   return (
