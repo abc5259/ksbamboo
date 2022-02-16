@@ -1,83 +1,5 @@
 import { atom } from "recoil";
 
-export interface User {
-  id: number;
-  username: string;
-  email: string;
-  password?: string;
-  verified: boolean;
-  boards?: Board[];
-  ksDeparment: string;
-}
-
-export interface Board {
-  id: number;
-  title: string;
-  content: string;
-  status: string;
-  department: string;
-  user: User;
-}
-
-const dummyBoards: Board[] = [
-  {
-    id: 1,
-    title: "더미 포스트입니다",
-    content: "더미 포스트의 content입니다1",
-    status: "익명",
-    department: "컴퓨터공학과",
-    user: {
-      id: 1,
-      username: "serf",
-      email: "123@ks.ac.kr",
-      verified: true,
-      ksDeparment: "컴퓨터공학과",
-    },
-  },
-  {
-    id: 2,
-    title: "더미 포스트입니다2",
-    content: "더미 포스트의 content입니다2",
-    status: "익명",
-    department: "국어국문학과",
-    user: {
-      id: 2,
-      username: "serf2",
-      email: "1234@ks.ac.kr",
-      verified: true,
-      ksDeparment: "국어국문학과",
-    },
-  },
-  {
-    id: 3,
-    title: "더미 포스트입니다3",
-    content: "더미 포스트의 content입니다3",
-    status: "익명",
-    department: "컴퓨터공학과",
-    user: {
-      id: 3,
-      username: "serf3",
-      email: "1235@ks.ac.kr",
-      verified: true,
-      ksDeparment: "컴퓨터공학과",
-    },
-  },
-  {
-    id: 4,
-    title: "더미 포스트입니다4",
-    content: "더미 포스트의 content입니다4",
-    status: "익명",
-    department: "영어영문학과",
-    user: {
-      id: 4,
-      username: "serf4",
-      email: "1236@ks.ac.kr",
-      verified: true,
-      ksDeparment: "영어영문학과",
-    },
-  },
-];
-
 const ksDepartment = [
   "국어국문학과",
   "영어영문학과",
@@ -123,18 +45,12 @@ const ksDepartment = [
   "음악학과",
   "체육학과",
 ];
-
-export const boardsAtom = atom<Board[]>({
-  key: "isBoards",
-  default: dummyBoards,
-});
-
 export const ksDepartmentAtom = atom<string[]>({
   key: "isKsDepartment",
   default: ksDepartment,
 });
 
-export const loginAtom = atom<User | null>({
-  key: "isUserLogin",
-  default: null,
+export const showSideBarAtom = atom<boolean>({
+  key: "isShowSideBar",
+  default: false,
 });

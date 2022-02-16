@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { showSideBarAtom } from "../../../atom/atoms";
 import MobileSideBarBtn from "../../molecules/MobileSideBarBtn/MobileSideBarBtn";
 import MobileSideBar from "../../organisms/MobileSideBar/MobileSideBar";
 import NavBar from "../../organisms/NavBar/NavBar";
@@ -7,7 +9,8 @@ import { Container, StyledHeaderAndSideBar } from "./HeaderAndSideBarStyles";
 
 const HeaderAndSideBar: React.FC = props => {
   const [windowWidth, setWindowWidth] = useState<number>();
-  const [showMobileSideBar, setShowMobileSideBar] = useState(false);
+  const [showMobileSideBar, setShowMobileSideBar] =
+    useRecoilState(showSideBarAtom);
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
     console.log(windowWidth);

@@ -1,3 +1,5 @@
+import { useSetRecoilState } from "recoil";
+import { showSideBarAtom } from "../../../atom/atoms";
 import Molecule from "../../molecules";
 import { StyledMobileSideBar } from "./MobileSideBarStyles";
 

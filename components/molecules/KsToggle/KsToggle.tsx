@@ -3,6 +3,8 @@ import Atom from "../../atoms";
 import { DepartmentTitleType } from "../../atoms/Toggle/Toggle";
 import { StyledKsToggle } from "./KsToggleStyles";
 import Link from "next/link";
+import { useSetRecoilState } from "recoil";
+import { showSideBarAtom } from "../../../atom/atoms";
 
 export interface IKsToggleProps {
   departmentTitle: DepartmentTitleType;
@@ -111,7 +113,7 @@ const ksDepartment: IksDepartment[] = [
 const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
   const [detailKsDepartment, setDetailKsDepartment] = useState("");
   const [up, setUp] = useState(false);
-
+  const setShowSideBar = useSetRecoilState(showSideBarAtom);
   const onClickToggle = () => {
     setUp(prev => !prev);
     if (detailKsDepartment) {
@@ -134,7 +136,7 @@ const KsToggle = ({ departmentTitle }: IKsToggleProps) => {
             .filter(detail => detail.title === detailKsDepartment)[0]
             .departments.map(department => (
               <Link key={department} href={`/category/${department}`}>
-                <a>
+                <a onClick={() => setShowSideBar(prev => !prev)}>
                   <li>{department}</li>
                 </a>
               </Link>
