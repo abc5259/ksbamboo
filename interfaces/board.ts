@@ -1,4 +1,5 @@
 import Comment from "./comment";
+import { Like } from "./like";
 import User from "./user";
 
 export default interface IBoard {
@@ -10,4 +11,5 @@ export default interface IBoard {
   createdAt: Date;
   category: string;
   comments?: Comment[];
+  likes?: Like[];
 }

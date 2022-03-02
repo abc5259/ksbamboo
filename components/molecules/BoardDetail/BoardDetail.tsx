@@ -26,6 +26,7 @@ export interface IBoardDetailProps {
   user: User;
   myId?: number;
   token: string;
+  likesLength?: number;
 }
 
 const BoardDetail = ({
@@ -38,6 +39,7 @@ const BoardDetail = ({
   createdAt,
   user,
   myId,
+  likesLength,
 }: IBoardDetailProps) => {
   const [editBoard, setEditBoard] = useState(false);
   const router = useRouter();
@@ -103,6 +105,10 @@ const BoardDetail = ({
                 {title}
               </Atom.Title>
               <Atom.Content>{content}</Atom.Content>
+              <div className="cardInfo_like">
+                <Atom.Like />
+                <span>{likesLength}</span>
+              </div>
             </CardInfo>
           </Card>
         </>

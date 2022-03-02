@@ -22,6 +22,7 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
               category={board.category}
               createdAt={board.createdAt}
               commentLength={board.comments?.length}
+              likesLength={board.likes?.length}
             />
           );
         })

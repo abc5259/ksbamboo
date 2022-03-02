@@ -55,5 +55,15 @@ export const CardInfo = styled.div`
   p {
     word-break: break-word;
     overflow-wrap: break-word;
+    margin-bottom: 20px;
+  }
+  .cardInfo_like {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    span {
+      color: ${props => props.theme.accentColor};
+      font-size: 0.9rem;
+    }
   }
 `;

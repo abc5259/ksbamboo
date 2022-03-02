@@ -20,6 +20,7 @@ export interface IBoardProps {
   category?: string;
   createdAt: Date;
   commentLength?: number;
+  likesLength?: number;
 }
 
 const Board = ({
@@ -31,6 +32,7 @@ const Board = ({
   category,
   createdAt,
   commentLength,
+  likesLength,
 }: IBoardProps) => {
   return (
     <Link href={`/board/${boardId}`}>
@@ -55,7 +57,7 @@ const Board = ({
           <div>{user.ksDepartment}</div>
           <LikeWrapper>
             <Atom.Like mr="8px" />
-            <span>100</span>
+            <span>{likesLength}</span>
           </LikeWrapper>
         </Bottom>
       </BoardWrapper>
