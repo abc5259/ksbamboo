@@ -26,7 +26,7 @@ const BoardDetailAndComment = ({
         createdAt={board.createdAt}
         user={board.user}
         myId={loginUserId}
-        likesLength={board.likes?.length}
+        likes={board.likes}
       />
       <div className="commentWrapper">
         {board.comments?.map(comment => (

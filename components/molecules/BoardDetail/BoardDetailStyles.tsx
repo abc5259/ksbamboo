@@ -79,6 +79,20 @@ export const CardInfo = styled.div`
       gap: 5px;
       font-size: 0.8rem;
       color: #737373;
+      cursor: pointer;
     }
   }
+`;
+
+export const LikeBtn = styled.div<{ isLike: boolean }>`
+  background-color: ${props =>
+    props.isLike ? props.theme.accentColor : "#e2e0e093"};
+  padding: 8px 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: ${props => (props.isLike ? props.theme.textColor : "#737373")};
+  cursor: pointer;
 `;

@@ -1,4 +1,8 @@
+import IBoard from "./board";
+import User from "./user";
+
 export interface Like {
-  user_id: number;
-  board_id: number;
+  id: number;
+  user: User;
+  board: IBoard;
 }

@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import Molecule from "..";
 import { deleteBoardAPI, updateBoardLikesAPI } from "../../../apis/board";
+import { Like } from "../../../interfaces/like";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import {
@@ -14,6 +15,7 @@ import {
   EditAndDelete,
   CardHeader,
   CardInfo,
+  LikeBtn,
 } from "./BoardDetailStyles";
 
 export interface IBoardDetailProps {
@@ -26,7 +28,7 @@ export interface IBoardDetailProps {
   user: User;
   myId?: number;
   token: string;
-  likesLength?: number;
+  likes?: Like[];
 }
 
 const BoardDetail = ({
@@ -39,7 +41,7 @@ const BoardDetail = ({
   createdAt,
   user,
   myId,
-  likesLength,
+  likes,
 }: IBoardDetailProps) => {
   const queryClient = useQueryClient();
   const [editBoard, setEditBoard] = useState(false);
@@ -116,13 +118,16 @@ const BoardDetail = ({
               <Atom.Content>{content}</Atom.Content>
               <div className="cardInfo_like">
                 <Atom.Like />
-                <span>{likesLength}</span>
+                <span>{likes?.length}</span>
               </div>
               <div className="cardInfo_btns">
-                <div className="btns_like" onClick={onLikeBtnClick}>
+                <LikeBtn
+                  isLike={!!likes?.filter(like => like.user.id === user.id)[0]}
+                  onClick={onLikeBtnClick}
+                >
                   <Atom.Like fillColor="currentColor" />
                   <span>좋아요</span>
-                </div>
+                </LikeBtn>
               </div>
             </CardInfo>
           </Card>
