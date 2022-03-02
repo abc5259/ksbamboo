@@ -1,10 +1,10 @@
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import Molecule from "..";
-import { deleteBoardAPI } from "../../../apis/board";
+import { deleteBoardAPI, updateBoardLikesAPI } from "../../../apis/board";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
 import {
@@ -41,6 +41,7 @@ const BoardDetail = ({
   myId,
   likesLength,
 }: IBoardDetailProps) => {
+  const queryClient = useQueryClient();
   const [editBoard, setEditBoard] = useState(false);
   const router = useRouter();
   const mutation = useMutation<
@@ -67,6 +68,14 @@ const BoardDetail = ({
   const onEditClick = useCallback(() => {
     setEditBoard(prev => !prev); // true
   }, [editBoard]);
+
+  const onLikeBtnClick = useCallback(() => {
+    updateBoardLikesAPI(boardId, token)
+      .then(() => {
+        queryClient.refetchQueries(["board", `${boardId}`]);
+      })
+      .catch(error => console.log(error));
+  }, [token, boardId]);
   return (
     <StyledBoardDetail>
       {editBoard ? (
@@ -108,6 +117,12 @@ const BoardDetail = ({
               <div className="cardInfo_like">
                 <Atom.Like />
                 <span>{likesLength}</span>
+              </div>
+              <div className="cardInfo_btns">
+                <div className="btns_like" onClick={onLikeBtnClick}>
+                  <Atom.Like fillColor="currentColor" />
+                  <span>좋아요</span>
+                </div>
               </div>
             </CardInfo>
           </Card>

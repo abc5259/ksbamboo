@@ -61,9 +61,24 @@ export const CardInfo = styled.div`
     display: flex;
     align-items: center;
     gap: 3px;
+    margin-bottom: 10px;
     span {
       color: ${props => props.theme.accentColor};
       font-size: 0.9rem;
+    }
+  }
+  .cardInfo_btns {
+    display: flex;
+    align-items: center;
+    .btns_like {
+      background-color: #e2e0e093;
+      padding: 8px 10px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      color: #737373;
     }
   }
 `;

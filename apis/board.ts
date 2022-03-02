@@ -129,3 +129,13 @@ export const updateBoardCommentAPI = ({
     )
     .then(response => response.data);
 };
+
+export const updateBoardLikesAPI = (boardId: number, token: string) => {
+  return axios.patch(
+    `/boards/${boardId}/like`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+};
