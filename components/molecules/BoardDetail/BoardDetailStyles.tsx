@@ -61,7 +61,6 @@ export const CardInfo = styled.div`
     display: flex;
     align-items: center;
     gap: 3px;
-    margin-bottom: 10px;
     span {
       color: ${props => props.theme.accentColor};
       font-size: 0.9rem;
@@ -70,6 +69,7 @@ export const CardInfo = styled.div`
   .cardInfo_btns {
     display: flex;
     align-items: center;
+    margin-top: 10px;
     .btns_like {
       background-color: #e2e0e093;
       padding: 8px 10px;

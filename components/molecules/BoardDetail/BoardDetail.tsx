@@ -76,8 +76,13 @@ const BoardDetail = ({
       .then(() => {
         queryClient.refetchQueries(["board", `${boardId}`]);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        if (error.response.data.statusCode === 401) {
+          toast.error("로그인후에 이용가능한 서비스입니다.");
+        }
+      });
   }, [token, boardId]);
+  console.log(user);
   return (
     <StyledBoardDetail>
       {editBoard ? (
@@ -120,15 +125,17 @@ const BoardDetail = ({
                 <Atom.Like />
                 <span>{likes?.length}</span>
               </div>
-              <div className="cardInfo_btns">
-                <LikeBtn
-                  isLike={!!likes?.filter(like => like.user.id === user.id)[0]}
-                  onClick={onLikeBtnClick}
-                >
-                  <Atom.Like fillColor="currentColor" />
-                  <span>좋아요</span>
-                </LikeBtn>
-              </div>
+              {myId && (
+                <div className="cardInfo_btns">
+                  <LikeBtn
+                    isLike={!!likes?.filter(like => like.user.id === myId)[0]}
+                    onClick={onLikeBtnClick}
+                  >
+                    <Atom.Like fillColor="currentColor" />
+                    <span>좋아요</span>
+                  </LikeBtn>
+                </div>
+              )}
             </CardInfo>
           </Card>
         </>
