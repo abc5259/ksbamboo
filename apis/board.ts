@@ -1,7 +1,4 @@
 import axios from "axios";
-export const BASE_URL = "http://localhost:3050";
-
-axios.defaults.baseURL = BASE_URL;
 
 export const allBoardsAPI = () => {
   return axios.get(`/boards`).then(response => response.data);

@@ -65,6 +65,7 @@ export const Author = styled.div`
 export const LikeWrapper = styled.div`
   display: flex;
   align-items: center;
+  color: ${props => props.theme.accentColor};
 `;
 
 export const Like = styled.svg`

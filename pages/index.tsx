@@ -11,7 +11,6 @@ import Home from "../components/templates/Home/Home";
 import reissueExpToken from "../utils/reissueExpToken";
 
 const HomePage = () => {
-  const router = useRouter();
   const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const queryClient = useQueryClient();
