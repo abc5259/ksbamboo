@@ -4,15 +4,14 @@ import AllBoards from "../../organisms/AllBoards/AllBoards";
 import BoardForm from "../../molecules/BoardForm/BoardForm";
 
 export interface ITempHomeProps {
-  token: string;
   boards?: IBoard[];
 }
 
-const Home = ({ token, boards }: ITempHomeProps) => {
+const Home = ({ boards }: ITempHomeProps) => {
   return (
     <>
       <HeaderAndSideBar>
-        <BoardForm mb="30px" token={token} />
+        <BoardForm mb="30px" />
         {boards ? <AllBoards boards={boards} /> : <div>로딩중...</div>}
       </HeaderAndSideBar>
     </>

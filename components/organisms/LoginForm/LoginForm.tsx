@@ -20,7 +20,7 @@ const LoginForm = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const mutation = useMutation<
-    { accessToken: string; refreshToken: string; user: User }, //success했을때 data값의 타입
+    { user: User }, //success했을때 data값의 타입
     AxiosError, // error타입
     { email: string; password: string } // loginAPI의 인자로 들어갈 타입
   >("user", loginAPI, {
@@ -35,13 +35,11 @@ const LoginForm = () => {
     },
     onSuccess: data => {
       // 성공
-      queryClient.setQueryData("user", data.user); //user라는 이름으로 data.user값이 캐싱됨
+      queryClient.setQueryData("user", data); //user라는 이름으로 data.user값이 캐싱됨
       setValue("email", "");
       setValue("password", "");
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      // setToken(localStorage.getItem("accessToken") || "");
       router.push("/");
+      console.log(data);
     },
     onSettled: () => {}, // 성공이든 에러든 어쨌든 끝났을 때
   });

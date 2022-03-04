@@ -7,10 +7,9 @@ import BoardDetailAndComment from "../../organisms/BoardDetailAndComment/BoardDe
 
 export interface ITempBoardDetailTempProps {
   board: IBoard;
-  token: string;
 }
 
-const BoardDetailTemp = ({ board, token }: ITempBoardDetailTempProps) => {
+const BoardDetailTemp = ({ board }: ITempBoardDetailTempProps) => {
   const [user, setUser] = useState<User>();
   const queryClient = useQueryClient();
   useEffect(() => {
@@ -23,7 +22,6 @@ const BoardDetailTemp = ({ board, token }: ITempBoardDetailTempProps) => {
       <HeaderAndSideBar>
         {board && (
           <BoardDetailAndComment
-            token={token}
             board={board}
             loginUserId={user?.id as number}
           />

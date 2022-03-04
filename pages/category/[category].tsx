@@ -12,33 +12,21 @@ import reissueExpToken from "../../utils/reissueExpToken";
 const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
-  const [token, setToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
   const queryClient = useQueryClient();
   const { error, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
-    () => getUserAPI(token),
-    {
-      enabled: !!token,
-    }
+    getUserAPI
   );
   const { data: boards } = useQuery<IBoard[]>(["boards", category], () =>
     allCategoryBoardsAPI(category as string)
   );
 
-  useEffect(() => {
-    setToken(localStorage.getItem("accessToken") || "");
-    setRefreshToken(localStorage.getItem("refreshToken") || "");
-    // if (!me) {
-    //   router.replace("/login");
-    // }
-  }, [token, me]);
-  if (token || me === false) {
-    reissueExpToken(token, refreshToken, setToken, queryClient);
-  }
+  // if (token || me === false) {
+  //   reissueExpToken(token, refreshToken, setToken, queryClient);
+  // }
   return (
     <>
-      <Home token={token} boards={boards} />
+      <Home boards={boards} />
     </>
   );
 };

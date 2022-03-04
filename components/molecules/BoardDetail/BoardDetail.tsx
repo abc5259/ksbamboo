@@ -27,13 +27,11 @@ export interface IBoardDetailProps {
   createdAt: Date;
   user: User;
   myId?: number;
-  token: string;
   likes?: Like[];
 }
 
 const BoardDetail = ({
   boardId,
-  token,
   title,
   content,
   status,
@@ -49,7 +47,7 @@ const BoardDetail = ({
   const mutation = useMutation<
     { result: boolean },
     AxiosError,
-    { token: string; boardId: number }
+    { boardId: number }
   >("deleteBoard", deleteBoardAPI, {
     onError: error => {
       console.log(error);
@@ -62,17 +60,16 @@ const BoardDetail = ({
   });
   const onDeleteClick = useCallback(() => {
     mutation.mutate({
-      token,
       boardId,
     });
-  }, [token, boardId]);
+  }, [boardId]);
 
   const onEditClick = useCallback(() => {
     setEditBoard(prev => !prev); // true
   }, [editBoard]);
 
   const onLikeBtnClick = useCallback(() => {
-    updateBoardLikesAPI(boardId, token)
+    updateBoardLikesAPI(boardId)
       .then(() => {
         queryClient.refetchQueries(["board", `${boardId}`]);
       })
@@ -81,13 +78,12 @@ const BoardDetail = ({
           toast.error("로그인후에 이용가능한 서비스입니다.");
         }
       });
-  }, [token, boardId]);
+  }, [boardId]);
   console.log(user);
   return (
     <StyledBoardDetail>
       {editBoard ? (
         <Molecule.BoardForm
-          token={token}
           editBoard={editBoard}
           current_title={title}
           current_textArea={content}

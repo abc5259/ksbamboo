@@ -6,18 +6,15 @@ import { StyledBoardDetailAndComment } from "./BoardDetailAndCommentStyles";
 export interface IBoardDetailAndCommentProps {
   board: IBoard;
   loginUserId: number;
-  token: string;
 }
 
 const BoardDetailAndComment = ({
   board,
   loginUserId,
-  token,
 }: IBoardDetailAndCommentProps) => {
   return (
     <StyledBoardDetailAndComment>
       <BoardDetail
-        token={token}
         boardId={board.id}
         title={board.title}
         content={board.content}
@@ -38,13 +35,12 @@ const BoardDetailAndComment = ({
             createdAt={comment.createdAt}
             myId={loginUserId}
             writerId={board.user.id}
-            token={token}
             commentId={comment.id}
             boardId={board.id}
           />
         ))}
       </div>
-      <Molecule.CommentForm token={token} boardId={board.id} />
+      <Molecule.CommentForm boardId={board.id} />
     </StyledBoardDetailAndComment>
   );
 };

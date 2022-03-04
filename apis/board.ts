@@ -5,24 +5,16 @@ export const allBoardsAPI = () => {
 };
 
 export const createBoardAPI = ({
-  token,
   title,
   content,
   category,
 }: {
-  token: string;
   title: string;
   content: string;
   category: string;
 }) => {
   return axios
-    .post(
-      "/boards",
-      { title, content, category },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    .post("/boards", { title, content, category })
     .then(response => response.data);
 };
 
@@ -36,39 +28,21 @@ export const getBoardAPI = (boardId: string) => {
   return axios.get(`/boards/${boardId}`).then(response => response.data);
 };
 
-export const deleteBoardAPI = ({
-  boardId,
-  token,
-}: {
-  boardId: number;
-  token: string;
-}) => {
-  return axios
-    .delete(`/boards/${boardId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then(response => response.data);
+export const deleteBoardAPI = ({ boardId }: { boardId: number }) => {
+  return axios.delete(`/boards/${boardId}`).then(response => response.data);
 };
 
 export const editBoardAPI = ({
   title,
   content,
   boardId,
-  token,
 }: {
   title?: string;
   content?: string;
   boardId: number;
-  token: string;
 }) => {
   return axios
-    .patch(
-      `/boards/${boardId}`,
-      { title, content },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    .patch(`/boards/${boardId}`, { title, content })
     .then(response => response.data);
 };
 
@@ -76,63 +50,38 @@ export const editBoardAPI = ({
 export const createBoardCommentAPI = (data: {
   boardId: number;
   content: string;
-  token: string;
 }) => {
   return axios
-    .post(
-      `/boards/${data.boardId}/comment`,
-      { content: data.content },
-      {
-        headers: { Authorization: `Bearer ${data.token}` },
-      }
-    )
+    .post(`/boards/${data.boardId}/comment`, { content: data.content })
     .then(response => response.data);
 };
 
 export const deleteBoardCommentAPI = ({
   boardId,
   commentId,
-  token,
 }: {
   boardId: number;
   commentId: number;
-  token: string;
 }) => {
   return axios
-    .delete(`/boards/${boardId}/comment/${commentId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    .delete(`/boards/${boardId}/comment/${commentId}`)
     .then(response => response.data);
 };
 
 export const updateBoardCommentAPI = ({
   boardId,
   commentId,
-  token,
   content,
 }: {
   boardId: number;
   commentId: number;
-  token: string;
   content: string;
 }) => {
   return axios
-    .patch(
-      `/boards/${boardId}/comment/${commentId}`,
-      { content },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    .patch(`/boards/${boardId}/comment/${commentId}`, { content })
     .then(response => response.data);
 };
 
-export const updateBoardLikesAPI = (boardId: number, token: string) => {
-  return axios.patch(
-    `/boards/${boardId}/like`,
-    {},
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+export const updateBoardLikesAPI = (boardId: number) => {
+  return axios.patch(`/boards/${boardId}/like`, {});
 };

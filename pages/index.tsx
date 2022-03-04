@@ -11,30 +11,17 @@ import Home from "../components/templates/Home/Home";
 import reissueExpToken from "../utils/reissueExpToken";
 
 const HomePage = () => {
-  const [token, setToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
   const queryClient = useQueryClient();
-  const { data: me } = useQuery<User | boolean, AxiosError>(
-    "user",
-    () => getUserAPI(token),
-    {
-      enabled: !!token,
-    }
-  );
+  const { data: me } = useQuery<User | boolean, AxiosError>("user", getUserAPI);
   const { data: boards } = useQuery<IBoard[]>("allboards", allBoardsAPI);
 
-  useEffect(() => {
-    setToken(localStorage.getItem("accessToken") || "");
-    setRefreshToken(localStorage.getItem("refreshToken") || "");
-  }, [token]);
-
-  if (token || me === false) {
-    reissueExpToken(token, refreshToken, setToken, queryClient);
-  }
+  // if (token || me === false) {
+  //   reissueExpToken(token, refreshToken, setToken, queryClient);
+  // }
 
   return (
     <>
-      <Home token={token} boards={boards} />
+      <Home boards={boards} />
     </>
   );
 };

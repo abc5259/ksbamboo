@@ -16,7 +16,6 @@ interface IForm {
 }
 
 export interface ICommentFormProps {
-  token: string;
   boardId: number;
   current_content?: string;
   editComment?: boolean;
@@ -25,7 +24,6 @@ export interface ICommentFormProps {
 }
 
 const CommentForm = ({
-  token,
   boardId,
   current_content,
   editComment,
@@ -47,7 +45,7 @@ const CommentForm = ({
   const mutation = useMutation<
     Comment,
     AxiosError,
-    { token: string; content: string; boardId: number }
+    { content: string; boardId: number }
   >("createBoardComment", createBoardCommentAPI, {
     onError: error => {
       if (error.response?.data.statusCode === 400) {
@@ -65,7 +63,7 @@ const CommentForm = ({
   const editMutation = useMutation<
     Comment,
     AxiosError,
-    { token: string; content: string; boardId: number; commentId: number }
+    { content: string; boardId: number; commentId: number }
   >("createBoardComment", updateBoardCommentAPI, {
     onError: error => {
       if (error.response?.data.statusCode === 400) {
@@ -88,14 +86,12 @@ const CommentForm = ({
     }
     if (editComment && commentId) {
       editMutation.mutate({
-        token,
         ...data,
         boardId,
         commentId,
       });
     } else {
       mutation.mutate({
-        token,
         ...data,
         boardId,
       });

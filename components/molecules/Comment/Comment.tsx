@@ -16,7 +16,6 @@ export interface ICommentProps {
   createdAt: Date;
   myId: number;
   writerId: number;
-  token: string;
   commentId: number;
   boardId: number;
   //대댓글 목록?
@@ -30,7 +29,6 @@ const Comment = ({
   myId,
   writerId,
   commentId,
-  token,
   boardId,
 }: ICommentProps) => {
   const [editComment, setEditComment] = useState(false);
@@ -38,7 +36,7 @@ const Comment = ({
   const deleteMutation = useMutation<
     { ok: boolean },
     AxiosError,
-    { boardId: number; commentId: number; token: string }
+    { boardId: number; commentId: number }
   >("deleteBoardComment", deleteBoardCommentAPI, {
     onError: error => {
       console.log(error);
@@ -53,9 +51,8 @@ const Comment = ({
     deleteMutation.mutate({
       boardId,
       commentId,
-      token,
     });
-  }, [boardId, commentId, token]);
+  }, [boardId, commentId]);
 
   const onEditComment = useCallback(() => {
     setEditComment(prev => !prev);
@@ -65,7 +62,6 @@ const Comment = ({
     <>
       {editComment ? (
         <Molecule.CommentForm
-          token={token}
           boardId={boardId}
           commentId={commentId}
           editComment={editComment}

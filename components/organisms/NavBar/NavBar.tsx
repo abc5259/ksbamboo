@@ -9,8 +9,6 @@ const NavBar = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const onClickLogOut = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
     queryClient.removeQueries("user");
     router.push("/login");
   };

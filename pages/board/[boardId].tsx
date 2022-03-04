@@ -12,16 +12,11 @@ import reissueExpToken from "../../utils/reissueExpToken";
 const BoardPage = () => {
   const router = useRouter();
   const { boardId } = router.query;
-  const [token, setToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
   const [getBoardId, setGetBoardId] = useState("");
   const queryClient = useQueryClient();
   const { error, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
-    () => getUserAPI(token),
-    {
-      enabled: !!token,
-    }
+    getUserAPI
   );
   const {
     isLoading,
@@ -36,21 +31,15 @@ const BoardPage = () => {
   );
 
   useEffect(() => {
-    setToken(localStorage.getItem("accessToken") || "");
-    setRefreshToken(localStorage.getItem("refreshToken") || "");
     setGetBoardId(boardId as string);
-  }, [token, boardId]);
+  }, [boardId]);
 
-  if (token || me === false) {
-    reissueExpToken(token, refreshToken, setToken, queryClient);
-  }
+  // if (token || me === false) {
+  //   reissueExpToken(token, refreshToken, setToken, queryClient);
+  // }
   if (isLoading) {
     return <div>로딩중...</div>;
   }
-  return (
-    <>
-      {board && <BoardDetailTemp board={board} token={token}></BoardDetailTemp>}
-    </>
-  );
+  return <>{board && <BoardDetailTemp board={board}></BoardDetailTemp>}</>;
 };
 export default BoardPage;

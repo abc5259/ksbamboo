@@ -1,11 +1,9 @@
 import axios from "axios";
 const JWT_EXPIRY_TIME = 60 * 1000;
 
-export const getUserAPI = async (token: string) => {
+export const getUserAPI = async () => {
   return axios
-    .get(`/auth/user`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    .get(`/auth/user`)
     .then(response => response.data)
     .catch(error => {
       console.log(error);

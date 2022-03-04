@@ -16,14 +16,8 @@ import reissueExpToken from "../utils/reissueExpToken";
 const queryClient = new QueryClient();
 
 function App({ Component, pageProps }: AppProps) {
-  // const [token, setToken] = useState(localStorage.getItem("accessToken") || "");
-  // const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refreshToken") || "");
-  // const queryClient = useQueryClient();
   axios.defaults.baseURL = BASE_URL;
-  // axios.defaults.headers.common['Authorization'] = token;
-  // if (token) {
-  //   reissueExpToken(token, refreshToken, setToken, queryClient);
-  // }
+  axios.defaults.withCredentials = true;
   return (
     <>
       <Head>
