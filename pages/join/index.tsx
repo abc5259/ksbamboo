@@ -7,7 +7,6 @@ import User from "../../interfaces/user";
 import { getUserAPI } from "../../apis/user";
 import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
 import { AxiosError } from "axios";
-import reissueExpToken from "../../utils/reissueExpToken";
 
 const Join: NextPage = () => {
   const router = useRouter();
@@ -21,9 +20,7 @@ const Join: NextPage = () => {
       router.replace("/");
     }
   }, [me]);
-  // if (token || me === false) {
-  //   reissueExpToken(token, refreshToken, setToken);
-  // }
+
   return (
     <>
       <HeaderLayout>

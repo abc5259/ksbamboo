@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import User from "../interfaces/user";
 import { AxiosError } from "axios";
 import HeaderLayout from "../components/layouts/HeaderLayout/HeaderLayout";
-import reissueExpToken from "../utils/reissueExpToken";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -21,9 +20,7 @@ const Login: NextPage = () => {
       router.replace("/");
     }
   }, [me]);
-  // if (token || me === false) {
-  //   reissueExpToken(token, refreshToken, setToken);
-  // }
+
   return (
     <>
       <HeaderLayout>

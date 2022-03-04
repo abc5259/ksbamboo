@@ -8,16 +8,12 @@ import { getUserAPI } from "../apis/user";
 import User from "../interfaces/user";
 import { AxiosError } from "axios";
 import Home from "../components/templates/Home/Home";
-import reissueExpToken from "../utils/reissueExpToken";
 
 const HomePage = () => {
   const queryClient = useQueryClient();
   const { data: me } = useQuery<User | boolean, AxiosError>("user", getUserAPI);
   const { data: boards } = useQuery<IBoard[]>("allboards", allBoardsAPI);
 
-  // if (token || me === false) {
-  //   reissueExpToken(token, refreshToken, setToken, queryClient);
-  // }
   return (
     <>
       <Home boards={boards} />

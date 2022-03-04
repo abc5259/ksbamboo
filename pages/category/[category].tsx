@@ -7,7 +7,6 @@ import { getUserAPI } from "../../apis/user";
 import Home from "../../components/templates/Home/Home";
 import IBoard from "../../interfaces/board";
 import User from "../../interfaces/user";
-import reissueExpToken from "../../utils/reissueExpToken";
 
 const CategoryPage = () => {
   const router = useRouter();
@@ -21,9 +20,6 @@ const CategoryPage = () => {
     allCategoryBoardsAPI(category as string)
   );
 
-  // if (token || me === false) {
-  //   reissueExpToken(token, refreshToken, setToken, queryClient);
-  // }
   return (
     <>
       <Home boards={boards} />
