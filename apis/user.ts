@@ -1,4 +1,5 @@
 import axios from "axios";
+import User from "../interfaces/user";
 const JWT_EXPIRY_TIME = 60 * 1000;
 
 export const getUserAPI = async () => {
@@ -16,8 +17,10 @@ export const loginAPI = (data: { email: string; password: string }) => {
 };
 
 //accessToken 재발급
-export const newAccessTokenAPI = (data: {
-  refresh_token: string;
-}): Promise<{ accessToken: string }> => {
-  return axios.post(`/auth/refresh`, data).then(response => response.data);
+export const newAccessTokenAPI = (): Promise<{ user: User }> => {
+  return axios.post(`/auth/refresh`);
+};
+
+export const logoutAPI = () => {
+  return axios(`/auth/logout`);
 };

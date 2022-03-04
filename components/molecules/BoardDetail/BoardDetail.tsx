@@ -79,7 +79,7 @@ const BoardDetail = ({
         }
       });
   }, [boardId]);
-  console.log(user);
+
   return (
     <StyledBoardDetail>
       {editBoard ? (

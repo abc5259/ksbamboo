@@ -3,14 +3,18 @@ import { Title, Header, List, Nav, NaveBarWrapper } from "./NavBarstyles";
 import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useEffect, useState } from "react";
+import { logoutAPI } from "../../../apis/user";
 
 const NavBar = () => {
   const [isLogin, setIsLogin] = useState(false);
   const queryClient = useQueryClient();
   const router = useRouter();
   const onClickLogOut = () => {
-    queryClient.removeQueries("user");
-    router.push("/login");
+    logoutAPI().then(() => {
+      queryClient.removeQueries("user");
+      window.localStorage.removeItem("isLogin");
+      router.push("/login");
+    });
   };
   useEffect(() => {
     if (queryClient.getQueryData("user")) {

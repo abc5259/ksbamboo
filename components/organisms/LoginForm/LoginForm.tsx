@@ -36,6 +36,7 @@ const LoginForm = () => {
     onSuccess: data => {
       // 성공
       queryClient.setQueryData("user", data); //user라는 이름으로 data.user값이 캐싱됨
+      window.localStorage.setItem("isLogin", "true");
       setValue("email", "");
       setValue("password", "");
       router.push("/");

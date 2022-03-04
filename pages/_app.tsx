@@ -10,14 +10,28 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../utils/baseUrl";
-import { useEffect, useState } from "react";
-import reissueExpToken from "../utils/reissueExpToken";
-
+import { newAccessTokenAPI } from "../apis/user";
 const queryClient = new QueryClient();
 
 function App({ Component, pageProps }: AppProps) {
   axios.defaults.baseURL = BASE_URL;
   axios.defaults.withCredentials = true;
+  axios.interceptors.response.use(
+    response => {
+      return response;
+    },
+    error => {
+      if (error.response?.data.statusCode === 401) {
+        if (window.localStorage.getItem("isLogin") === "true") {
+          window.localStorage.removeItem("isLogin");
+          newAccessTokenAPI().then(() => {
+            window.localStorage.setItem("isLogin", "true");
+          });
+        }
+      }
+      return error;
+    }
+  );
   return (
     <>
       <Head>

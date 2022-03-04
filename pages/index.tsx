@@ -18,7 +18,6 @@ const HomePage = () => {
   // if (token || me === false) {
   //   reissueExpToken(token, refreshToken, setToken, queryClient);
   // }
-
   return (
     <>
       <Home boards={boards} />

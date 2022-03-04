@@ -11,26 +11,19 @@ import reissueExpToken from "../../utils/reissueExpToken";
 
 const Join: NextPage = () => {
   const router = useRouter();
-  const [token, setToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
   const { error, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
-    () => getUserAPI(token),
-    {
-      enabled: !!token,
-    }
+    getUserAPI
   );
 
   useEffect(() => {
-    setToken(localStorage.getItem("accessToken") || "");
-    setRefreshToken(localStorage.getItem("refreshToken") || "");
     if (me) {
       router.replace("/");
     }
-  }, [token, refreshToken, me]);
-  if (token || me === false) {
-    reissueExpToken(token, refreshToken, setToken);
-  }
+  }, [me]);
+  // if (token || me === false) {
+  //   reissueExpToken(token, refreshToken, setToken);
+  // }
   return (
     <>
       <HeaderLayout>
