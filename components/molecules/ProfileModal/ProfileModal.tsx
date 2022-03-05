@@ -24,16 +24,36 @@ const ProfileModal = (props: IProfileModalProps) => {
     <StyledProfileModal>
       <div className="profileModal">
         <Link href="/profile/write">
-          <a className="profileModal_child">내가 쓴글</a>
+          <a
+            onClick={() => setShowProfileModal(prev => !prev)}
+            className="profileModal_child"
+          >
+            내가 쓴글
+          </a>
         </Link>
-        <Link href="/profile/commentpost">
-          <a className="profileModal_child">댓글 단 글</a>
+        <Link href="/profile/comment">
+          <a
+            onClick={() => setShowProfileModal(prev => !prev)}
+            className="profileModal_child"
+          >
+            댓글 단 글
+          </a>
         </Link>
         <Link href="/profile/favorite">
-          <a className="profileModal_child">내 스크랩</a>
+          <a
+            onClick={() => setShowProfileModal(prev => !prev)}
+            className="profileModal_child"
+          >
+            내 스크랩
+          </a>
         </Link>
         <Link href="/profile/setting">
-          <a className="profileModal_child">설정</a>
+          <a
+            onClick={() => setShowProfileModal(prev => !prev)}
+            className="profileModal_child"
+          >
+            설정
+          </a>
         </Link>
         <div onClick={onClickLogOut} className="profileModal_child">
           로그아웃

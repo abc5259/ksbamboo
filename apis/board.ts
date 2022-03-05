@@ -85,3 +85,11 @@ export const updateBoardCommentAPI = ({
 export const updateBoardLikesAPI = (boardId: number) => {
   return axios.patch(`/boards/${boardId}/like`, {});
 };
+
+export const getMyBoards = () => {
+  return axios.get(`/boards/me`).then(response => response.data);
+};
+
+export const getMyCommentBoards = () => {
+  return axios.get(`/boards/me/comment`).then(response => response.data);
+};
