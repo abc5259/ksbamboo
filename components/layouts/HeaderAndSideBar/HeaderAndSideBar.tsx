@@ -34,7 +34,7 @@ const HeaderAndSideBar: React.FC = props => {
     <>
       <NavBar />
       <StyledHeaderAndSideBar>
-        <Container onClick={() => setShowProfileModal(prev => !prev)}>
+        <Container onClick={() => setShowProfileModal(false)}>
           {props.children}
         </Container>
         {windowWidth >= 600 ? (

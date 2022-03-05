@@ -1,9 +1,25 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useQueryClient } from "react-query";
+import { useSetRecoilState } from "recoil";
+import { logoutAPI } from "../../../apis/user";
+import { showProfileModalAtom } from "../../../atom/atoms";
 import { StyledProfileModal } from "./ProfileModalStyles";
 
 export interface IProfileModalProps {}
 
 const ProfileModal = (props: IProfileModalProps) => {
+  const setShowProfileModal = useSetRecoilState(showProfileModalAtom);
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const onClickLogOut = () => {
+    logoutAPI().then(() => {
+      queryClient.removeQueries("user");
+      window.localStorage.removeItem("isLogin");
+      setShowProfileModal(prev => !prev);
+      router.push("/login");
+    });
+  };
   return (
     <StyledProfileModal>
       <div className="profileModal">
@@ -19,7 +35,9 @@ const ProfileModal = (props: IProfileModalProps) => {
         <Link href="/profile/setting">
           <a className="profileModal_child">설정</a>
         </Link>
-        <div className="profileModal_child">로그아웃</div>
+        <div onClick={onClickLogOut} className="profileModal_child">
+          로그아웃
+        </div>
       </div>
     </StyledProfileModal>
   );

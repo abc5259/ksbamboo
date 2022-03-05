@@ -9,7 +9,7 @@ export interface IOrgSideBarProps {}
 const SideBar = () => {
   const setShowProfileModal = useSetRecoilState(showProfileModalAtom);
   return (
-    <StyledSideBar onClick={() => setShowProfileModal(prev => !prev)}>
+    <StyledSideBar onClick={() => setShowProfileModal(false)}>
       <ul>
         <li>
           <Molecule.KsToggle departmentTitle="문과대학" />

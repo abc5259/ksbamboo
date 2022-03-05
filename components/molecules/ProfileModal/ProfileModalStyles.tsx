@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledProfileModal = styled.nav`
   .profileModal {
-    position: absolute;
+    position: fixed;
     z-index: 10000000;
     right: 0;
     top: 0;
@@ -18,7 +18,7 @@ export const StyledProfileModal = styled.nav`
       background-color: inherit;
       cursor: pointer;
       font-size: 0.9rem;
-      padding: 12px 16px;
+      padding: 16px;
       color: ${props => props.theme.textColor};
     }
     .profileModal_child:hover {
