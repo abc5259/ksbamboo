@@ -16,7 +16,7 @@ const BoardPage = () => {
     "user",
     getUserAPI
   );
-  const { isLoading, data: board } = useQuery<IBoard>(
+  const { data: board } = useQuery<IBoard>(
     ["board", boardId],
     () => getBoardAPI(boardId as string),
     {
@@ -28,9 +28,10 @@ const BoardPage = () => {
     setGetBoardId(boardId as string);
   }, [boardId]);
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
-  return <>{board && <BoardDetailTemp board={board}></BoardDetailTemp>}</>;
+  return (
+    <>
+      <BoardDetailTemp board={board}></BoardDetailTemp>
+    </>
+  );
 };
 export default BoardPage;

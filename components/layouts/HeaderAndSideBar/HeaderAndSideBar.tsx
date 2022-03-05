@@ -26,9 +26,9 @@ const HeaderAndSideBar: React.FC = props => {
   const onClickMobileSideBarIcon = () => {
     setShowMobileSideBar(prev => !prev);
   };
-  if (!windowWidth) {
-    return <div>로딩중..</div>;
-  }
+  // if (!windowWidth) {
+  //   return <div>로딩중..</div>;
+  // }
 
   return (
     <>
@@ -37,7 +37,9 @@ const HeaderAndSideBar: React.FC = props => {
         <Container onClick={() => setShowProfileModal(false)}>
           {props.children}
         </Container>
-        {windowWidth >= 600 ? (
+        {!windowWidth ? (
+          <div>로딩중..</div>
+        ) : windowWidth >= 600 ? (
           <SideBar />
         ) : (
           <Molecule.MobileSideBarBtn

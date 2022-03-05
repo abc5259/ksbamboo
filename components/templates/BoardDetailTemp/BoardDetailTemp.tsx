@@ -6,7 +6,7 @@ import HeaderAndSideBar from "../../layouts/HeaderAndSideBar/HeaderAndSideBar";
 import BoardDetailAndComment from "../../organisms/BoardDetailAndComment/BoardDetailAndComment";
 
 export interface ITempBoardDetailTempProps {
-  board: IBoard;
+  board?: IBoard;
 }
 
 const BoardDetailTemp = ({ board }: ITempBoardDetailTempProps) => {

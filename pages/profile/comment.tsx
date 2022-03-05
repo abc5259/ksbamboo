@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { getMyBoards, getMyCommentBoards } from "../../apis/board";
+import { getMyCommentBoards } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
 import Atom from "../../components/atoms";
 import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";

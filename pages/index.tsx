@@ -5,8 +5,9 @@ import { getUserAPI } from "../apis/user";
 import User from "../interfaces/user";
 import { AxiosError } from "axios";
 import Home from "../components/templates/Home/Home";
+import type { NextPage } from "next";
 
-const HomePage = () => {
+const HomePage: NextPage = () => {
   const { data: me } = useQuery<User | boolean, AxiosError>("user", getUserAPI);
   const { data: boards } = useQuery<IBoard[]>("allboards", allBoardsAPI);
   return (
