@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { showSideBarAtom } from "../../../atom/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { showProfileModalAtom, showSideBarAtom } from "../../../atom/atoms";
 import Molecule from "../../molecules";
 import MobileSideBar from "../../organisms/MobileSideBar/MobileSideBar";
 import NavBar from "../../organisms/NavBar/NavBar";
@@ -9,6 +9,7 @@ import { Container, StyledHeaderAndSideBar } from "./HeaderAndSideBarStyles";
 
 const HeaderAndSideBar: React.FC = props => {
   const [windowWidth, setWindowWidth] = useState<number>();
+  const setShowProfileModal = useSetRecoilState(showProfileModalAtom);
   const [showMobileSideBar, setShowMobileSideBar] =
     useRecoilState(showSideBarAtom);
   const handleResize = useCallback(() => {
@@ -33,7 +34,9 @@ const HeaderAndSideBar: React.FC = props => {
     <>
       <NavBar />
       <StyledHeaderAndSideBar>
-        <Container>{props.children}</Container>
+        <Container onClick={() => setShowProfileModal(prev => !prev)}>
+          {props.children}
+        </Container>
         {windowWidth >= 600 ? (
           <SideBar />
         ) : (

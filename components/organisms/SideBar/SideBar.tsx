@@ -1,3 +1,5 @@
+import { useSetRecoilState } from "recoil";
+import { showProfileModalAtom } from "../../../atom/atoms";
 import Atom from "../../atoms";
 import Molecule from "../../molecules";
 import { StyledSideBar } from "./SideBarStyles";
@@ -5,8 +7,9 @@ import { StyledSideBar } from "./SideBarStyles";
 export interface IOrgSideBarProps {}
 
 const SideBar = () => {
+  const setShowProfileModal = useSetRecoilState(showProfileModalAtom);
   return (
-    <StyledSideBar>
+    <StyledSideBar onClick={() => setShowProfileModal(prev => !prev)}>
       <ul>
         <li>
           <Molecule.KsToggle departmentTitle="문과대학" />

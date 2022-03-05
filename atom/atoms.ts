@@ -54,3 +54,8 @@ export const showSideBarAtom = atom<boolean>({
   key: "isShowSideBar",
   default: false,
 });
+
+export const showProfileModalAtom = atom<boolean>({
+  key: "isShowProfileModal",
+  default: false,
+});
