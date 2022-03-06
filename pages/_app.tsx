@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
 import { theme } from "../styles/theme";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../utils/baseUrl";
 import { newAccessTokenAPI } from "../apis/user";
@@ -27,9 +27,10 @@ function App({ Component, pageProps }: AppProps) {
           newAccessTokenAPI().then(() => {
             window.localStorage.setItem("isLogin", "true");
           });
+          // .catch(error => toast.error("dwd"));
         }
       }
-      return error;
+      return Promise.reject(error);
     }
   );
   return (

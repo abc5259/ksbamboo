@@ -8,10 +8,7 @@ import Home from "../components/templates/Home/Home";
 import type { NextPage } from "next";
 
 const HomePage: NextPage = () => {
-  const { data: me } = useQuery<User | boolean, AxiosError>("user", getUserAPI);
   const { data: boards } = useQuery<IBoard[]>("allboards", allBoardsAPI);
-  const { data } = useQuery<IBoard[]>("sd", getFavoriteBoardsAPI);
-  console.log(data);
   return (
     <>
       <Home boards={boards} />

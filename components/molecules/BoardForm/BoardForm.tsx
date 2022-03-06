@@ -60,9 +60,10 @@ const BoardForm = (props: IBoardFormProps) => {
     onMutate: () => {}, // 뮤테이션 시작
     onError: error => {
       // 에러가 났음
-      console.log(error);
       if (error.response?.data.statusCode === 400) {
         toast.error(error.response.data.message[0]);
+      } else if (error.response?.data.statusCode === 401) {
+        toast.error("로그인이 필요합니다.");
       } else {
         toast.error(error.response?.data.message);
       }
@@ -107,7 +108,7 @@ const BoardForm = (props: IBoardFormProps) => {
   });
 
   const onValid = (data: IForm) => {
-    // if (!props.token) {
+    // if () {
     //   return toast.error("로그인이 필요합니다.");
     // }
     if (props.editBoard) {
