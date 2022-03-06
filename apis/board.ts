@@ -83,7 +83,7 @@ export const updateBoardCommentAPI = ({
 };
 
 export const updateBoardLikesAPI = (boardId: number) => {
-  return axios.patch(`/boards/${boardId}/like`, {});
+  return axios.patch(`/boards/${boardId}/like`);
 };
 
 export const getMyBoards = () => {
@@ -92,4 +92,8 @@ export const getMyBoards = () => {
 
 export const getMyCommentBoards = () => {
   return axios.get(`/boards/me/comment`).then(response => response.data);
+};
+
+export const updateBoardFavoritesAPI = (boardId: number) => {
+  return axios.patch(`/boards/${boardId}/favorite`);
 };

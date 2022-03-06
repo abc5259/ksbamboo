@@ -11,6 +11,7 @@ import Title from "./Title/Title";
 import Toggle from "./Toggle/Toggle";
 import Time from "./Time/Time";
 import Avatar from "./Avatar/Avatar";
+import Star from "./Star/Star";
 
 const Atom = {
   Button,
@@ -26,6 +27,7 @@ const Atom = {
   Toggle,
   Time,
   Avatar,
+  Star,
 };
 
 export default Atom;

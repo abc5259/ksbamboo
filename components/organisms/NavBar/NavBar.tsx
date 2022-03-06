@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { Title, Header, List, Nav, NaveBarWrapper } from "./NavBarstyles";
-import { useRouter } from "next/router";
 import { useQueryClient } from "react-query";
 import { useEffect, useState } from "react";
-import { logoutAPI } from "../../../apis/user";
 import ProfileModal from "../../molecules/ProfileModal/ProfileModal";
 import { useRecoilState } from "recoil";
 import { showProfileModalAtom } from "../../../atom/atoms";
@@ -13,19 +11,11 @@ const NavBar = () => {
   const [isShowProfileModal, setIsShowProfileModal] =
     useRecoilState(showProfileModalAtom);
   const queryClient = useQueryClient();
-  const router = useRouter();
   useEffect(() => {
     if (queryClient.getQueryData("user")) {
       setIsLogin(true);
     }
-  }, [queryClient.getQueryData("user")]);
-  const onClickLogOut = () => {
-    logoutAPI().then(() => {
-      queryClient.removeQueries("user");
-      window.localStorage.removeItem("isLogin");
-      router.push("/login");
-    });
-  };
+  }, []);
   const onToggleProfileModal = () => {
     setIsShowProfileModal(prev => !prev);
   };
