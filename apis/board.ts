@@ -97,3 +97,7 @@ export const getMyCommentBoards = () => {
 export const updateBoardFavoritesAPI = (boardId: number) => {
   return axios.patch(`/boards/${boardId}/favorite`);
 };
+
+export const getFavoriteBoardsAPI = () => {
+  return axios.get(`/boards/me/favorite`).then(response => response.data);
+};

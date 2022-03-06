@@ -1,22 +1,23 @@
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { getMyCommentBoards } from "../../apis/board";
+import { getFavoriteBoardsAPI, getMyCommentBoards } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
 import Atom from "../../components/atoms";
 import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
 import AllBoards from "../../components/organisms/AllBoards/AllBoards";
 import IBoard from "../../interfaces/board";
 import User from "../../interfaces/user";
-const CommentBoard = () => {
+
+const Favorite = () => {
   const router = useRouter();
   const { isLoading, data: me } = useQuery<User | boolean, AxiosError>(
     "user",
     getUserAPI
   );
-  const { data: myCommentBoards } = useQuery<IBoard[]>(
-    "myCommentBoards",
-    getMyCommentBoards
+  const { data: myFavoriteBoards } = useQuery<IBoard[]>(
+    "myFavoriteBoards",
+    getFavoriteBoardsAPI
   );
   if (!isLoading) {
     if (me === undefined) {
@@ -25,14 +26,14 @@ const CommentBoard = () => {
   }
   return (
     <HeaderLayout>
-      <Atom.Tag>댓글 단 글</Atom.Tag>
-      {!myCommentBoards ? (
+      <Atom.Tag>내 스크랩</Atom.Tag>
+      {!myFavoriteBoards ? (
         <div>Lodinng..</div>
       ) : (
-        <AllBoards boards={myCommentBoards} />
+        <AllBoards boards={myFavoriteBoards} />
       )}
     </HeaderLayout>
   );
 };
 
-export default CommentBoard;
+export default Favorite;
