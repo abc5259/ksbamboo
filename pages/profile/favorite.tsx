@@ -20,7 +20,7 @@ const Favorite = () => {
     getFavoriteBoardsAPI
   );
   if (!isLoading) {
-    if (me === undefined) {
+    if (!me) {
       router.replace("/login");
     }
   }

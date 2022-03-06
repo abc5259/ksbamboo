@@ -10,7 +10,10 @@ import HeaderLayout from "../components/layouts/HeaderLayout/HeaderLayout";
 
 const Login: NextPage = () => {
   const router = useRouter();
-  const { error, data: me } = useQuery<User, AxiosError>("user", getUserAPI);
+  const { error, data: me } = useQuery<User | boolean, AxiosError>(
+    "user",
+    getUserAPI
+  );
 
   useEffect(() => {
     if (me) {

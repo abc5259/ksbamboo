@@ -7,7 +7,6 @@ export const getUserAPI = async () => {
     .get(`/auth/user`)
     .then(response => response.data)
     .catch(error => {
-      console.log(error);
       return false;
     });
 };

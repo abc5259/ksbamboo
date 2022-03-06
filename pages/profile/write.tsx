@@ -18,7 +18,7 @@ const Write = () => {
   );
   const { data: myBoards } = useQuery<IBoard[]>("myBoards", getMyBoards);
   if (!isLoading) {
-    if (me === undefined) {
+    if (!me) {
       router.replace("/login");
     }
   }
