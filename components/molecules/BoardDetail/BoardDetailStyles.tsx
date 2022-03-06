@@ -57,30 +57,26 @@ export const CardInfo = styled.div`
     overflow-wrap: break-word;
     margin-bottom: 20px;
   }
-  .cardInfo_like {
+  .cardInfo_status {
     display: flex;
     align-items: center;
-    gap: 3px;
-    span {
-      color: ${props => props.theme.accentColor};
-      font-size: 0.9rem;
+    gap: 10px;
+    .cardInfo_like,
+    .cardInfo_star {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      span {
+        color: ${props => props.theme.accentColor};
+        font-size: 0.9rem;
+      }
     }
   }
   .cardInfo_btns {
     display: flex;
     align-items: center;
     margin-top: 10px;
-    .btns_like {
-      background-color: #e2e0e093;
-      padding: 8px 10px;
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.8rem;
-      color: #737373;
-      cursor: pointer;
-    }
+    gap: 10px;
   }
 `;
 
@@ -94,5 +90,17 @@ export const LikeBtn = styled.div<{ isLike: boolean }>`
   gap: 5px;
   font-size: 0.8rem;
   color: ${props => (props.isLike ? props.theme.textColor : "#737373")};
+  cursor: pointer;
+`;
+
+export const StarBtn = styled.div<{ isStar: boolean }>`
+  background-color: ${props => (props.isStar ? "#F7BE00" : "#e2e0e093")};
+  padding: 8px 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: ${props => (props.isStar ? props.theme.textColor : "#737373")};
   cursor: pointer;
 `;

@@ -4,7 +4,12 @@ import { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import Molecule from "..";
-import { deleteBoardAPI, updateBoardLikesAPI } from "../../../apis/board";
+import {
+  deleteBoardAPI,
+  updateBoardFavoritesAPI,
+  updateBoardLikesAPI,
+} from "../../../apis/board";
+import { Favorite } from "../../../interfaces/favorite";
 import { Like } from "../../../interfaces/like";
 import User from "../../../interfaces/user";
 import Atom from "../../atoms";
@@ -16,6 +21,7 @@ import {
   CardHeader,
   CardInfo,
   LikeBtn,
+  StarBtn,
 } from "./BoardDetailStyles";
 
 export interface IBoardDetailProps {
@@ -28,6 +34,7 @@ export interface IBoardDetailProps {
   user: User;
   myId?: number;
   likes?: Like[];
+  favorites?: Favorite[];
 }
 
 const BoardDetail = ({
@@ -40,6 +47,7 @@ const BoardDetail = ({
   user,
   myId,
   likes,
+  favorites,
 }: IBoardDetailProps) => {
   const queryClient = useQueryClient();
   const [editBoard, setEditBoard] = useState(false);
@@ -70,6 +78,18 @@ const BoardDetail = ({
 
   const onLikeBtnClick = useCallback(() => {
     updateBoardLikesAPI(boardId)
+      .then(() => {
+        queryClient.refetchQueries(["board", `${boardId}`]);
+      })
+      .catch(error => {
+        if (error.response.data.statusCode === 401) {
+          toast.error("로그인후에 이용가능한 서비스입니다.");
+        }
+      });
+  }, [boardId]);
+
+  const onFavoriteBtnClick = useCallback(() => {
+    updateBoardFavoritesAPI(boardId)
       .then(() => {
         queryClient.refetchQueries(["board", `${boardId}`]);
       })
@@ -117,9 +137,15 @@ const BoardDetail = ({
                 {title}
               </Atom.Title>
               <Atom.Content>{content}</Atom.Content>
-              <div className="cardInfo_like">
-                <Atom.Like />
-                <span>{likes?.length}</span>
+              <div className="cardInfo_status">
+                <div className="cardInfo_like">
+                  <Atom.Like />
+                  <span>{likes?.length}</span>
+                </div>
+                <div className="cardInfo_star">
+                  <Atom.Star width="1rem" height="1rem" />
+                  <span>{favorites?.length}</span>
+                </div>
               </div>
               {myId && (
                 <div className="cardInfo_btns">
@@ -130,6 +156,21 @@ const BoardDetail = ({
                     <Atom.Like fillColor="currentColor" />
                     <span>좋아요</span>
                   </LikeBtn>
+                  <StarBtn
+                    isStar={
+                      !!favorites?.filter(
+                        favorite => favorite.user.id === myId
+                      )[0]
+                    }
+                    onClick={onFavoriteBtnClick}
+                  >
+                    <Atom.Star
+                      width="1rem"
+                      height="1rem"
+                      fillColor="currentColor"
+                    />
+                    <span>스크랩</span>
+                  </StarBtn>
                 </div>
               )}
             </CardInfo>

@@ -24,6 +24,7 @@ const BoardDetailAndComment = ({
         user={board.user}
         myId={loginUserId}
         likes={board.likes}
+        favorites={board.favorites}
       />
       <div className="commentWrapper">
         {board.comments?.map(comment => (
