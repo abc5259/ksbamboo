@@ -1,9 +1,6 @@
-import { useQuery, useQueryClient } from "react-query";
-import { allBoardsAPI, getFavoriteBoardsAPI } from "../apis/board";
+import { useQuery } from "react-query";
+import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
-import { getUserAPI } from "../apis/user";
-import User from "../interfaces/user";
-import axios, { AxiosError } from "axios";
 import Home from "../components/templates/Home/Home";
 import type { NextPage } from "next";
 import { BASE_URL } from "../utils/baseUrl";
@@ -17,13 +14,11 @@ const HomePage: NextPage = () => {
     });
     console.log(evtSource);
     evtSource.onmessage = ({ data }) => {
-      console.log("New message", JSON.parse(data));
+      console.log(data);
     };
-    axios.post(`${BASE_URL}/boards/emit`).then(response => {
-      evtSource.onmessage = ({ data }) => {
-        console.log("New message", JSON.parse(data));
-      };
-    });
+    return () => {
+      evtSource.close();
+    };
   }, []);
 
   return (
