@@ -14,7 +14,8 @@ const HomePage: NextPage = () => {
     });
     console.log(evtSource);
     evtSource.onmessage = ({ data }) => {
-      console.log(data);
+      console.log(evtSource);
+      alert(data);
     };
     return () => {
       evtSource.close();

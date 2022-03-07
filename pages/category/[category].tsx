@@ -7,6 +7,7 @@ import { getUserAPI } from "../../apis/user";
 import Home from "../../components/templates/Home/Home";
 import IBoard from "../../interfaces/board";
 import User from "../../interfaces/user";
+import { BASE_URL } from "../../utils/baseUrl";
 
 const CategoryPage = () => {
   const router = useRouter();
@@ -19,6 +20,20 @@ const CategoryPage = () => {
   const { data: boards } = useQuery<IBoard[]>(["boards", category], () =>
     allCategoryBoardsAPI(category as string)
   );
+
+  useEffect(() => {
+    const evtSource = new EventSource(`${BASE_URL}/boards/events`, {
+      withCredentials: true,
+    });
+    console.log(evtSource);
+    evtSource.onmessage = ({ data }) => {
+      console.log(evtSource);
+      alert(data);
+    };
+    return () => {
+      evtSource.close();
+    };
+  }, []);
 
   return (
     <>
