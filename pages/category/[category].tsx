@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { allCategoryBoardsAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
+import Notice from "../../components/atoms/Notice/Notice";
 import Home from "../../components/templates/Home/Home";
 import IBoard from "../../interfaces/board";
 import User from "../../interfaces/user";
@@ -13,31 +14,66 @@ const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
   const queryClient = useQueryClient();
-  const { error, data: me } = useQuery<User | boolean, AxiosError>(
+  const { isLoading, data: me } = useQuery<User, AxiosError>(
     "user",
     getUserAPI
   );
-  const { data: boards } = useQuery<IBoard[]>(["boards", category], () =>
-    allCategoryBoardsAPI(category as string)
+  const { data: boards, refetch } = useQuery<IBoard[]>(
+    ["boards", category],
+    () => allCategoryBoardsAPI(category as string),
+    {
+      refetchOnWindowFocus: false,
+    }
   );
-
+  const [newBoardNotice, setNewBoardNotice] = useState("");
   useEffect(() => {
-    const evtSource = new EventSource(`${BASE_URL}/boards/events`, {
-      withCredentials: true,
-    });
-    console.log(evtSource);
-    evtSource.onmessage = ({ data }) => {
-      console.log(evtSource);
-      alert(data);
-    };
-    return () => {
-      evtSource.close();
-    };
-  }, []);
+    if (!isLoading && category) {
+      if (!me) {
+        const evtSource = new EventSource(
+          `${BASE_URL}/boards/events/${category}`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(evtSource);
+        evtSource.onmessage = ({ data }) => {
+          console.log(data);
+          setNewBoardNotice(data);
+        };
+        return () => {
+          evtSource.close();
+        };
+      }
+      if (me) {
+        const evtSource = new EventSource(
+          `${BASE_URL}/boards/events/${category}?userId=${me?.id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(evtSource);
+        evtSource.onmessage = ({ data }) => {
+          console.log(data);
+          setNewBoardNotice(data);
+        };
+        return () => {
+          evtSource.close();
+        };
+      }
+    }
+  }, [isLoading, me, category]);
+  const onClickNotice = () => {
+    setNewBoardNotice("");
+    refetch();
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
       <Home boards={boards} />
+      {newBoardNotice && (
+        <Notice onClick={onClickNotice}>{newBoardNotice}</Notice>
+      )}
     </>
   );
 };

@@ -15,7 +15,7 @@ const NavBar = () => {
     if (queryClient.getQueryData("user")) {
       setIsLogin(true);
     }
-  }, []);
+  }, [queryClient.getQueryData("user")]);
   const onToggleProfileModal = () => {
     setIsShowProfileModal(prev => !prev);
   };
