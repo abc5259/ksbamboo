@@ -6,8 +6,15 @@ import type { NextPage } from "next";
 import { BASE_URL } from "../utils/baseUrl";
 import { useEffect, useState } from "react";
 import Notice from "../components/atoms/Notice/Notice";
+import User from "../interfaces/user";
+import axios, { AxiosError } from "axios";
+import { getUserAPI } from "../apis/user";
 
 const HomePage: NextPage = () => {
+  const { isLoading, data: me } = useQuery<User, AxiosError>(
+    "user",
+    getUserAPI
+  );
   const { data: boards, refetch } = useQuery<IBoard[]>(
     "allboards",
     allBoardsAPI,
@@ -17,18 +24,38 @@ const HomePage: NextPage = () => {
   );
   const [newBoardNotice, setNewBoardNotice] = useState("");
   useEffect(() => {
-    const evtSource = new EventSource(`${BASE_URL}/boards/events`, {
-      withCredentials: true,
-    });
-    console.log(evtSource);
-    evtSource.onmessage = ({ data }) => {
-      console.log(data);
-      setNewBoardNotice(data);
-    };
-    return () => {
-      evtSource.close();
-    };
-  }, []);
+    if (!isLoading) {
+      if (!me) {
+        const evtSource = new EventSource(`${BASE_URL}/boards/events`, {
+          withCredentials: true,
+        });
+        console.log(evtSource);
+        evtSource.onmessage = ({ data }) => {
+          console.log(data);
+          setNewBoardNotice(data);
+        };
+        return () => {
+          evtSource.close();
+        };
+      }
+      if (me) {
+        const evtSource = new EventSource(
+          `${BASE_URL}/boards/events?userId=${me?.id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(evtSource);
+        evtSource.onmessage = ({ data }) => {
+          console.log(data);
+          setNewBoardNotice(data);
+        };
+        return () => {
+          evtSource.close();
+        };
+      }
+    }
+  }, [isLoading, me]);
 
   const onClickNotice = () => {
     setNewBoardNotice("");
@@ -47,3 +74,19 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
+
+// export async function getServerSideProps() {
+//   const user = await axios
+//     .get(`/auth/user`)
+//     .then(response => response.data)
+//     .catch(error => {
+//       console.log(error);
+//       return false;
+//     });
+//   console.log(user);
+//   return {
+//     props: {
+//       user,
+//     },
+//   };
+// }

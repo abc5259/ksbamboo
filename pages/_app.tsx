@@ -27,7 +27,6 @@ function App({ Component, pageProps }: AppProps) {
           newAccessTokenAPI().then(() => {
             window.localStorage.setItem("isLogin", "true");
           });
-          // .catch(error => toast.error("dwd"));
         }
       }
       return Promise.reject(error);
