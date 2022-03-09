@@ -38,6 +38,13 @@ const NavBar = () => {
                   </Link>
                 </List>
                 <List>
+                  <Link href="/profile/notification">
+                    <a>
+                      <Atom.NotificationIcon />
+                    </a>
+                  </Link>
+                </List>
+                <List>
                   <div onClick={onToggleProfileModal} className="profile">
                     <Atom.Avatar />
                     <svg
@@ -54,9 +61,6 @@ const NavBar = () => {
                     </svg>
                   </div>
                 </List>
-                {/* <List>
-                  <a onClick={onClickLogOut}>로그아웃</a>
-                </List> */}
               </>
             ) : (
               <>

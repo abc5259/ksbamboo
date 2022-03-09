@@ -12,6 +12,7 @@ import Toggle from "./Toggle/Toggle";
 import Time from "./Time/Time";
 import Avatar from "./Avatar/Avatar";
 import Star from "./Star/Star";
+import NotificationIcon from "./NotificationIcon/NotificationIcon";
 
 const Atom = {
   Button,
@@ -28,6 +29,7 @@ const Atom = {
   Time,
   Avatar,
   Star,
+  NotificationIcon,
 };
 
 export default Atom;
