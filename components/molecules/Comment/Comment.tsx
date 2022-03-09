@@ -71,7 +71,7 @@ const Comment = ({
       ) : (
         <StyledComment>
           <div className="comment_info">
-            <Atom.Avatar className="small" />
+            <Atom.Avatar className="small" width="15" />
             <Atom.Title fontSize="0.9rem" fontWeight={700}>
               {status === "PUBLIC"
                 ? `${user.username} (${user.ksDepartment})`
