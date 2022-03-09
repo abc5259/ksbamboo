@@ -9,7 +9,9 @@ const NotificationCard = (props: INotificationCardProps) => {
       <div className="notification_info">
         <Atom.Avatar />
         <div className="notification_message">
-          <Atom.Title fontSize="14px">유리님이 댓글을 남겼어요</Atom.Title>
+          <Atom.Title fontWeight={500} fontSize="14px">
+            유리님이 댓글을 남겼어요
+          </Atom.Title>
           <p>무슨 게시글에 대한 댓글이에요</p>
         </div>
       </div>
