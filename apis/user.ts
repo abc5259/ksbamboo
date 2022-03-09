@@ -21,5 +21,10 @@ export const newAccessTokenAPI = (): Promise<{ user: User }> => {
 };
 
 export const logoutAPI = () => {
-  return axios(`/auth/logout`);
+  return axios.get(`/auth/logout`);
+};
+
+//notification
+export const getAllNotifications = () => {
+  return axios.get("/auth/notifications").then(response => response.data);
 };

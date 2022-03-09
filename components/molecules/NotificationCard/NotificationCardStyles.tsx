@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledNotificationCard = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 20px;
   .notification_info {
     display: flex;
     align-items: center;

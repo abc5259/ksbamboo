@@ -18,7 +18,7 @@ export const Nav = styled.ul`
 `;
 
 export const List = styled.li`
-  margin-left: 20px;
+  margin-left: 10px;
   /* transition: color 0.2s ease-in; */
   font-size: 1.1rem;
   .profile {

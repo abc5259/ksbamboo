@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Notice from "../components/atoms/Notice/Notice";
 import User from "../interfaces/user";
 import axios, { AxiosError } from "axios";
-import { getUserAPI } from "../apis/user";
+import { getAllNotifications, getUserAPI } from "../apis/user";
 
 const HomePage: NextPage = () => {
   const { isLoading, data: me } = useQuery<User, AxiosError>(

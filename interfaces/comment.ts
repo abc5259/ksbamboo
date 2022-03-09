@@ -1,3 +1,4 @@
+import IBoard from "./board";
 import User from "./user";
 
 export default interface Comment {
@@ -6,4 +7,5 @@ export default interface Comment {
   status: string;
   createdAt: Date;
   user: User;
+  board: IBoard;
 }
