@@ -8,7 +8,7 @@ export const StyledProfileModal = styled.nav`
     top: 0;
     height: fit-content;
     margin-top: 80px;
-    margin-right: 90px;
+    margin-right: 50px;
     width: 192px;
     display: flex;
     flex-direction: column;

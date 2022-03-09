@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ProfileModal from "../../molecules/ProfileModal/ProfileModal";
 import { useRecoilState } from "recoil";
 import { showProfileModalAtom } from "../../../atom/atoms";
+import Atom from "../../atoms";
 
 const NavBar = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -38,8 +39,9 @@ const NavBar = () => {
                 </List>
                 <List>
                   <div onClick={onToggleProfileModal} className="profile">
-                    <div></div>
+                    <Atom.Avatar />
                     <svg
+                      className="down"
                       stroke="currentColor"
                       fill="currentColor"
                       strokeWidth="0"

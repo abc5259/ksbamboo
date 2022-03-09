@@ -24,20 +24,13 @@ export const List = styled.li`
   .profile {
     display: flex;
     align-items: center;
-    gap: 6px;
     cursor: pointer;
     &:hover {
-      svg {
+      svg.down {
         fill: ${props => props.theme.accentColor};
       }
     }
-    div {
-      width: 33px;
-      height: 33px;
-      border-radius: 50%;
-      background-color: ${props => props.theme.accentColor};
-    }
-    svg {
+    svg.down {
       transition: fill 0.2s ease-in;
     }
   }
@@ -48,7 +41,7 @@ export const NaveBarWrapper = styled.div`
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 0 80px;
+  padding: 0 40px;
   background-color: #202329;
   color: white;
   a {

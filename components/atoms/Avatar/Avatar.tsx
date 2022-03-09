@@ -8,7 +8,6 @@ export interface IAtomAvatarProps {
 const Avatar = (props: IAtomAvatarProps) => {
   return (
     <StyledAvatar className={props.className}>
-      {/* <FontAwesomeIcon icon={faUser} width={props.width ? props.width : "24"} /> */}
       <svg
         width={props.width ? props.width : "24"}
         height={props.width ? props.width : "24"}
