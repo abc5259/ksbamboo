@@ -1,22 +1,45 @@
 import Link from "next/link";
 import { Title, Header, List, Nav, NaveBarWrapper } from "./NavBarstyles";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useEffect, useState } from "react";
 import ProfileModal from "../../molecules/ProfileModal/ProfileModal";
 import { useRecoilState } from "recoil";
 import { showProfileModalAtom } from "../../../atom/atoms";
 import Atom from "../../atoms";
+import { BASE_URL } from "../../../utils/baseUrl";
+import User from "../../../interfaces/user";
+import { AxiosError } from "axios";
+import { getUserAPI } from "../../../apis/user";
 
 const NavBar = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [isShowProfileModal, setIsShowProfileModal] =
     useRecoilState(showProfileModalAtom);
   const queryClient = useQueryClient();
+  const { isLoading, data: me } = useQuery<User, AxiosError>(
+    "user",
+    getUserAPI
+  );
   useEffect(() => {
-    if (queryClient.getQueryData("user")) {
-      setIsLogin(true);
+    if (!isLoading) {
+      if (me) {
+        setIsLogin(true);
+        const evtSource = new EventSource(
+          `${BASE_URL}/boards/events/comment?userId=${me?.id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(evtSource);
+        evtSource.onmessage = ({ data }) => {
+          alert(data);
+        };
+        return () => {
+          evtSource.close();
+        };
+      }
     }
-  }, [queryClient.getQueryData("user")]);
+  }, [isLoading, me]);
   const onToggleProfileModal = () => {
     setIsShowProfileModal(prev => !prev);
   };
