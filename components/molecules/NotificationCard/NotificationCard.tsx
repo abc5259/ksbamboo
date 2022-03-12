@@ -4,11 +4,13 @@ import { StyledNotificationCard } from "./NotificationCardStyles";
 export interface INotificationCardProps {
   boardTitle: string;
   commentMessage: string;
+  createAt: Date;
 }
 
 const NotificationCard = ({
   boardTitle,
   commentMessage,
+  createAt,
 }: INotificationCardProps) => {
   return (
     <StyledNotificationCard>
@@ -21,7 +23,7 @@ const NotificationCard = ({
           <p>{commentMessage}</p>
         </div>
       </div>
-      <Atom.Time createdAt={new Date()} />
+      <Atom.Time createdAt={createAt} />
     </StyledNotificationCard>
   );
 };

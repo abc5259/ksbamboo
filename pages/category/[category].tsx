@@ -30,14 +30,13 @@ const CategoryPage = () => {
     if (!isLoading && category) {
       if (!me) {
         const evtSource = new EventSource(
-          `${BASE_URL}/boards/events/${category}`,
+          `${BASE_URL}/sse/events/${category}`,
           {
             withCredentials: true,
           }
         );
         console.log(evtSource);
         evtSource.onmessage = ({ data }) => {
-          console.log(data);
           setNewBoardNotice(data);
         };
         return () => {
@@ -46,14 +45,13 @@ const CategoryPage = () => {
       }
       if (me) {
         const evtSource = new EventSource(
-          `${BASE_URL}/boards/events/${category}?userId=${me?.id}`,
+          `${BASE_URL}/sse/events/${category}?userId=${me?.id}`,
           {
             withCredentials: true,
           }
         );
         console.log(evtSource);
         evtSource.onmessage = ({ data }) => {
-          console.log(data);
           setNewBoardNotice(data);
         };
         return () => {

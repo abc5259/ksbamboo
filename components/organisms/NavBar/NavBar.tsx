@@ -25,7 +25,7 @@ const NavBar = () => {
       if (me) {
         setIsLogin(true);
         const evtSource = new EventSource(
-          `${BASE_URL}/boards/events/comment?userId=${me?.id}`,
+          `${BASE_URL}/sse/events/comment?userId=${me?.id}`,
           {
             withCredentials: true,
           }

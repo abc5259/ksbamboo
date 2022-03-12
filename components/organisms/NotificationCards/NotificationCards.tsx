@@ -19,6 +19,7 @@ const NotificationCards = ({ notifications }: INotificationCardsProps) => {
             <NotificationCard
               boardTitle={notification.comment.board.title}
               commentMessage={notification.comment.content}
+              createAt={notification.comment.createdAt}
             />
           </a>
         </Link>

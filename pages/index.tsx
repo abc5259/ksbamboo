@@ -26,7 +26,7 @@ const HomePage: NextPage = () => {
   useEffect(() => {
     if (!isLoading) {
       if (!me) {
-        const evtSource = new EventSource(`${BASE_URL}/boards/events`, {
+        const evtSource = new EventSource(`${BASE_URL}/sse/events`, {
           withCredentials: true,
         });
         console.log(evtSource);
@@ -40,7 +40,7 @@ const HomePage: NextPage = () => {
       }
       if (me) {
         const evtSource = new EventSource(
-          `${BASE_URL}/boards/events?userId=${me?.id}`,
+          `${BASE_URL}/sse/events?userId=${me?.id}`,
           {
             withCredentials: true,
           }
