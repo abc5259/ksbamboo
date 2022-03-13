@@ -3,8 +3,11 @@ import { Title, Header, List, Nav, NaveBarWrapper } from "./NavBarstyles";
 import { useQuery, useQueryClient } from "react-query";
 import { useEffect, useState } from "react";
 import ProfileModal from "../../molecules/ProfileModal/ProfileModal";
-import { useRecoilState } from "recoil";
-import { showProfileModalAtom } from "../../../atom/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  showCommentAlarmAtom,
+  showProfileModalAtom,
+} from "../../../atom/atoms";
 import Atom from "../../atoms";
 import { BASE_URL } from "../../../utils/baseUrl";
 import User from "../../../interfaces/user";
@@ -13,6 +16,7 @@ import { getUserAPI } from "../../../apis/user";
 
 const NavBar = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const setShowCommentAlarm = useSetRecoilState(showCommentAlarmAtom);
   const [isShowProfileModal, setIsShowProfileModal] =
     useRecoilState(showProfileModalAtom);
   const queryClient = useQueryClient();
@@ -32,7 +36,8 @@ const NavBar = () => {
         );
         console.log(evtSource);
         evtSource.onmessage = ({ data }) => {
-          alert(data);
+          // alert(data);
+          setShowCommentAlarm(true);
         };
         return () => {
           evtSource.close();
@@ -62,7 +67,7 @@ const NavBar = () => {
                 </List>
                 <List>
                   <Link href="/profile/notification">
-                    <a>
+                    <a onClick={() => setShowCommentAlarm(false)}>
                       <Atom.NotificationIcon />
                     </a>
                   </Link>

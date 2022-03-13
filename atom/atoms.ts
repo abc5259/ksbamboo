@@ -59,3 +59,8 @@ export const showProfileModalAtom = atom<boolean>({
   key: "isShowProfileModal",
   default: false,
 });
+
+export const showCommentAlarmAtom = atom<boolean>({
+  key: "isShowCommentAlarm",
+  default: false,
+});
