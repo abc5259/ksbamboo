@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/global-style";
 import { theme } from "../styles/theme";
 import "react-toastify/dist/ReactToastify.css";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../utils/baseUrl";
 import { newAccessTokenAPI } from "../apis/user";

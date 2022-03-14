@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import { allBoardsAPI } from "../apis/board";
 import IBoard from "../interfaces/board";
 import Home from "../components/templates/Home/Home";
@@ -10,18 +10,40 @@ import User from "../interfaces/user";
 import axios, { AxiosError } from "axios";
 import { getAllNotifications, getUserAPI } from "../apis/user";
 
+const nextPage = 20;
 const HomePage: NextPage = () => {
   const { isLoading, data: me } = useQuery<User, AxiosError>(
     "user",
     getUserAPI
   );
-  const { data: boards, refetch } = useQuery<IBoard[]>(
+  const { data: boards, refetch } = useQuery<{ boards: IBoard[] }>(
     "allboards",
-    allBoardsAPI,
+    () => allBoardsAPI(0),
     {
       refetchOnWindowFocus: false,
     }
   );
+  const { data, fetchPreviousPage, hasPreviousPage } = useInfiniteQuery(
+    "example",
+    async ({ pageParam = 0 }) => {
+      // console.log(pageParam);
+      const data = await allBoardsAPI(nextPage * pageParam);
+      // console.log(data);
+      return data;
+    },
+    {
+      getPreviousPageParam: firstPage => {
+        // console.log(firstPage);
+        return firstPage.nextId ? firstPage.previousId + 1 : undefined;
+      },
+      getNextPageParam: (lastPage, allPages) => {
+        // console.log(lastPage);
+        // return lastPage.nextId;
+        return lastPage.nextId;
+      },
+    }
+  );
+  console.log({ pages: data?.pages.reverse() });
   const [newBoardNotice, setNewBoardNotice] = useState("");
   useEffect(() => {
     if (!isLoading) {
@@ -65,7 +87,8 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <Home boards={boards} />
+      <Home boards={boards?.boards} />
+      <div onClick={() => fetchPreviousPage()}>click</div>
       {newBoardNotice && (
         <Notice onClick={onClickNotice}>{newBoardNotice}</Notice>
       )}
