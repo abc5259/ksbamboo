@@ -1,7 +1,13 @@
 import axios from "axios";
 
-export const allBoardsAPI = (page: number) => {
-  return axios.get(`/boards?page=${page}`).then(response => response.data);
+export const allBoardsAPI = (boardId?: number) => {
+  if (boardId !== 0) {
+    return axios
+      .get(`/boards?boardId=${boardId}`)
+      .then(response => response.data);
+  } else {
+    return axios.get(`/boards`).then(response => response.data);
+  }
 };
 
 export const createBoardAPI = ({

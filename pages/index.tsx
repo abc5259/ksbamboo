@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Notice from "../components/atoms/Notice/Notice";
 import User from "../interfaces/user";
 import axios, { AxiosError } from "axios";
-import { getAllNotifications, getUserAPI } from "../apis/user";
+import { getUserAPI } from "../apis/user";
 
 const nextPage = 20;
 const HomePage: NextPage = () => {
@@ -16,35 +16,30 @@ const HomePage: NextPage = () => {
     "user",
     getUserAPI
   );
-  const { data: boards, refetch } = useQuery<{ boards: IBoard[] }>(
+  const { data: boards, refetch } = useQuery<IBoard[]>(
     "allboards",
     () => allBoardsAPI(0),
     {
       refetchOnWindowFocus: false,
     }
   );
-  const { data, fetchPreviousPage, hasPreviousPage } = useInfiniteQuery(
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     "example",
     async ({ pageParam = 0 }) => {
-      // console.log(pageParam);
-      const data = await allBoardsAPI(nextPage * pageParam);
-      // console.log(data);
-      return data;
+      const data = await allBoardsAPI(pageParam);
+      return {
+        boards: data,
+        nextId: data.length !== 15 ? false : data[14].id,
+      };
     },
     {
-      getPreviousPageParam: firstPage => {
-        // console.log(firstPage);
-        return firstPage.nextId ? firstPage.previousId + 1 : undefined;
-      },
-      getNextPageParam: (lastPage, allPages) => {
-        // console.log(lastPage);
-        // return lastPage.nextId;
-        return lastPage.nextId;
-      },
+      getNextPageParam: (lastPage, allPages) =>
+        lastPage.nextId ? lastPage.nextId : undefined,
+      refetchOnWindowFocus: false,
     }
   );
-  console.log({ pages: data?.pages.reverse() });
   const [newBoardNotice, setNewBoardNotice] = useState("");
+  console.log(data, hasNextPage);
   useEffect(() => {
     if (!isLoading) {
       if (!me) {
@@ -87,8 +82,8 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <Home boards={boards?.boards} />
-      <div onClick={() => fetchPreviousPage()}>click</div>
+      <Home boards={boards} />
+      <div onClick={() => fetchNextPage()}>click</div>
       {newBoardNotice && (
         <Notice onClick={onClickNotice}>{newBoardNotice}</Notice>
       )}
