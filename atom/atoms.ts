@@ -76,3 +76,8 @@ export const showCommentAlarmAtom = atom<boolean>({
   key: "isShowCommentAlarm",
   default: false,
 });
+
+export const showBoardNoticeAtom = atom<string>({
+  key: "isShowBoardNotice",
+  default: "",
+});
