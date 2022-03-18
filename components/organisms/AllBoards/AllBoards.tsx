@@ -1,15 +1,15 @@
 import IBoard from "../../../interfaces/board";
 import Board from "../../molecules/Board/Board";
-import { StyledAllBoards } from "./AllBoardsStyles";
 
 export interface IOrgAllBoardsProps {
   boards: IBoard[];
+  isNotboards: boolean;
 }
 
-const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
+const AllBoards = ({ boards, isNotboards }: IOrgAllBoardsProps) => {
   return (
-    <StyledAllBoards>
-      {boards.length > 0 ? (
+    <>
+      {!isNotboards ? (
         boards.map(board => {
           return (
             <Board
@@ -29,7 +29,7 @@ const AllBoards = ({ boards }: IOrgAllBoardsProps) => {
       ) : (
         <div>게시글이 존재하지 않습니다.</div>
       )}
-    </StyledAllBoards>
+    </>
   );
 };
 

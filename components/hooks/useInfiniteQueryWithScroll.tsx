@@ -22,7 +22,7 @@ export const useInfiniteQueryWithScroll = (category?: string) => {
         }
         return {
           boards: data,
-          nextId: data.length !== 15 ? false : data[14].id,
+          nextId: data.length !== 10 ? false : data[9].id,
         };
       },
       {

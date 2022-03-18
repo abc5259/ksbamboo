@@ -6,6 +6,7 @@ import Notice from "../../atoms/Notice/Notice";
 import { useRecoilState } from "recoil";
 import { showBoardNoticeAtom } from "../../../atom/atoms";
 import { allBoardsAPI } from "../../../apis/board";
+import { StyledAllBoards } from "../../organisms/AllBoards/AllBoardsStyles";
 
 export interface ITempHomeProps {
   category?: string;
@@ -30,13 +31,19 @@ const Home = ({ category }: ITempHomeProps) => {
         {newBoardNotice && (
           <Notice onClick={onClickNotice}>{newBoardNotice}</Notice>
         )}
-        {data &&
-          data.pages.map((page, index) => (
-            <AllBoards key={index} boards={page.boards} />
-          ))}
+        <StyledAllBoards>
+          {data &&
+            data.pages.map((page, index) => (
+              <AllBoards
+                key={index}
+                boards={page.boards}
+                isNotboards={page.boards.length === 0 && index === 0}
+              />
+            ))}
+          {isFetching && isFetchingMore && <div>로딩중...</div>}
+          {isFetchingMore && fetchTriggerElement}
+        </StyledAllBoards>
       </HeaderAndSideBar>
-      {isFetching && <div>로딩중...</div>}
-      {isFetchingMore && fetchTriggerElement}
     </>
   );
 };
