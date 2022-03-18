@@ -3,7 +3,7 @@ import axios from "axios";
 export const allBoardsAPI = (boardId?: number) => {
   if (boardId !== 0) {
     return axios
-      .get(`/boards?boardId=${boardId}`)
+      .get(`/boards?nextBoardId=${boardId}`)
       .then(response => response.data);
   } else {
     return axios.get(`/boards`).then(response => response.data);
@@ -24,10 +24,16 @@ export const createBoardAPI = ({
     .then(response => response.data);
 };
 
-export const allCategoryBoardsAPI = (category: string) => {
-  return axios
-    .get(`/boards/category/${category}`)
-    .then(response => response.data);
+export const allCategoryBoardsAPI = (category: string, boardId?: number) => {
+  if (boardId !== 0) {
+    return axios
+      .get(`/boards/category/${category}?nextBoardId=${boardId}`)
+      .then(response => response.data);
+  } else {
+    return axios
+      .get(`/boards/category/${category}`)
+      .then(response => response.data);
+  }
 };
 
 export const getBoardAPI = (boardId: string) => {

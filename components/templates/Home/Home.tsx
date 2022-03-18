@@ -1,26 +1,28 @@
-import IBoard from "../../../interfaces/board";
 import HeaderAndSideBar from "../../layouts/HeaderAndSideBar/HeaderAndSideBar";
 import AllBoards from "../../organisms/AllBoards/AllBoards";
 import BoardForm from "../../molecules/BoardForm/BoardForm";
 import { useInfiniteQueryWithScroll } from "../../hooks/useInfiniteQueryWithScroll";
-import { useState } from "react";
 import Notice from "../../atoms/Notice/Notice";
 import { useRecoilState } from "recoil";
 import { showBoardNoticeAtom } from "../../../atom/atoms";
+import { allBoardsAPI } from "../../../apis/board";
 
-export interface ITempHomeProps {}
+export interface ITempHomeProps {
+  category?: string;
+}
 
-const Home = (props: ITempHomeProps) => {
+const Home = ({ category }: ITempHomeProps) => {
   const [newBoardNotice, setNewBoardNotice] =
     useRecoilState(showBoardNoticeAtom);
   const { data, refetch, isFetchingMore, fetchTriggerElement, isFetching } =
-    useInfiniteQueryWithScroll();
+    useInfiniteQueryWithScroll(category);
 
   const onClickNotice = () => {
     setNewBoardNotice("");
     refetch();
     window.scrollTo(0, 0);
   };
+
   return (
     <>
       <HeaderAndSideBar>

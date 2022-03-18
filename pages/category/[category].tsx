@@ -2,8 +2,10 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
+import { useSetRecoilState } from "recoil";
 import { allCategoryBoardsAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
+import { showBoardNoticeAtom } from "../../atom/atoms";
 import Notice from "../../components/atoms/Notice/Notice";
 import Home from "../../components/templates/Home/Home";
 import IBoard from "../../interfaces/board";
@@ -18,14 +20,14 @@ const CategoryPage = () => {
     "user",
     getUserAPI
   );
-  const { data: boards, refetch } = useQuery<IBoard[]>(
-    ["boards", category],
-    () => allCategoryBoardsAPI(category as string),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-  const [newBoardNotice, setNewBoardNotice] = useState("");
+  // const { data: boards, refetch } = useQuery<IBoard[]>(
+  //   ["boards", category],
+  //   () => allCategoryBoardsAPI(category as string),
+  //   {
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
+  const setNewBoardNotice = useSetRecoilState(showBoardNoticeAtom);
   useEffect(() => {
     if (!isLoading && category) {
       if (!me) {
@@ -60,18 +62,10 @@ const CategoryPage = () => {
       }
     }
   }, [isLoading, me, category]);
-  const onClickNotice = () => {
-    setNewBoardNotice("");
-    refetch();
-    window.scrollTo(0, 0);
-  };
 
   return (
     <>
-      <Home boards={boards} />
-      {newBoardNotice && (
-        <Notice onClick={onClickNotice}>{newBoardNotice}</Notice>
-      )}
+      <Home category={category as string} />
     </>
   );
 };

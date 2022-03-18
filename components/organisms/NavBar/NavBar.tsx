@@ -19,7 +19,6 @@ const NavBar = () => {
   const setShowCommentAlarm = useSetRecoilState(showCommentAlarmAtom);
   const [isShowProfileModal, setIsShowProfileModal] =
     useRecoilState(showProfileModalAtom);
-  const queryClient = useQueryClient();
   const { isLoading, data: me } = useQuery<User, AxiosError>(
     "user",
     getUserAPI
@@ -36,7 +35,6 @@ const NavBar = () => {
         );
         console.log(evtSource);
         evtSource.onmessage = ({ data }) => {
-          // alert(data);
           setShowCommentAlarm(true);
         };
         return () => {
