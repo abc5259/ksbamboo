@@ -8,6 +8,12 @@ export const StyledNotificationIcon = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  svg {
+    fill: ${props => props.theme.accentColor};
+    font-weight: 700;
+    stroke: ${props => props.theme.accentColor};
+    stroke-width: 1px;
+  }
 `;
 
 export const Alram = styled.div`

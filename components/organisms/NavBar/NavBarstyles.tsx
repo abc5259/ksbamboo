@@ -8,7 +8,8 @@ export const Header = styled.header`
 `;
 
 export const Title = styled.h1`
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  font-weight: 500;
   color: #44bd32;
 `;
 
@@ -39,11 +40,12 @@ export const List = styled.li`
 export const NaveBarWrapper = styled.div`
   position: fixed;
   top: 0;
+  z-index: 1000;
   width: 100%;
   z-index: 1000;
   padding: 0 40px;
-  background-color: #202329;
-  color: white;
+  background-color: ${props => props.theme.bgColor.lighter};
+  color: ${props => props.theme.textColor};
   a {
     cursor: pointer;
   }
