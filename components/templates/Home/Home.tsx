@@ -4,7 +4,10 @@ import BoardForm from "../../molecules/BoardForm/BoardForm";
 import { useInfiniteQueryWithScroll } from "../../hooks/useInfiniteQueryWithScroll";
 import Notice from "../../atoms/Notice/Notice";
 import { useRecoilState } from "recoil";
-import { showBoardNoticeAtom } from "../../../atom/atoms";
+import {
+  showBoardNoticeAtom,
+  showCategoryBoardNoticeAtom,
+} from "../../../atom/atoms";
 import { allBoardsAPI } from "../../../apis/board";
 import { StyledAllBoards } from "../../organisms/AllBoards/AllBoardsStyles";
 
@@ -15,21 +18,33 @@ export interface ITempHomeProps {
 const Home = ({ category }: ITempHomeProps) => {
   const [newBoardNotice, setNewBoardNotice] =
     useRecoilState(showBoardNoticeAtom);
+  const [newCategoryBooardNotice, setNewCategoryBoardNotice] = useRecoilState(
+    showCategoryBoardNoticeAtom
+  );
   const { data, refetch, isFetchingMore, fetchTriggerElement, isFetching } =
     useInfiniteQueryWithScroll(category);
 
   const onClickNotice = () => {
-    setNewBoardNotice("");
+    if (category) {
+      setNewCategoryBoardNotice(prev =>
+        prev.filter(prevCategory => prevCategory !== category)
+      );
+    } else {
+      setNewBoardNotice("");
+    }
     refetch();
     window.scrollTo(0, 0);
   };
-
+  console.log(newCategoryBooardNotice);
   return (
     <>
       <HeaderAndSideBar>
         <BoardForm mb="30px" />
-        {newBoardNotice && (
+        {!category && newBoardNotice && (
           <Notice onClick={onClickNotice}>{newBoardNotice}</Notice>
+        )}
+        {category && newCategoryBooardNotice.includes(category) && (
+          <Notice onClick={onClickNotice}>새로운 게시글</Notice>
         )}
         <StyledAllBoards>
           {data &&

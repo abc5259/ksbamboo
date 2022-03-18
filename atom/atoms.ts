@@ -81,3 +81,8 @@ export const showBoardNoticeAtom = atom<string>({
   key: "isShowBoardNotice",
   default: "",
 });
+
+export const showCategoryBoardNoticeAtom = atom<string[]>({
+  key: "isShowCategoryBoardNotice",
+  default: [],
+});

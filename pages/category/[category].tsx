@@ -5,7 +5,10 @@ import { useQuery, useQueryClient } from "react-query";
 import { useSetRecoilState } from "recoil";
 import { allCategoryBoardsAPI } from "../../apis/board";
 import { getUserAPI } from "../../apis/user";
-import { showBoardNoticeAtom } from "../../atom/atoms";
+import {
+  showBoardNoticeAtom,
+  showCategoryBoardNoticeAtom,
+} from "../../atom/atoms";
 import Notice from "../../components/atoms/Notice/Notice";
 import Home from "../../components/templates/Home/Home";
 import IBoard from "../../interfaces/board";
@@ -15,19 +18,13 @@ import { BASE_URL } from "../../utils/baseUrl";
 const CategoryPage = () => {
   const router = useRouter();
   const { category } = router.query;
-  const queryClient = useQueryClient();
   const { isLoading, data: me } = useQuery<User, AxiosError>(
     "user",
     getUserAPI
   );
-  // const { data: boards, refetch } = useQuery<IBoard[]>(
-  //   ["boards", category],
-  //   () => allCategoryBoardsAPI(category as string),
-  //   {
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
-  const setNewBoardNotice = useSetRecoilState(showBoardNoticeAtom);
+  const setNewCategoryBoardNotice = useSetRecoilState(
+    showCategoryBoardNoticeAtom
+  );
   useEffect(() => {
     if (!isLoading && category) {
       if (!me) {
@@ -39,7 +36,8 @@ const CategoryPage = () => {
         );
         console.log(evtSource);
         evtSource.onmessage = ({ data }) => {
-          setNewBoardNotice(data);
+          console.log(data);
+          setNewCategoryBoardNotice(prev => [...prev, category as string]);
         };
         return () => {
           evtSource.close();
@@ -54,7 +52,8 @@ const CategoryPage = () => {
         );
         console.log(evtSource);
         evtSource.onmessage = ({ data }) => {
-          setNewBoardNotice(data);
+          console.log(data);
+          setNewCategoryBoardNotice(prev => [...prev, category as string]);
         };
         return () => {
           evtSource.close();
