@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BoardWrapper = styled.div`
   overflow: hidden;
-  max-width: 500px;
+  /* max-width: 500px; */
   height: 350px;
   border-radius: 5px;
   background-color: ${props => props.theme.bgColor.lighter};

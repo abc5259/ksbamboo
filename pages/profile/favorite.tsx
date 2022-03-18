@@ -6,6 +6,7 @@ import { getUserAPI } from "../../apis/user";
 import Atom from "../../components/atoms";
 import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
 import AllBoards from "../../components/organisms/AllBoards/AllBoards";
+import { StyledAllBoards } from "../../components/organisms/AllBoards/AllBoardsStyles";
 import IBoard from "../../interfaces/board";
 import User from "../../interfaces/user";
 
@@ -27,11 +28,13 @@ const Favorite = () => {
   return (
     <HeaderLayout>
       <Atom.Tag>내 스크랩</Atom.Tag>
-      {!myFavoriteBoards ? (
-        <div>Lodinng..</div>
-      ) : (
-        <AllBoards boards={myFavoriteBoards} />
-      )}
+      <StyledAllBoards>
+        {!myFavoriteBoards ? (
+          <div>Lodinng..</div>
+        ) : (
+          <AllBoards boards={myFavoriteBoards} />
+        )}
+      </StyledAllBoards>
     </HeaderLayout>
   );
 };

@@ -7,6 +7,7 @@ import { getUserAPI } from "../../apis/user";
 import Atom from "../../components/atoms";
 import HeaderLayout from "../../components/layouts/HeaderLayout/HeaderLayout";
 import AllBoards from "../../components/organisms/AllBoards/AllBoards";
+import { StyledAllBoards } from "../../components/organisms/AllBoards/AllBoardsStyles";
 import IBoard from "../../interfaces/board";
 import User from "../../interfaces/user";
 
@@ -25,7 +26,9 @@ const Write = () => {
   return (
     <HeaderLayout>
       <Atom.Tag>내가 쓴 글</Atom.Tag>
-      {!myBoards ? <div>Lodinng..</div> : <AllBoards boards={myBoards} />}
+      <StyledAllBoards>
+        {!myBoards ? <div>Lodinng..</div> : <AllBoards boards={myBoards} />}
+      </StyledAllBoards>
     </HeaderLayout>
   );
 };

@@ -4,7 +4,7 @@ export const StyledSideBar = styled.nav`
   position: fixed;
   right: 0;
   width: 400px;
-  background-color: #f7f7f7;
+  background-color: ${props => props.theme.bgColor};
   height: 100%;
   overflow: auto;
   padding: 160px 80px 80px;

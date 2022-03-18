@@ -3,7 +3,7 @@ import Board from "../../molecules/Board/Board";
 
 export interface IOrgAllBoardsProps {
   boards: IBoard[];
-  isNotboards: boolean;
+  isNotboards?: boolean;
 }
 
 const AllBoards = ({ boards, isNotboards }: IOrgAllBoardsProps) => {
