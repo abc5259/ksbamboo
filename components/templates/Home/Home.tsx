@@ -1,7 +1,7 @@
 import HeaderAndSideBar from "../../layouts/HeaderAndSideBar/HeaderAndSideBar";
 import AllBoards from "../../organisms/AllBoards/AllBoards";
 import BoardForm from "../../molecules/BoardForm/BoardForm";
-import { useInfiniteQueryWithScroll } from "../../hooks/useInfiniteQueryWithScroll";
+import { useInfiniteQueryWithScroll } from "../../../hooks/useInfiniteQueryWithScroll";
 import Notice from "../../atoms/Notice/Notice";
 import { useRecoilState } from "recoil";
 import {

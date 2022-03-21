@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "react-query";
-import { allBoardsAPI, allCategoryBoardsAPI } from "../../apis/board";
-import IBoard from "../../interfaces/board";
+import { allBoardsAPI, allCategoryBoardsAPI } from "../apis/board";
+import IBoard from "../interfaces/board";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 

@@ -26,5 +26,5 @@ export const logoutAPI = () => {
 
 //notification
 export const getAllNotifications = () => {
-  return axios.get("/auth/notifications").then(response => response.data);
+  return axios.get("/user/notifications").then(response => response.data);
 };
